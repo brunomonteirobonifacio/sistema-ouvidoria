@@ -24,15 +24,16 @@ function validateForm(form) {
     })
 }
 
-if (form = document.querySelector('form.needs-validation')){
-    (() => {
-        $('.validate_form').click(() => {
+(() => {
+    var form = document.querySelector('form.needs-validation')
+        'use strict'
+      
+          form.addEventListener('submit', event => {
             if (!form.checkValidity()) {
-                return
-              }
-          
-              form.classList.add('was-validated')
-          
-        })
-    })()
-}
+              event.preventDefault()
+              event.stopPropagation()
+            }
+      
+            form.classList.add('was-validated')
+          }, false)
+      })()
