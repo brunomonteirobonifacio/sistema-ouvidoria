@@ -16,13 +16,16 @@
             </div>
         </div>
         
-        <form action="" method="post" class="">
+        <form action="" method="post" class="needs-validation" novalidate>
 
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
                         <input type="text" name="nome" id="nome" class="form-control">
                         <label for="nome">Nome Completo</label>
+                        <div class="invalid-feedback">
+                            Por favor, digite seu nome completo.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -32,6 +35,9 @@
                     <div class="form-floating">
                         <input type="email" name="email" id="email" class="form-control">
                         <label for="email">Endereço de E-mail</label>
+                        <div class="invalid-feedback">
+                            Digite um endereço de E-mail válido.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,12 +47,18 @@
                     <div class="form-floating">
                         <input type="text" name="telefone" id="telefone" class="form-control fone">
                         <label for="telefone">Telefone</label>
+                        <div class="invalid-feedback">
+                            Digite um telefone válido.
+                        </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
                         <input type="text" name="whastapp" id="whatsapp" class="form-control celular">
                         <label for="whatsapp">Número WhatsApp</label>
+                        <div class="invalid-feedback">
+                            Digite um número WhatsApp válido.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,12 +68,18 @@
                     <div class="form-floating">
                         <input type="text" name="cpf" id="cpf" class="form-control cpf">
                         <label for="cpf">CPF</label>
+                        <div class="invalid-feedback">
+                            Digite um CPF válido.
+                        </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
                         <input type="date" name="data_nasc" id="data_nasc" class="form-control">
                         <label for="data_nasc">Data de Nascimento</label>
+                        <div class="invalid-feedback">
+                            É preciso ter mais de 18 anos para realizar o cadastro.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,11 +89,17 @@
                     <select class="form-select" aria-label="Default select example" name="estado" id="estado">
                         <option selected>Estado</option>
                     </select>
+                    <div class="invalid-feedback">
+                            Por favor, escolha seu estado.
+                    </div>
                 </div>
                 <div class="col">
                     <select class="form-select" aria-label="Default select example" name="cidade" id="cidade" disabled>
                         <option selected>Cidade</option>
                     </select>
+                    <div class="invalid-feedback">
+                            Por favor, escolha seu estado.
+                    </div>
                 </div>
             </div>
 
@@ -96,7 +120,7 @@
 
             <div class="row align-items-center m-2 p-2">
                 <div class="col">
-                    <button type="button" class="btn btn-primary p-2" name="signup_btn">Cadastrar-se</button>
+                    <button type="button" class="btn btn-primary p-2 validate_form" name="signup_btn" id="signup_btn">Cadastrar-se</button>
                 </div>
             </div>
         </form>
@@ -110,4 +134,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha512-0XDfGxFliYJPFrideYOoxdgNIvrwGTLnmK20xZbCAvPfLGQMzHUsaqZK8ZoH+luXGRxTrS46+Aq400nCnAT0/w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="../js/masks.js"></script>
   <script src="../js/forms.js"></script>
+  <script src="../js/forms_validation.js"></script>
 </html>
