@@ -1,16 +1,20 @@
 async function getStates() {
     var states = []
+
+    // gets all states from table `estado` and adds them all as Objects to states array
     await $.post('../php/address.php', {function: 'getStates'}, (response) => {
         responseArr = response.split('//\\').filter(state => state.trim())
-
+        
         responseArr.forEach(state => states.push(JSON.parse(state)))
     })
-
+    
     return states
 }
 
 async function getCities(stateId) {
     var cities = []
+
+    // gets all cities from table `cidade` from given state and adds them all as Objects to cities array
     await $.post('../php/address.php', {function: 'getCities', state: stateId}, (response) => {
         responseArr = response.split('//\\').filter(state => state.trim())
 
