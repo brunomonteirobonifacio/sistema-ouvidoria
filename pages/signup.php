@@ -61,17 +61,11 @@
                 <div class="col">
                     <select class="form-select" aria-label="Default select example" name="estado" id="estado">
                         <option selected>Estado</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
                     </select>
                 </div>
                 <div class="col">
                     <select class="form-select" aria-label="Default select example" name="cidade" id="cidade" disabled>
                         <option selected>Cidade</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
                     </select>
                 </div>
             </div>
@@ -93,7 +87,7 @@
 
             <div class="row align-items-center m-2">
                 <div class="col">
-                    <button type="button" class="btn btn-primary">Criar conta</button>
+                    <button type="button" class="btn btn-primary" name="signup_btn">Criar conta</button>
                 </div>
             </div>
         </form>
@@ -106,5 +100,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha512-0XDfGxFliYJPFrideYOoxdgNIvrwGTLnmK20xZbCAvPfLGQMzHUsaqZK8ZoH+luXGRxTrS46+Aq400nCnAT0/w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="../js/masks.js"></script>
-  
+  <script src="../js/forms.js"></script>
 </html>
