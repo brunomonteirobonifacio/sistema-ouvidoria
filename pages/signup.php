@@ -16,7 +16,7 @@
             </div>
         </div>
         
-        <form method="post" action="" class="needs-validation" novalidate>
+        <form method="post" class="needs-validation" novalidate>
 
             <div class="row align-items-start m-2">
                 <div class="col">
