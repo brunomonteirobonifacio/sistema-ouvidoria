@@ -1,8 +1,8 @@
 <?php
-
+// this file will contain functions referring to address tables (`cidade` and `estado`)
 $functions = [
     'getCities' => function() {
-        
+
     }
 ];
 
