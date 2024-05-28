@@ -16,12 +16,12 @@
             </div>
         </div>
         
-        <form action="" method="post" class="needs-validation" novalidate>
+        <form method="post" action="" class="needs-validation" novalidate>
 
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="nome" id="nome" class="form-control">
+                        <input type="text" name="nome" id="nome" class="form-control" require>
                         <label for="nome">Nome Completo</label>
                         <div class="invalid-feedback">
                             Por favor, digite seu nome completo.
@@ -33,7 +33,7 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="email" name="email" id="email" class="form-control">
+                        <input type="email" name="email" id="email" class="form-control" require>
                         <label for="email">Endereço de E-mail</label>
                         <div class="invalid-feedback">
                             Digite um endereço de E-mail válido.
@@ -45,7 +45,7 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="telefone" id="telefone" class="form-control fone">
+                        <input type="text" name="telefone" id="telefone" class="form-control fone" require>
                         <label for="telefone">Telefone</label>
                         <div class="invalid-feedback">
                             Digite um telefone válido.
@@ -54,7 +54,7 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="whastapp" id="whatsapp" class="form-control celular">
+                        <input type="text" name="whastapp" id="whatsapp" class="form-control celular" require>
                         <label for="whatsapp">Número WhatsApp</label>
                         <div class="invalid-feedback">
                             Digite um número WhatsApp válido.
@@ -66,7 +66,7 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="cpf" id="cpf" class="form-control cpf">
+                        <input type="text" name="cpf" id="cpf" class="form-control cpf" require>
                         <label for="cpf">CPF</label>
                         <div class="invalid-feedback">
                             Digite um CPF válido.
@@ -120,7 +120,7 @@
 
             <div class="row align-items-center m-2 p-2">
                 <div class="col">
-                    <button type="button" class="btn btn-primary p-2 validate_form" name="signup_btn" id="signup_btn">Cadastrar-se</button>
+                    <button type="submit" class="btn btn-primary p-2 validate_form" name="signup_btn" id="signup_btn">Cadastrar-se</button>
                 </div>
             </div>
         </form>
