@@ -10,7 +10,6 @@
 <body>
     <div class="container-md">
         <h1>Criar conta</h1>
-        
         <form action="" method="post" class="">
 
             <div class="row align-items-start m-2">

@@ -1,5 +1,6 @@
 <?php
-require "config.php";
+require "../config.php";
 
-[$host, $user, $pass, $port] = getenv('db_config');
-$connection = mysqli_connect($host, $user, $pass, $port);
+[$host, $user, $pass, $database] = $_ENV['db_config'];
+
+$connection = mysqli_connect($host, $user, $pass, $database);
