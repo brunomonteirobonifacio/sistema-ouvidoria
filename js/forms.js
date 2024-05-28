@@ -1,4 +1,4 @@
-// This .js file contains functions used in forms within the system
+// This .js file contains functions used for form utilities within the system
 
 async function getStates() {
     var states = []
