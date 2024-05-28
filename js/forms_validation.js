@@ -35,5 +35,7 @@ function validateForm(form) {
             }
       
             form.classList.add('was-validated')
+
+            
           }, false)
       })()
