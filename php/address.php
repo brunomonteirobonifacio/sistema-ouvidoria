@@ -50,6 +50,7 @@ $functions = [
     }
 ];
 
+// $function will receive what was passed through $.post() with AJAX, and if the function actually exists it will be executed
 $function = $_POST['function'] ?? null;
 if (key_exists($function, $functions)) {
     $functions[$function]();
