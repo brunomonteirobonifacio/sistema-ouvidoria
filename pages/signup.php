@@ -8,8 +8,13 @@
     <title>Crie uma conta</title>
 </head>
 <body>
-    <div class="container px-auto">
-        <h1 class="m-2 p-2">Criar conta</h1>
+    <div class="container text-center p-3 mx-auto my-3 border rounded w-50">
+        <div class="row align-items-center m-2 d-inline-flex">
+            <div class="col">
+                <h1 class="m-2 pd-2 display-2">Criar conta</h1>
+                <hr>
+            </div>
+        </div>
         
         <form action="" method="post" class="">
 
@@ -21,6 +26,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
@@ -28,6 +34,9 @@
                         <label for="email">Endereço de E-mail</label>
                     </div>
                 </div>
+            </div>
+
+            <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
                         <input type="text" name="telefone" id="telefone" class="form-control fone">
@@ -85,9 +94,9 @@
                 </div>
             </div>
 
-            <div class="row align-items-center m-2">
+            <div class="row align-items-center m-2 p-2">
                 <div class="col">
-                    <button type="button" class="btn btn-primary" name="signup_btn">Criar conta</button>
+                    <button type="button" class="btn btn-primary p-2" name="signup_btn">Cadastrar-se</button>
                 </div>
             </div>
         </form>
