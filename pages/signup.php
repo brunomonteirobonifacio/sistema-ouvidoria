@@ -8,8 +8,9 @@
     <title>Crie uma conta</title>
 </head>
 <body>
-    <div class="container-md">
-        <h1>Criar conta</h1>
+    <div class="container px-auto">
+        <h1 class="m-2 p-2">Criar conta</h1>
+        
         <form action="" method="post" class="">
 
             <div class="row align-items-start m-2">
@@ -24,19 +25,19 @@
                 <div class="col">
                     <div class="form-floating">
                         <input type="email" name="email" id="email" class="form-control">
-                        <label for="nome">Endereço de E-mail</label>
+                        <label for="email">Endereço de E-mail</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="telefone" id="telefone" class="form-control">
-                        <label for="nome">Telefone</label>
+                        <input type="text" name="telefone" id="telefone" class="form-control fone">
+                        <label for="telefone">Telefone</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="whastapp" id="whatsapp" class="form-control">
-                        <label for="nome">Número WhatsApp</label>
+                        <input type="text" name="whastapp" id="whatsapp" class="form-control celular">
+                        <label for="whatsapp">Número WhatsApp</label>
                     </div>
                 </div>
             </div>
@@ -44,14 +45,14 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="cpf" id="cpf" class="form-control">
-                        <label for="nome">CPF</label>
+                        <input type="text" name="cpf" id="cpf" class="form-control cpf">
+                        <label for="cpf">CPF</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="date" name="data_nasc" id="dataNasc" class="form-control">
-                        <label for="nome">Data de Nascimento</label>
+                        <input type="date" name="data_nasc" id="data_nasc" class="form-control">
+                        <label for="data_nasc">Data de Nascimento</label>
                     </div>
                 </div>
             </div>
@@ -78,18 +79,23 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="nome" id="nome" class="form-control">
+                        <input type="password" name="senha" id="senha" class="form-control">
                         <label for="nome">Senha</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="nome" id="nome" class="form-control">
+                        <input type="password" name="confirma_senha" id="confirma_senha" class="form-control">
                         <label for="nome">Confirme sua Senha</label>
                     </div>
                 </div>
             </div>
 
+            <div class="row align-items-center m-2">
+                <div class="col">
+                    <button type="button" class="btn btn-primary">Criar conta</button>
+                </div>
+            </div>
         </form>
     </div>
 </body>
@@ -97,5 +103,8 @@
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
   crossorigin="anonymous"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha512-0XDfGxFliYJPFrideYOoxdgNIvrwGTLnmK20xZbCAvPfLGQMzHUsaqZK8ZoH+luXGRxTrS46+Aq400nCnAT0/w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="../js/masks.js"></script>
+  
 </html>
