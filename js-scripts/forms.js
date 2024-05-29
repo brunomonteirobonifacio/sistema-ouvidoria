@@ -4,7 +4,7 @@ async function getStates() {
     var states = []
 
     // gets all states from table `estado` and adds them all as Objects to states array
-    await $.post('../php/address.php', { function: 'getStates' }, (response) => {
+    await $.post('../php-scripts/address.php', { function: 'getStates' }, (response) => {
         const responseArr = response.split('//\\').filter(state => state.trim())
         
         responseArr.forEach(state => states.push(JSON.parse(state)))
@@ -17,7 +17,7 @@ async function getCities(stateId) {
     var cities = []
 
     // gets all cities from table `cidade` from given state and adds them all as Objects to cities array
-    await $.post('../php/address.php', { function: 'getCities', state: stateId }, (response) => {
+    await $.post('../php-scripts/address.php', { function: 'getCities', state: stateId }, (response) => {
         const responseArr = response.split('//\\').filter(state => state.trim())
 
         responseArr.forEach(city => cities.push(JSON.parse(city)))
@@ -74,4 +74,48 @@ if ($('cidade')) {
 
         })
     )
+}
+
+// TODO: make this vaildateForm() work and use it instead of Bootstraps
+function checkFormValidity(form) {
+    const formData = new FormData(form)
+    var allValid = true
+    
+    var validateField = {
+        email: validEmail,    
+        phone: validPhone,
+        whatsapp: validPhone,
+        cpf: validCPF,
+    }
+
+    formData.entries().forEach(input => {
+        if (validateField[input[0]]) {
+            const formInput = form[input[0]]
+            
+            const validField = validateField[input[0]](formInput)
+            
+            // the next valid fields won't change the result if there was an invalid field before
+            // this won't stop the verification though, as all invalid fields should be warned to the user
+            allValid = !allValid ? false : validField
+            return
+        }
+    })
+
+    return allValid
+}
+    
+if ($('button#signup_btn')) {
+    $('button#signup_btn').on('click', () => {
+        var form = document.querySelector('form.needs-validation')
+        
+        if (!checkFormValidity(form)) {
+            return
+        }
+        
+        // using FormData.entries() to create an object structured as {*input[i]_name*: *input[i]_value*}
+        const formData = new FormData(form)
+        const dataObj = Object.fromEntries(formData.entries())
+        
+        createUser(dataObj).then();
+    })
 }
