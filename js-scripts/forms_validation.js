@@ -33,20 +33,20 @@ function validPhone(phoneInput) {
 function validCPF(cpfInput) {
     const cpf = $(cpfInput).cleanVal()  // getting the value without its mask
     
-    var sum = 0,
-        rest
-
-    if (cpf == '00000000000') {
+    var sum = 0, rest
+        
+    // checks if all cpf digits are the same
+    if (cpf.split('').filter((digit, index) => digit == cpf[index - 1] || !cpf[index - 1]).join('') == cpf) {
         cpfInput.classList.remove('is-valid')
         cpfInput.classList.add('is-invalid')
-
+        
         return false
     }
 
     for (i = 1; i <= 9; i++) {
         sum = sum + parseInt(cpf.substring(i-1, i)) * (11 - i)
     }
-
+    
     rest = (sum * 10) % 11
   
     if ((rest == 10) || (rest == 11)) {
@@ -77,11 +77,11 @@ function validCPF(cpfInput) {
 
         return false
     }
+    
+    // TODO: check if CPF is already in use
+    
+    cpfInput.classList.add('is-valid')
+    cpfInput.classList.remove('is-invalid')
 
-    if (isValidCpf) {
-        cpfInput.classList.remove('is-valid')
-        cpfInput.classList.add('is-invalid')
-
-        return false
-    }
+    return true
 }
