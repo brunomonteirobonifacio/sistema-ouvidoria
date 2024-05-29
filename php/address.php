@@ -9,12 +9,12 @@ $functions = [
 
         if (!$query->execute()) {
             echo "[]";
-            return;
+            exit();
         }
 
         if (!$query->rowCount()) {
             echo "[]";
-            return;
+            exit();
         }
 
         $states = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -23,6 +23,7 @@ $functions = [
             echo json_encode($state) . ' //\\ ';
         }
 
+        exit();
     },
 
     'getCities' => function() {
@@ -34,12 +35,12 @@ $functions = [
 
         if (!$query->execute()) {
             echo "[]";
-            return;
+            exit();
         }
 
         if (!$query->rowCount()) {
             echo "[]";
-            return;
+            exit();
         }
 
         $states = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -47,6 +48,8 @@ $functions = [
         foreach($states as $state) {
             echo json_encode($state) . ' //\\ ';
         }
+        
+        exit();
     }
 ];
 
