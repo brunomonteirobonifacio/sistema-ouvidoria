@@ -7,6 +7,7 @@ function validEmail(emailInput) {
     }
 }
 
+// TODO: make this vaildateForm() work and use it instead of Bootstraps
 function validateForm(form) {
     
     form.entries().forEach(input => {
