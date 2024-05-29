@@ -8,6 +8,7 @@
     <title>Crie uma conta</title>
 </head>
 <body>
+    <!-- TODO: Find a way to text-start invalid-feedback messages -->
     <div class="container text-center p-3 mx-auto my-3 border rounded w-50">
         <div class="row align-items-center m-2 d-inline-flex">
             <div class="col">
@@ -17,7 +18,7 @@
         </div>
         
         <form method="post" class="needs-validation" novalidate>
-
+            
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
@@ -54,7 +55,7 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="whastapp" id="whatsapp" class="form-control phone" require>
+                        <input type="text" name="whatsapp" id="whatsapp" class="form-control phone" require>
                         <label for="whatsapp">Número WhatsApp</label>
                         <div class="invalid-feedback">
                             Digite um número WhatsApp válido.
@@ -120,7 +121,7 @@
 
             <div class="row align-items-center m-2 p-2">
                 <div class="col">
-                    <button type="submit" class="btn btn-primary p-2 validate_form" name="signup_btn" id="signup_btn">Cadastrar-se</button>
+                    <button type="button" class="btn btn-primary p-2 validate_form" name="signup_btn" id="signup_btn">Cadastrar-se</button>
                 </div>
             </div>
         </form>
