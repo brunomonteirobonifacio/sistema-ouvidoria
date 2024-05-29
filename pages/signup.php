@@ -21,8 +21,8 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="nome" id="nome" class="form-control" require>
-                        <label for="nome">Nome Completo</label>
+                        <input type="text" name="name" id="name" class="form-control" require>
+                        <label for="name">Nome Completo</label>
                         <div class="invalid-feedback">
                             Por favor, digite seu nome completo.
                         </div>
@@ -45,8 +45,8 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="telefone" id="telefone" class="form-control fone" require>
-                        <label for="telefone">Telefone</label>
+                        <input type="text" name="phone" id="phone" class="form-control phone" require>
+                        <label for="phone">Telefone</label>
                         <div class="invalid-feedback">
                             Digite um telefone válido.
                         </div>
@@ -54,7 +54,7 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="whastapp" id="whatsapp" class="form-control fone" require>
+                        <input type="text" name="whastapp" id="whatsapp" class="form-control phone" require>
                         <label for="whatsapp">Número WhatsApp</label>
                         <div class="invalid-feedback">
                             Digite um número WhatsApp válido.
@@ -75,8 +75,8 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="date" name="data_nasc" id="data_nasc" class="form-control">
-                        <label for="data_nasc">Data de Nascimento</label>
+                        <input type="date" name="birthdate" id="birthdate" class="form-control">
+                        <label for="birthdate">Data de Nascimento</label>
                         <div class="invalid-feedback">
                             É preciso ter mais de 18 anos para realizar o cadastro.
                         </div>
@@ -86,7 +86,7 @@
             
             <div class="row align-items-start m-2">
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example" name="estado" id="estado">
+                    <select class="form-select" aria-label="Default select example" name="state" id="state">
                         <option selected>Estado</option>
                     </select>
                     <div class="invalid-feedback">
@@ -94,7 +94,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example" name="cidade" id="cidade" disabled>
+                    <select class="form-select" aria-label="Default select example" name="city" id="city" disabled>
                         <option selected>Cidade</option>
                     </select>
                     <div class="invalid-feedback">
@@ -106,13 +106,13 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="password" name="senha" id="senha" class="form-control">
+                        <input type="password" name="password" id="password" class="form-control">
                         <label for="nome">Senha</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="password" name="confirma_senha" id="confirma_senha" class="form-control">
+                        <input type="password" name="confirm_password" id="confirm_password" class="form-control">
                         <label for="nome">Confirme sua Senha</label>
                     </div>
                 </div>

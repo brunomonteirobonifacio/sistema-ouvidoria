@@ -20,15 +20,15 @@ $functions = [
         include "../db-connection/connection.php";
         include "../config.php";
 
-        $username = $_POST['nome'];
+        $username = $_POST['name'];
         $email = $_POST['email'];
-        $phone = $_POST['telefone'];
+        $phone = $_POST['phone'];
         $whatsapp = $_POST['whatsapp'];
         $cpf = $_POST['cpf'];
-        $birthDate = $_POST['data_nasc'];
-        $stateId = $_POST['estado'];
-        $cityId = $_POST['cidade'];
-        $pass = $_POST['senha'] . $_ENV['pepper'];
+        $birthDate = $_POST['birthdate'];
+        $stateId = $_POST['state'];
+        $cityId = $_POST['city'];
+        $pass = $_POST['password'] . $_ENV['pepper'];
 
         $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_estado, cod_cidade, senha_usuario) VALUES
         (:username, :email, :phone, :whatsapp, :cpf, :birthDate, :stateId, :cityId, SHA512(:pass))");

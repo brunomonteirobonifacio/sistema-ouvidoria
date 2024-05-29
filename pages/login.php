@@ -29,7 +29,7 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="password" name="senha" id="senha" class="form-control">
+                        <input type="password" name="password" id="password" class="form-control">
                         <label for="nome">Senha</label>
                     </div>
                 </div>
