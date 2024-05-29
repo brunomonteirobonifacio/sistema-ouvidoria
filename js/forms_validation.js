@@ -36,6 +36,10 @@ function validateForm(form) {
       
             form.classList.add('was-validated')
 
-            
+            // using FormData.entries() to create an object structured as {*input[i]_name*: *input[i]_value*}
+            const formData = new FormData(form)
+            const dataObj = Object.fromEntries(formData.entries())
+
+            createUser(dataObj).then();
           }, false)
       })()
