@@ -54,7 +54,7 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="whastapp" id="whatsapp" class="form-control celular" require>
+                        <input type="text" name="whastapp" id="whatsapp" class="form-control fone" require>
                         <label for="whatsapp">Número WhatsApp</label>
                         <div class="invalid-feedback">
                             Digite um número WhatsApp válido.
