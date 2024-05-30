@@ -19,28 +19,36 @@ $functions = [
     'createUser' => function() {
         include "../db-connection/connection.php";
 
+        $stateId = $_POST['state'];
+        $cityId = $_POST['city'];
+
+        // // if stateId's state doesn't contain the selected city, stateId will be changed to the right state
+        // $query = $connection->prepare("SELECT cod_estado FROM cidade WHERE id_cidade = :city");
+        // $query->bindParam('city', $cityId);
+
+        
+
+        // registers user
         $username = $_POST['name'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $whatsapp = $_POST['whatsapp'];
         $cpf = $_POST['cpf'];
         $birthDate = $_POST['birthdate'];
-        $stateId = $_POST['state'];
-        $cityId = $_POST['city'];
         $pass = $_POST['password'] . $_ENV['pepper'];
 
         $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_estado, cod_cidade, senha_usuario) VALUES
         (:username, :email, :phone, :whatsapp, :cpf, :birthDate, :stateId, :cityId, SHA512(:pass))");
 
-        $query->bindValue('username', $username);
-        $query->bindValue('email', $email);
-        $query->bindValue('phone', $phone);
-        $query->bindValue('whatsapp', $whatsapp);
-        $query->bindValue('cpf', $cpf);
-        $query->bindValue('birthDate', $birthDate);
-        $query->bindValue('stateId', $stateId);
-        $query->bindValue('cityId', $cityId);
-        $query->bindValue('pass', $pass);
+        $query->bindParam('username', $username);
+        $query->bindParam('email', $email);
+        $query->bindParam('phone', $phone);
+        $query->bindParam('whatsapp', $whatsapp);
+        $query->bindParam('cpf', $cpf);
+        $query->bindParam('birthDate', $birthDate);
+        $query->bindParam('stateId', $stateId);
+        $query->bindParam('cityId', $cityId);
+        $query->bindParam('pass', $pass);
 
         if (!$query->execute()) {
             echo "Status 500";
@@ -72,7 +80,55 @@ $functions = [
 
         echo $query->rowCount() > 0 ? $query->rowCount() : "0";
         exit();
-    }
+    },
+
+    'checkEmail' => function() {
+        include "../db-connection/connection.php";
+        $email = $_POST['email'];
+
+        $query = $connection->prepare("SELECT email_usuario FROM usuario WHERE email_usuario = :email");
+        $query->bindValue('email', $email);
+
+        if (!$query->execute()) {
+            echo "500";
+            exit();
+        }
+
+        echo $query->rowCount() > 0 ? $query->rowCount() : "0";
+        exit();
+    },
+
+    'checkPhone' => function() {
+        include "../db-connection/connection.php";
+        $phone = $_POST['phone'];
+
+        $query = $connection->prepare("SELECT telefone_usuario FROM usuario WHERE telefone_usuario = :telefone");
+        $query->bindValue('telefone', $phone);
+
+        if (!$query->execute()) {
+            echo "500";
+            exit();
+        }
+
+        echo $query->rowCount() > 0 ? $query->rowCount() : "0";
+        exit();
+    },
+
+    'checkWhatsapp' => function() {
+        include "../db-connection/connection.php";
+        $whatsapp = $_POST['phone'];
+
+        $query = $connection->prepare("SELECT whatsapp_usuario FROM usuario WHERE whatsapp_usuario = :whatsapp");
+        $query->bindValue('whatsapp', $whatsapp);
+
+        if (!$query->execute()) {
+            echo "500";
+            exit();
+        }
+
+        echo $query->rowCount() > 0 ? $query->rowCount() : "0";
+        exit();
+    },
 ];
 
 // $function will receive what was passed through $.post() with AJAX, and if the function actually exists it will be executed
