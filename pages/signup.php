@@ -36,7 +36,7 @@
                     <div class="form-floating">
                         <input type="email" name="email" id="email" class="form-control" require>
                         <label for="email">Endereço de E-mail</label>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" id="invalid-email">
                             Digite um endereço de E-mail válido.
                         </div>
                     </div>
@@ -48,8 +48,8 @@
                     <div class="form-floating">
                         <input type="text" name="phone" id="phone" class="form-control phone" require>
                         <label for="phone">Telefone</label>
-                        <div class="invalid-feedback">
-                            Digite um telefone válido.
+                        <div class="invalid-feedback" id="invalid-phone">
+                            Digite um número de telefone válido.
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                     <div class="form-floating">
                         <input type="text" name="whatsapp" id="whatsapp" class="form-control phone" require>
                         <label for="whatsapp">Número WhatsApp</label>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" id="invalid-whatsapp">
                             Digite um número WhatsApp válido.
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                     <div class="form-floating">
                         <input type="text" name="cpf" id="cpf" class="form-control cpf" require>
                         <label for="cpf">CPF</label>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" id="invalid-cpf">
                             Digite um CPF válido.
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                         <input type="date" name="birthdate" id="birthdate" class="form-control">
                         <label for="birthdate">Data de Nascimento</label>
                         <div class="invalid-feedback">
-                            Digite uma data válida (É necessário ter mais de 18 anos para realizar o cadastro).
+                            É necessário ter mais de 18 anos para realizar o cadastro.
                         </div>
                     </div>
                 </div>
@@ -108,13 +108,13 @@
                 <div class="col">
                     <div class="form-floating">
                         <input type="password" name="password" id="password" class="form-control">
-                        <label for="nome">Senha</label>
+                        <label for="password">Senha</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
                         <input type="password" name="confirm_password" id="confirm_password" class="form-control">
-                        <label for="nome">Confirme sua Senha</label>
+                        <label for="confirm_password">Confirme sua Senha</label>
                     </div>
                 </div>
             </div>
@@ -138,4 +138,5 @@
   <script src="../js-scripts/masks.js"></script>
   <script src="../js-scripts/forms.js"></script>
   <script src="../js-scripts/forms_validation.js"></script>
+  <script src="../js-scripts/user.js"></script>
 </html>
