@@ -24,7 +24,7 @@
                     <div class="form-floating">
                         <input type="text" name="name" id="name" class="form-control" require>
                         <label for="name">Nome Completo</label>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" style="text-align: start">
                             Por favor, digite seu nome completo.
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                     <div class="form-floating">
                         <input type="email" name="email" id="email" class="form-control" require>
                         <label for="email">Endereço de E-mail</label>
-                        <div class="invalid-feedback" id="invalid-email">
+                        <div class="invalid-feedback" id="invalid-email" style="text-align: start">
                             Digite um endereço de E-mail válido.
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                     <div class="form-floating">
                         <input type="text" name="phone" id="phone" class="form-control phone" require>
                         <label for="phone">Telefone</label>
-                        <div class="invalid-feedback" id="invalid-phone">
+                        <div class="invalid-feedback" id="invalid-phone" style="text-align: start">
                             Digite um número de telefone válido.
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                     <div class="form-floating">
                         <input type="text" name="whatsapp" id="whatsapp" class="form-control phone" require>
                         <label for="whatsapp">Número WhatsApp</label>
-                        <div class="invalid-feedback" id="invalid-whatsapp">
+                        <div class="invalid-feedback" id="invalid-whatsapp" style="text-align: start">
                             Digite um número WhatsApp válido.
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                     <div class="form-floating">
                         <input type="text" name="cpf" id="cpf" class="form-control cpf" require>
                         <label for="cpf">CPF</label>
-                        <div class="invalid-feedback" id="invalid-cpf">
+                        <div class="invalid-feedback" id="invalid-cpf" style="text-align: start">
                             Digite um CPF válido.
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                     <div class="form-floating">
                         <input type="date" name="birthdate" id="birthdate" class="form-control">
                         <label for="birthdate">Data de Nascimento</label>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" style="text-align: start">
                             É necessário ter mais de 18 anos para realizar o cadastro.
                         </div>
                     </div>
@@ -87,28 +87,39 @@
             
             <div class="row align-items-start m-2">
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example" name="state" id="state">
+                    <select class="form-select"  name="state" id="state">
                         <option selected>Estado</option>
                     </select>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" style="text-align: start">
                             Por favor, escolha seu estado.
                     </div>
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example" name="city" id="city" disabled>
+                    <select class="form-select" name="city" id="city" disabled>
                         <option selected>Cidade</option>
                     </select>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" style="text-align: start">
                             Por favor, escolha sua cidade.
                     </div>
                 </div>
             </div>
-
+            
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
                         <input type="password" name="password" id="password" class="form-control">
                         <label for="password">Senha</label>
+                        <div class="invalid-feedback" id="invalid-password" style="text-align: start">
+                            Digite uma senha válida.
+                        </div>
+                        <p style="text-align: start" class="password_requirements lead fs-6">
+                            Sua senha deve conter:
+                            <ul style="text-align: start" class="lead fs-6">
+                                <li>Pelo menos 8 caracteres</li>
+                                <li>Letras maiúsculas e minúsculas</li>
+                                <li>Pelo menos um caracter especial</li>
+                            </ul>
+                        </p>
                     </div>
                 </div>
                 <div class="col">
