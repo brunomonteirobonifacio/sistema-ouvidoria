@@ -19,36 +19,28 @@ $functions = [
     'createUser' => function() {
         include "../db-connection/connection.php";
 
-        $stateId = $_POST['state'];
-        $cityId = $_POST['city'];
-
-        // // if stateId's state doesn't contain the selected city, stateId will be changed to the right state
-        // $query = $connection->prepare("SELECT cod_estado FROM cidade WHERE id_cidade = :city");
-        // $query->bindParam('city', $cityId);
-
-        
-
-        // registers user
         $username = $_POST['name'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $whatsapp = $_POST['whatsapp'];
         $cpf = $_POST['cpf'];
+        $stateId = $_POST['state'];
+        $cityId = $_POST['city'];
         $birthDate = $_POST['birthdate'];
         $pass = $_POST['password'] . $_ENV['pepper'];
 
         $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_estado, cod_cidade, senha_usuario) VALUES
         (:username, :email, :phone, :whatsapp, :cpf, :birthDate, :stateId, :cityId, SHA512(:pass))");
 
-        $query->bindParam('username', $username);
-        $query->bindParam('email', $email);
-        $query->bindParam('phone', $phone);
-        $query->bindParam('whatsapp', $whatsapp);
-        $query->bindParam('cpf', $cpf);
-        $query->bindParam('birthDate', $birthDate);
-        $query->bindParam('stateId', $stateId);
-        $query->bindParam('cityId', $cityId);
-        $query->bindParam('pass', $pass);
+        $query->bindValue('username', $username);
+        $query->bindValue('email', $email);
+        $query->bindValue('phone', $phone);
+        $query->bindValue('whatsapp', $whatsapp);
+        $query->bindValue('cpf', $cpf);
+        $query->bindValue('birthDate', $birthDate);
+        $query->bindValue('stateId', $stateId);
+        $query->bindValue('cityId', $cityId);
+        $query->bindValue('pass', $pass);
 
         if (!$query->execute()) {
             echo "Status 500";
