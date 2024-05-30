@@ -26,9 +26,9 @@ async function getCities(stateId) {
     return cities
 }
 
-if ($('estado')) {
+if ($('state')) {
     getStates().then(states => {
-
+        debugger
         // creates an option in the selector for each state
         states.forEach(state => {
 
@@ -36,27 +36,27 @@ if ($('estado')) {
             option.value = state.id_estado
             option.innerText = state.nome_estado
             
-            document.getElementsByName('estado').forEach(selector => selector.append(option))
+            document.getElementsByName('state').forEach(selector => selector.append(option))
         })
     })
 }
 
-if ($('cidade')) {
-    document.getElementsByName('estado').forEach(element => 
+if ($('city')) {
+    document.getElementsByName('state').forEach(element => 
         element.addEventListener('change', () => {
 
-            document.getElementsByName('cidade').forEach(selector => selector.innerHTML = `<option selected>Cidade</option>`)
+            document.getElementsByName('city').forEach(selector => selector.innerHTML = `<option selected>Cidade</option>`)
 
             var state = $(element).val()
             
             
             // if there was no selected state (the "selected state" being "Estado"), it disables the city selector and doesn't proceed
             if (state == 'Estado') {
-                document.getElementsByName('cidade').forEach(selector => selector.setAttribute('disabled', true))
+                document.getElementsByName('city').forEach(selector => selector.setAttribute('disabled', true))
                 return
             }
 
-            document.getElementsByName('cidade').forEach(selector => selector.removeAttribute('disabled'))
+            document.getElementsByName('city').forEach(selector => selector.removeAttribute('disabled'))
             
             getCities(state).then(cities => {
 
@@ -67,7 +67,7 @@ if ($('cidade')) {
                     option.value = city.id_cidade
                     option.innerText = city.nome_cidade
 
-                    document.getElementsByName('cidade').forEach(selector => selector.append(option))
+                    document.getElementsByName('city').forEach(selector => selector.append(option))
                 })
             }
             )
@@ -82,12 +82,13 @@ function checkFormValidity(form) {
     var allValid = true
     
     var validateField = {
+        name: validName,
         email: validEmail,    
         phone: validPhone,
         whatsapp: validPhone,
         cpf: validCPF,
         birthdate: validBirthdate,
-        // state: ValidState,
+        state: validState,
         // city: validCity,
 
     }
@@ -97,7 +98,7 @@ function checkFormValidity(form) {
             const formInput = form[input[0]]
             
             const validField = await validateField[input[0]](formInput)
-            debugger
+
             // the next valid fields won't change the result if there was an invalid field before
             // this won't stop the verification though, as all invalid fields should be warned to the user
             allValid = !allValid ? false : validField
@@ -120,6 +121,7 @@ if ($('button#signup_btn')) {
         const formData = new FormData(form)
         const dataObj = Object.fromEntries(formData.entries())
         
+        debugger
         createUser(dataObj).then();
     })
 }
