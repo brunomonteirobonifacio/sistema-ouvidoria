@@ -99,7 +99,7 @@
                         <option selected>Cidade</option>
                     </select>
                     <div class="invalid-feedback">
-                            Por favor, escolha seu estado.
+                            Por favor, escolha sua cidade.
                     </div>
                 </div>
             </div>
