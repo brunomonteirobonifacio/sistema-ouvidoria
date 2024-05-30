@@ -79,24 +79,12 @@ if ($('city')) {
 function checkFormValidity(form) {
     const formData = new FormData(form)
     var allValid = true
-    
-    var validateField = {
-        name: validName,
-        email: validEmail,    
-        phone: validPhone,
-        whatsapp: validPhone,
-        cpf: validCPF,
-        birthdate: validBirthdate,
-        state: validState,
-        city: validCity,
-
-    }
 
     formData.entries().forEach(async input => {
         if (validateField[input[0]]) {
             const formInput = form[input[0]]
             
-            const validField = await validateField[input[0]](formInput)
+            const validField = await validateField[input[0]](formInput, form)
 
             // the next valid fields won't change the result if there was an invalid field before
             // this won't stop the verification though, as all invalid fields should be warned to the user
@@ -120,7 +108,19 @@ if ($('button#signup_btn')) {
         const formData = new FormData(form)
         const dataObj = Object.fromEntries(formData.entries())
         
-        debugger
         createUser(dataObj).then();
+    })
+}
+
+if ($('form.needs-validation')) {
+    form = document.querySelector('form.needs-validation')
+
+    // validates invalid and valid fields again every time the user changes input values
+    form.querySelectorAll('input').forEach(field => {
+        field.addEventListener('blur', () => {
+            if (field.classList.contains('is-invalid') || field.classList.contains('is-valid')) {
+                validateField[field.name](field)
+            }
+        })
     })
 }

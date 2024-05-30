@@ -1,4 +1,4 @@
-function validName(nameInput) {
+function validName(nameInput, form) {
     const name = nameInput.value
 
     // checks if the "full name" is at least 2 words long
@@ -15,7 +15,7 @@ function validName(nameInput) {
     return true;
 }
 
-async function validEmail(emailInput) {
+async function validEmail(emailInput, form) {
     const email = emailInput.value
 
     // checks if the Email is already registered
@@ -51,7 +51,7 @@ async function validEmail(emailInput) {
     return true;
 }
 
-async function validPhone(phoneInput) {
+async function validPhone(phoneInput, form) {
     const phone = phoneInput.value
     
     // this indicates whether it's a whatsapp number or a phone number
@@ -84,15 +84,17 @@ async function validPhone(phoneInput) {
     if (!phonePattern.test(phone)) {
         phoneInput.classList.remove('is-valid')
         phoneInput.classList.add('is-invalid')
+        
         return false;
     }
     
     phoneInput.classList.remove('is-invalid')
     phoneInput.classList.add('is-valid')
+
     return true;
 }
 
-async function validCPF(cpfInput) {
+async function validCPF(cpfInput, form) {
     const cpf = $(cpfInput).cleanVal()  // getting the value without its mask
 
     // checks if the CPF is already registered
@@ -163,7 +165,7 @@ async function validCPF(cpfInput) {
     
 }
 
-function validBirthdate(birthdateInput) {
+function validBirthdate(birthdateInput, form) {
     if (!birthdateInput.value) {
         birthdateInput.classList.remove('is-valid')
         birthdateInput.classList.add('is-invalid')
@@ -191,7 +193,7 @@ function validBirthdate(birthdateInput) {
     return true
 }
 
-function validState(stateInput) {
+function validState(stateInput, form) {
     const state = parseInt(stateInput.value) || 0
 
     // checks if the state chosen has am invalid ID
@@ -209,7 +211,7 @@ function validState(stateInput) {
 
 }
 
-function validCity(cityInput) {
+function validCity(cityInput, form) {
     const city = parseInt(cityInput.value) || 0
 
     if (city < 1 || city > 5564) {
@@ -223,4 +225,61 @@ function validCity(cityInput) {
     cityInput.classList.remove('is-invalid')
     
     return true
+}
+
+// passwords must be at laest 8 characters long, contain uppercase and lowercase letters, and at least one special character
+function validPassword(passwordInput, form) {
+    const password = passwordInput.value
+    const confirmPasswordInput = form.confirm_password
+    const confirmPassword = form.confirm_password.value
+
+    const hasUpperAndLower = Boolean(password.split('').filter(char => char === char.toUpperCase()).length && password.split('').filter(char => char === char.toLowerCase()).length)
+    const hasSpecialCharacters = Boolean(password.split('').filter(char => !(/[^A-Za-z0-9]/.test(char))).length)
+
+
+    if (!hasUpperAndLower || !hasSpecialCharacters || password.length < 8) {
+        passwordInput.classList.remove('is-valid')
+        passwordInput.classList.add('is-invalid')
+        confirmPasswordInput.classList.remove('is-valid')
+        confirmPasswordInput.classList.add('is-invalid')
+        
+        document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)'
+        document.getElementById('invalid-password').innerText = 'Digite uma senha válida.'
+        
+        return false
+    }
+    
+    if (password !== confirmPassword) {
+        passwordInput.classList.remove('is-valid')
+        passwordInput.classList.add('is-invalid')
+        confirmPasswordInput.classList.remove('is-valid')
+        confirmPasswordInput.classList.add('is-invalid')
+        
+        document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)'
+        document.getElementById('invalid-password').innerText = 'Ambas as senhas precisam ser iguais.'
+        
+        return false
+    }
+    
+    document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)'
+
+    passwordInput.classList.add('is-valid')
+    passwordInput.classList.remove('is-invalid')
+    confirmPasswordInput.classList.add('is-valid')
+    confirmPasswordInput.classList.remove('is-invalid')
+    
+    return true
+}
+
+// an object containing every field-validator
+var validateField = {
+    name: validName,
+    email: validEmail,    
+    phone: validPhone,
+    whatsapp: validPhone,
+    cpf: validCPF,
+    birthdate: validBirthdate,
+    state: validState,
+    city: validCity,
+    password: validPassword
 }
