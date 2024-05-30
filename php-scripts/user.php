@@ -29,7 +29,7 @@ $functions = [
         $pass = $_POST['password'] . $_ENV['pepper'];
 
         $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_estado, cod_cidade, senha_usuario) VALUES
-        (:username, :email, :phone, :whatsapp, :cpf, :birthDate, :stateId, :cityId, SHA512(:pass))");
+        (:username, :email, :phone, :whatsapp, :cpf, :birthDate, :stateId, :cityId, SHA2(:pass, 512))");
 
         $query->bindValue('username', $username);
         $query->bindValue('email', $email);
