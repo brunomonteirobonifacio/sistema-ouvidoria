@@ -28,7 +28,6 @@ async function getCities(stateId) {
 
 if ($('state')) {
     getStates().then(states => {
-        debugger
         // creates an option in the selector for each state
         states.forEach(state => {
 
@@ -89,7 +88,7 @@ function checkFormValidity(form) {
         cpf: validCPF,
         birthdate: validBirthdate,
         state: validState,
-        // city: validCity,
+        city: validCity,
 
     }
 

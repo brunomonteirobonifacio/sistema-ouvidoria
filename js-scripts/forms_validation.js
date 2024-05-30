@@ -193,7 +193,7 @@ function validBirthdate(birthdateInput) {
 
 function validState(stateInput) {
     const state = parseInt(stateInput.value) || 0
-    debugger
+
     // checks if the state chosen has am invalid ID
     if (state < 1 || state > 27) {
         stateInput.classList.remove('is-valid')
@@ -210,6 +210,17 @@ function validState(stateInput) {
 }
 
 function validCity(cityInput) {
-    // someone help me, oh please god help me
+    const city = parseInt(cityInput.value) || 0
+
+    if (city < 1 || city > 5564) {
+        cityInput.classList.remove('is-valid')
+        cityInput.classList.add('is-invalid')
+        
+        return false
+    }
+
+    cityInput.classList.add('is-valid')
+    cityInput.classList.remove('is-invalid')
     
+    return true
 }
