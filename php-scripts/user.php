@@ -56,6 +56,12 @@ $functions = [
         exit();
     },
 
+    'logoffUser' => function() {
+        session_start();
+        session_destroy();
+        exit();
+    },
+
     'checkCPF' => function() {
         include "../db-connection/connection.php";
         $cpf = $_POST['cpf'];
