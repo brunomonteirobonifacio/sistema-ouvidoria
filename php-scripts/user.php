@@ -24,7 +24,6 @@ $functions = [
         $phone = $_POST['phone'];
         $whatsapp = $_POST['whatsapp'];
         $cpf = $_POST['cpf'];
-        $stateId = $_POST['state'];
         $cityId = $_POST['city'];
         $birthDate = $_POST['birthdate'];
         $pass = $_POST['password'] . $_ENV['pepper'];
@@ -38,7 +37,6 @@ $functions = [
         $query->bindValue('whatsapp', $whatsapp);
         $query->bindValue('cpf', $cpf);
         $query->bindValue('birthDate', $birthDate);
-        $query->bindValue('stateId', $stateId);
         $query->bindValue('cityId', $cityId);
         $query->bindValue('pass', $pass);
 
