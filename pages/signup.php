@@ -79,7 +79,7 @@
                         <input type="date" name="birthdate" id="birthdate" class="form-control">
                         <label for="birthdate">Data de Nascimento</label>
                         <div class="invalid-feedback">
-                            É preciso ter mais de 18 anos para realizar o cadastro.
+                            Digite uma data válida (É necessário ter mais de 18 anos para realizar o cadastro).
                         </div>
                     </div>
                 </div>

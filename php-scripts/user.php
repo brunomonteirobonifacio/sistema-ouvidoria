@@ -18,7 +18,6 @@ function login($email) {
 $functions = [
     'createUser' => function() {
         include "../db-connection/connection.php";
-        include "../config.php";
 
         $username = $_POST['name'];
         $email = $_POST['email'];
@@ -56,6 +55,23 @@ $functions = [
 
     'loginUser' => function() {
         login($_POST['email']);
+        exit();
+    },
+
+    'checkCPF' => function() {
+        include "../db-connection/connection.php";
+        $cpf = $_POST['cpf'];
+
+        $query = $connection->prepare("SELECT cpf_usuario FROM usuario WHERE cpf_usuario = :cpf");
+        $query->bindValue('cpf', $cpf);
+
+        if (!$query->execute()) {
+            echo "500";
+            exit();
+        }
+
+        echo $query->rowCount() > 0 ? $query->rowCount() : "0";
+        exit();
     }
 ];
 

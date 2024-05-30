@@ -86,14 +86,18 @@ function checkFormValidity(form) {
         phone: validPhone,
         whatsapp: validPhone,
         cpf: validCPF,
+        birthdate: validBirthdate,
+        // state: ValidState,
+        // city: validCity,
+
     }
 
-    formData.entries().forEach(input => {
+    formData.entries().forEach(async input => {
         if (validateField[input[0]]) {
             const formInput = form[input[0]]
             
-            const validField = validateField[input[0]](formInput)
-            
+            const validField = await validateField[input[0]](formInput)
+            debugger
             // the next valid fields won't change the result if there was an invalid field before
             // this won't stop the verification though, as all invalid fields should be warned to the user
             allValid = !allValid ? false : validField

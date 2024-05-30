@@ -30,9 +30,26 @@ function validPhone(phoneInput) {
     return true;
 }
 
-function validCPF(cpfInput) {
+async function validCPF(cpfInput) {
     const cpf = $(cpfInput).cleanVal()  // getting the value without its mask
+
+    var isValid = false
+    await $.post('../php-scripts/user.php', { function: 'checkCPF', cpf: cpfInput.value }, (response) => {
+        isValid = !Boolean(parseInt(response))
+    }).then(() => {
+        if (!isValid) {            
+            cpfInput.classList.remove('is-valid')
+            cpfInput.classList.add('is-invalid')
+            
+            
+            return
+        }
+    })
     
+    if (!isValid) {
+        return false
+    }
+
     var sum = 0, rest
         
     // checks if all cpf digits are the same
@@ -78,10 +95,34 @@ function validCPF(cpfInput) {
         return false
     }
     
-    // TODO: check if CPF is already in use
+    return true
     
-    cpfInput.classList.add('is-valid')
-    cpfInput.classList.remove('is-invalid')
+}
+
+function validBirthdate(birthdateInput) {
+    if (!birthdateInput.value) {
+        birthdateInput.classList.remove('is-valid')
+        birthdateInput.classList.add('is-invalid')
+    
+        return false
+    }
+
+    const birthdate = new Date(birthdateInput.value)
+
+    // minDate = today - 18 years
+    let minDate = new Date(Date.now())
+    minDate.setFullYear(minDate.getFullYear() - 18)
+
+    // checks if the birthdate adds up to at least 18 years
+    if (birthdate > minDate) {
+        birthdateInput.classList.remove('is-valid')
+        birthdateInput.classList.add('is-invalid')
+    
+        return false
+    }
+
+    birthdateInput.classList.add('is-valid')
+    birthdateInput.classList.remove('is-invalid')
 
     return true
 }
