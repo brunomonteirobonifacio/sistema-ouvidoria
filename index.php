@@ -9,6 +9,9 @@
 <body>
     <div class="container">
         <p>
+            Logado como <span class="username"></span>
+        </p>
+        <p>
             Bem vindo ao site da Ouvidoria publica. Para ter acesso à criação de ouvidorias,
             <a href="pages/signup.php">Criar uma conta</a>
         </p>
