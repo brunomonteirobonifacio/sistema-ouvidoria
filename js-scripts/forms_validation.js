@@ -214,12 +214,12 @@ function validState(stateInput, form) {
     stateInput.classList.remove('is-invalid')
     
     return true
-
 }
 
 function validCity(cityInput, form) {
     const city = parseInt(cityInput.value) || 0
-
+    
+    // checks if the city chosen has am invalid ID
     if (city < 1 || city > 5564) {
         cityInput.classList.remove('is-valid')
         cityInput.classList.add('is-invalid')

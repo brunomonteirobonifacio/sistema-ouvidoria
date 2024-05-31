@@ -90,7 +90,6 @@ async function checkFormValidity(form) {
             // the next valid fields won't change the result if there was an invalid field before
             // this won't stop the verification though, as all invalid fields should be warned to the user
             allValid = !allValid ? false : validField
-            debugger
         }
     })
 
@@ -119,8 +118,14 @@ if ($('form.needs-validation')) {
 
     // validates invalid and valid fields again every time the user changes input values
     form.querySelectorAll('input').forEach(field => {
-        field.addEventListener('blur', () => {
-                validateField[field.name](field)
+        field.addEventListener('change', () => {
+            validateField[field.name](field)
+        })
+    })
+
+    form.querySelectorAll('select').forEach(field => {
+        field.addEventListener('change', () => {
+            validateField[field.name](field)
         })
     })
 }
