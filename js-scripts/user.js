@@ -7,9 +7,14 @@ async function createUser(data) {
 
     statusCode = parseInt(statusCode.split(' ')[1]) || 500
 
-    return statusCode
-
+    // if registration failed,
     if (statusCode != 201) return false
 
     return true
+}
+
+async function loginUser(email) {
+    await $.post('../php-scripts/user.php', { function: 'loginUser', email }, (response) => {
+
+    })
 }
