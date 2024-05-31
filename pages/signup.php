@@ -118,6 +118,7 @@
                                 <li>Pelo menos 8 caracteres</li>
                                 <li>Letras maiúsculas e minúsculas</li>
                                 <li>Pelo menos um caracter especial</li>
+                                <li>Pelo menos um dígito</li>
                             </ul>
                         </p>
                     </div>

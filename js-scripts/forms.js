@@ -55,6 +55,7 @@ if ($('city')) {
                 return
             }
 
+            // ... or it enables if any state was selected
             document.getElementsByName('city').forEach(selector => selector.removeAttribute('disabled'))
             
             getCities(state).then(cities => {
@@ -76,11 +77,11 @@ if ($('city')) {
 }
 
 // TODO: make this vaildateForm() work and use it instead of Bootstraps
-function checkFormValidity(form) {
+async function checkFormValidity(form) {
     const formData = new FormData(form)
     var allValid = true
 
-    formData.entries().forEach(async input => {
+    await formData.entries().forEach(async input => {
         if (validateField[input[0]]) {
             const formInput = form[input[0]]
             
@@ -89,7 +90,7 @@ function checkFormValidity(form) {
             // the next valid fields won't change the result if there was an invalid field before
             // this won't stop the verification though, as all invalid fields should be warned to the user
             allValid = !allValid ? false : validField
-            return
+            debugger
         }
     })
 
@@ -97,18 +98,19 @@ function checkFormValidity(form) {
 }
     
 if ($('button#signup_btn')) {
-    $('button#signup_btn').on('click', () => {
+    $('button#signup_btn').on('click', async () => {
         var form = document.querySelector('form.needs-validation')
         
-        if (!checkFormValidity(form)) {
-            return
-        }
+        const validForm = await checkFormValidity(form)
         
+        if (!validForm) return
+
         // using FormData.entries() to create an object structured as {*input[i]_name*: *input[i]_value*}
         const formData = new FormData(form)
         const dataObj = Object.fromEntries(formData.entries())
         
-        createUser(dataObj).then();
+        alert('é pra dar')
+        // createUser(dataObj).then();
     })
 }
 
@@ -118,9 +120,7 @@ if ($('form.needs-validation')) {
     // validates invalid and valid fields again every time the user changes input values
     form.querySelectorAll('input').forEach(field => {
         field.addEventListener('blur', () => {
-            if (field.classList.contains('is-invalid') || field.classList.contains('is-valid')) {
                 validateField[field.name](field)
-            }
         })
     })
 }

@@ -31,7 +31,8 @@ async function validEmail(emailInput, form) {
             return
         }
     
-    document.getElementById('invalid-email').innerText = 'Digite um endereço de E-mail válido.'
+        // changse back the invalid-feedback message
+        document.getElementById('invalid-email').innerText = 'Digite um endereço de E-mail válido.'
     })
 
     // doesn't proceed the verification if the E-mail is already in use
@@ -43,11 +44,13 @@ async function validEmail(emailInput, form) {
     if (!emailPattern.test(email)) {
         emailInput.classList.remove('is-valid')
         emailInput.classList.add('is-invalid')
+
         return false;
     }
     
     emailInput.classList.remove('is-invalid')
     emailInput.classList.add('is-valid')
+
     return true;
 }
 
@@ -65,8 +68,8 @@ async function validPhone(phoneInput, form) {
         if (!isValid) { 
             // changes the invalid-feedback message
             document.getElementById(`invalid-${phoneType}`).innerText = phoneType == 'phone' ? 'Este número de telefone já está em uso.' : 'Este número WhatsApp já está em uso.'
-            cpfInput.classList.remove('is-valid')
-            cpfInput.classList.add('is-invalid')
+            phoneInput.classList.remove('is-valid')
+            phoneInput.classList.add('is-invalid')
             
             return
         }
@@ -84,7 +87,7 @@ async function validPhone(phoneInput, form) {
     if (!phonePattern.test(phone)) {
         phoneInput.classList.remove('is-valid')
         phoneInput.classList.add('is-invalid')
-        
+
         return false;
     }
     
@@ -127,7 +130,7 @@ async function validCPF(cpfInput, form) {
     }
 
     for (i = 1; i <= 9; i++) {
-        sum = sum + parseInt(cpf.substring(i-1, i)) * (11 - i)
+        sum = sum + parseInt(cpf.substring(i - 1, i)) * (11 - i)
     }
     
     rest = (sum * 10) % 11
@@ -157,9 +160,12 @@ async function validCPF(cpfInput, form) {
     if (rest != parseInt(cpf.substring(10, 11))) {
         cpfInput.classList.remove('is-valid')
         cpfInput.classList.add('is-invalid')
-
+        
         return false
     }
+
+    cpfInput.classList.add('is-valid')
+    cpfInput.classList.remove('is-invalid')
     
     return true
     
@@ -235,9 +241,10 @@ function validPassword(passwordInput, form) {
 
     const hasUpperAndLower = Boolean(password.split('').filter(char => char === char.toUpperCase()).length && password.split('').filter(char => char === char.toLowerCase()).length)
     const hasSpecialCharacters = Boolean(password.split('').filter(char => !(/[^A-Za-z0-9]/.test(char))).length)
+    const hasNumeric = Boolean(password.split('').filter(char => _.isNumeric(char)).length)
 
 
-    if (!hasUpperAndLower || !hasSpecialCharacters || password.length < 8) {
+    if (!hasUpperAndLower || !hasSpecialCharacters || !hasNumeric || password.length < 8) {
         passwordInput.classList.remove('is-valid')
         passwordInput.classList.add('is-invalid')
         confirmPasswordInput.classList.remove('is-valid')
