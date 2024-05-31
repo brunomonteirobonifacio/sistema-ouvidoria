@@ -22,7 +22,7 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="name" id="name" class="form-control" require>
+                        <input type="text" name="name" id="name" class="form-control" autocomplete="off" require>
                         <label for="name">Nome Completo</label>
                         <div class="invalid-feedback" style="text-align: start">
                             Por favor, digite seu nome completo.
@@ -34,7 +34,7 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="email" name="email" id="email" class="form-control" require>
+                        <input type="email" name="email" id="email" class="form-control" autocomplete="off" require>
                         <label for="email">Endereço de E-mail</label>
                         <div class="invalid-feedback" id="invalid-email" style="text-align: start">
                             Digite um endereço de E-mail válido.
@@ -46,7 +46,7 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="phone" id="phone" class="form-control phone" require>
+                        <input type="text" name="phone" id="phone" class="form-control phone" autocomplete="off" require>
                         <label for="phone">Telefone</label>
                         <div class="invalid-feedback" id="invalid-phone" style="text-align: start">
                             Digite um número de telefone válido.
@@ -55,7 +55,7 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="whatsapp" id="whatsapp" class="form-control phone" require>
+                        <input type="text" name="whatsapp" id="whatsapp" class="form-control phone" autocomplete="off" require>
                         <label for="whatsapp">Número WhatsApp</label>
                         <div class="invalid-feedback" id="invalid-whatsapp" style="text-align: start">
                             Digite um número WhatsApp válido.
@@ -67,7 +67,7 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="cpf" id="cpf" class="form-control cpf" require>
+                        <input type="text" name="cpf" id="cpf" class="form-control cpf" autocomplete="off" require>
                         <label for="cpf">CPF</label>
                         <div class="invalid-feedback" id="invalid-cpf" style="text-align: start">
                             Digite um CPF válido.
@@ -76,7 +76,7 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="date" name="birthdate" id="birthdate" class="form-control">
+                        <input type="date" name="birthdate" id="birthdate" class="form-control" autocomplete="off" require>
                         <label for="birthdate">Data de Nascimento</label>
                         <div class="invalid-feedback" style="text-align: start">
                             É necessário ter mais de 18 anos para realizar o cadastro.
@@ -107,9 +107,9 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="password" name="password" id="password" class="form-control">
+                        <input type="password" name="password" id="password" class="form-control" autocomplete="off" require>
                         <label for="password">Senha</label>
-                        <div class="invalid-feedback" id="invalid-password" style="text-align: start">
+                        <div class="invalid-feedback" id="invalid-password" style="text-align: start" autocomplete="off" require>
                             Digite uma senha válida.
                         </div>
                         <p style="text-align: start" class="password_requirements lead fs-6">

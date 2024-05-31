@@ -119,13 +119,18 @@ if ($('form.needs-validation')) {
     // validates invalid and valid fields again every time the user changes input values
     form.querySelectorAll('input').forEach(field => {
         field.addEventListener('change', () => {
-            validateField[field.name](field)
+            validateField[field.name](field, form)
         })
     })
 
     form.querySelectorAll('select').forEach(field => {
         field.addEventListener('change', () => {
             validateField[field.name](field)
+
+            // if state is changed, then city changes back as well
+            if (field.name == 'state') {
+                validateField['city'](form.city)
+            }
         })
     })
 }

@@ -233,28 +233,10 @@ function validCity(cityInput, form) {
     return true
 }
 
-// passwords must be at laest 8 characters long, contain uppercase and lowercase letters, and at least one special character
-function validPassword(passwordInput, form) {
-    const password = passwordInput.value
-    const confirmPasswordInput = form.confirm_password
-    const confirmPassword = form.confirm_password.value
-
-    const hasUpperAndLower = Boolean(password.split('').filter(char => char === char.toUpperCase()).length && password.split('').filter(char => char === char.toLowerCase()).length)
-    const hasSpecialCharacters = Boolean(password.split('').filter(char => !(/[^A-Za-z0-9]/.test(char))).length)
-    const hasNumeric = Boolean(password.split('').filter(char => _.isNumeric(char)).length)
-
-
-    if (!hasUpperAndLower || !hasSpecialCharacters || !hasNumeric || password.length < 8) {
-        passwordInput.classList.remove('is-valid')
-        passwordInput.classList.add('is-invalid')
-        confirmPasswordInput.classList.remove('is-valid')
-        confirmPasswordInput.classList.add('is-invalid')
-        
-        document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)'
-        document.getElementById('invalid-password').innerText = 'Digite uma senha válida.'
-        
-        return false
-    }
+function validConfirmPassword(confirmPasswordInput, form) {
+    const confirmPassword = confirmPasswordInput.value
+    const passwordInput = form.password
+    const password = form.password.value
     
     if (password !== confirmPassword) {
         passwordInput.classList.remove('is-valid')
@@ -274,11 +256,44 @@ function validPassword(passwordInput, form) {
     passwordInput.classList.remove('is-invalid')
     confirmPasswordInput.classList.add('is-valid')
     confirmPasswordInput.classList.remove('is-invalid')
+
+    return true
+}
+
+// passwords must be at laest 8 characters long, contain uppercase and lowercase letters, and at least one special character
+function validPassword(passwordInput, form) {
+    const password = passwordInput.value
+    const confirmPasswordInput = form.confirm_password
+    const confirmPassword = form.confirm_password.value
+
+    const hasUpperAndLower = Boolean(password.split('').filter(char => char === char.toUpperCase()).length && password.split('').filter(char => char === char.toLowerCase()).length)
+    const hasSpecialCharacters = Boolean(password.split('').filter(char => !(/[^A-Za-z0-9]/.test(char))).length)
+    const hasNumeric = Boolean(password.split('').filter(char => $.isNumeric(char)).length)
+
+
+    if (!hasUpperAndLower || !hasSpecialCharacters || !hasNumeric || password.length < 8) {
+        passwordInput.classList.remove('is-valid')
+        passwordInput.classList.add('is-invalid')
+        confirmPasswordInput.classList.remove('is-valid')
+        confirmPasswordInput.classList.add('is-invalid')
+        
+        document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)'
+        document.getElementById('invalid-password').innerText = 'Digite uma senha válida.'
+        
+        return false
+    }
+    
+    if (!validConfirmPassword(confirmPasswordInput, form)) return false
+    
+    document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)'
+
+    passwordInput.classList.add('is-valid')
+    passwordInput.classList.remove('is-invalid')
     
     return true
 }
 
-// an object containing every field-validator
+// an object containing every field validator
 var validateField = {
     name: validName,
     email: validEmail,    
@@ -288,5 +303,6 @@ var validateField = {
     birthdate: validBirthdate,
     state: validState,
     city: validCity,
-    password: validPassword
+    password: validPassword,
+    confirm_password: validConfirmPassword
 }
