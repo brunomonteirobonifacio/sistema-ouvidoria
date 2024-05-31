@@ -34,28 +34,34 @@
             </div>
         </div>
         
-        <form action="" method="post" class="">
+        <form action="" method="post" class="needs-validation">
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="email" name="email" id="email" class="form-control">
-                        <label for="email">Endereço de E-mail</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
+                        <label for="email">Endereço de E-mail *</label>
+                        <div class="invalid-feedback" style="text-align: start" id="invalid-email">
+                                Este campo é obrigatório.
+                        </div>
                     </div>
                 </div>
             </div>
-
+            
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="password" name="password" id="password" class="form-control">
-                        <label for="nome">Senha</label>
+                        <input type="password" name="password" id="password" class="form-control" required>
+                        <label for="nome">Senha *</label>
+                        <div class="invalid-feedback" style="text-align: start">
+                                Este campo é obrigatório.
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="row align-items-center m-2">
                 <div class="col">
-                    <button type="button" class="btn btn-primary" name="login_btn">Entrar</button>
+                    <button type="button" class="btn btn-primary" id="login_btn">Entrar</button>
                 </div>
             </div>
         </form>
@@ -69,5 +75,7 @@
 <script src="../js-scripts/forms.js"></script>
 <script src="../js-scripts/forms_validation.js"></script>
 <script src="../js-scripts/user.js"></script>
+
+<script src="../js-scripts/login_form.js"></script>
 
 </html>
