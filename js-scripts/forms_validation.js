@@ -246,11 +246,11 @@ function validCity(cityInput, form) {
 }
 
 function validConfirmPassword(confirmPasswordInput, form) {
-    const confirmPassword = confirmPasswordInput.value
+    const confirmPassword = confirmPasswordInput.value.trim()
     const passwordInput = form.password
-    const password = form.password.value
+    const password = form.password.value.trim()
     
-    if (password !== confirmPassword) {
+    if (password !== confirmPassword || password == '' || confirmPassword == '') {
         passwordInput.classList.remove('is-valid')
         passwordInput.classList.add('is-invalid')
 
@@ -258,7 +258,12 @@ function validConfirmPassword(confirmPasswordInput, form) {
         confirmPasswordInput.classList.add('is-invalid')
         
         document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)'
-        document.getElementById('invalid-password').innerText = 'Ambas as senhas precisam ser iguais.'
+        
+        document.getElementById('invalid-password').innerText = 'Digite uma senha válida.'
+
+        if (password != '' || confirmPassword != '') {
+            document.getElementById('invalid-password').innerText = 'Ambas as senhas precisam ser iguais.'
+        }
         
         return false
     }
@@ -276,7 +281,7 @@ function validConfirmPassword(confirmPasswordInput, form) {
 
 // passwords must be at laest 8 characters long, contain uppercase and lowercase letters, at least one special character and at least one numnber
 function validPassword(passwordInput, form) {
-    const password = passwordInput.value
+    const password = passwordInput.value.trim()
     const confirmPasswordInput = form.confirm_password
 
     // checks if the password fills all requirements
