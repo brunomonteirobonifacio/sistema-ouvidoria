@@ -274,11 +274,10 @@ function validConfirmPassword(confirmPasswordInput, form) {
     return true
 }
 
-// passwords must be at laest 8 characters long, contain uppercase and lowercase letters, and at least one special character
+// passwords must be at laest 8 characters long, contain uppercase and lowercase letters, at least one special character and at least one numnber
 function validPassword(passwordInput, form) {
     const password = passwordInput.value
     const confirmPasswordInput = form.confirm_password
-    const confirmPassword = form.confirm_password.value
 
     // checks if the password fills all requirements
     const hasUpperAndLower = Boolean(password.split('').filter(char => char === char.toUpperCase()).length && password.split('').filter(char => char === char.toLowerCase()).length)
