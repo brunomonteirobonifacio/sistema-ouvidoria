@@ -120,7 +120,8 @@ if ($('form#signup.needs-validation')) {
 
     // validates invalid and valid fields again every time the user changes input values
     form.querySelectorAll('input').forEach(field => {
-        field.addEventListener('change', () => {
+        field.addEventListener('blur', () => {
+            field.value = field.value.trim()
             validateField[field.name](field, form)
         })
     })
