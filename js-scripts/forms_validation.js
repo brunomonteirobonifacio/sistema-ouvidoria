@@ -1,3 +1,7 @@
+// =========================================================================================
+// this file will contain field validation functions
+// =========================================================================================
+
 function validName(nameInput, form) {
     const name = nameInput.value
 
