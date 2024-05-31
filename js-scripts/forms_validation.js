@@ -25,8 +25,8 @@ async function validEmail(emailInput, form) {
     }).then(() => {
         if (!isValid) { 
             document.getElementById('invalid-email').innerText = 'Este E-mail já está em uso.'
-            cpfInput.classList.remove('is-valid')
-            cpfInput.classList.add('is-invalid')
+            emailInput.classList.remove('is-valid')
+            emailInput.classList.add('is-invalid')
             
             return
         }
