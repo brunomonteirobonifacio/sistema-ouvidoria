@@ -2,6 +2,26 @@
 // this file will contain field validation functions
 // =========================================================================================
 
+function checkEmptyFields(form) {
+    var hasEmpty = false
+
+    // goes through every field and checks if they are empty
+    form.querySelectorAll('input[required], select[required]').forEach(field => {
+        if (!field.value.trim()) {
+            field.classList.add('is-invalid')
+            field.classList.remove('is-valid')
+            
+            hasEmpty = true
+            return
+        }
+
+        field.classList.remove('is-invalid')
+        field.classList.add('is-valid')
+    })
+
+    return !hasEmpty
+}
+
 function validName(nameInput, form) {
     const name = nameInput.value
 
@@ -22,26 +42,6 @@ function validName(nameInput, form) {
 async function validEmail(emailInput, form) {
     const email = emailInput.value
 
-    // checks if the Email is already registered
-    var isValid
-    await $.post('../php-scripts/user.php', { function: 'checkEmail', email: emailInput.value }, (response) => {
-        isValid = !Boolean(parseInt(response))
-    }).then(() => {
-        if (!isValid) { 
-            document.getElementById('invalid-email').innerText = 'Este E-mail já está em uso.'
-            emailInput.classList.remove('is-valid')
-            emailInput.classList.add('is-invalid')
-            
-            return
-        }
-    
-        // changse back the invalid-feedback message
-        document.getElementById('invalid-email').innerText = 'Digite um endereço de E-mail válido.'
-    })
-
-    // doesn't proceed the verification if the E-mail is already in use
-    if (!isValid) return false
-
     // this pattern would be *any characters but space*@*any characters but space*.*2 or 3 letters*
     const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
 
@@ -60,30 +60,6 @@ async function validEmail(emailInput, form) {
 
 async function validPhone(phoneInput, form) {
     const phone = phoneInput.value
-    
-    // this indicates whether it's a whatsapp number or a phone number
-    const phoneType = phoneInput.name
-    
-    // checks if the phone or whatsapp number is already registered
-    var isValid
-    await $.post('../php-scripts/user.php', { function: `check${phoneType[0].toUpperCase() + phoneType.substring(1)}`, phone: phoneInput.value }, (response) => {
-        isValid = !Boolean(parseInt(response))
-    }).then(() => {
-        if (!isValid) { 
-            // changes the invalid-feedback message
-            document.getElementById(`invalid-${phoneType}`).innerText = phoneType == 'phone' ? 'Este número de telefone já está em uso.' : 'Este número WhatsApp já está em uso.'
-            phoneInput.classList.remove('is-valid')
-            phoneInput.classList.add('is-invalid')
-            
-            return
-        }
-        
-        // changse back the invalid-feedback message
-        document.getElementById(`invalid-${phoneType}`).innerText = 'Digite um número ' + (phoneType == 'phone' ? 'de telefone' : 'WhatsApp') + ' válido.'
-    })
-
-    // doesn't proceed the verification if the phone number is already in use
-    if (!isValid) return false
 
     // this pattern takes possible DDD digits combinations, first number being 9, and all numbers being filled in, into consideration
     const phonePattern = /^\((?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\) (?:[2-8]|9[0-9])[0-9]{3}\-[0-9]{4}$/
@@ -101,27 +77,8 @@ async function validPhone(phoneInput, form) {
     return true;
 }
 
-async function validCPF(cpfInput, form) {
+function validCPF(cpfInput, form) {
     const cpf = $(cpfInput).cleanVal()  // getting the value without its mask
-
-    // checks if the CPF is already registered
-    var isValid = false
-    await $.post('../php-scripts/user.php', { function: 'checkCPF', cpf: cpfInput.value }, (response) => {
-        isValid = !Boolean(parseInt(response))
-    }).then(() => {
-        if (!isValid) {            
-            document.getElementById('invalid-cpf').innerText = 'Este CPF já está em uso.'
-            cpfInput.classList.remove('is-valid')
-            cpfInput.classList.add('is-invalid')
-            
-            return
-        }
-        
-        document.getElementById('invalid-cpf').innerText = 'Digite um CPF válido.'
-    })
-    
-    // doesn't proceed the verification if CPF is already in use
-    if (!isValid) return false
 
     var sum = 0, rest
         
@@ -249,6 +206,39 @@ function validCity(cityInput, form) {
     return true
 }
 
+// passwords must be at laest 8 characters long, contain uppercase and lowercase letters, at least one special character and at least one numnber
+function validPassword(passwordInput, form) {
+    const password = passwordInput.value.trim()
+    const confirmPasswordInput = form.confirm_password
+
+    // checks if the password fills all requirements
+    const hasUpperAndLower = Boolean(password.split('').filter(char => char === char.toUpperCase()).length && password.split('').filter(char => char === char.toLowerCase()).length)
+    const hasSpecialCharacters = Boolean(password.split('').filter(char => !(/[^A-Za-z0-9]/.test(char))).length)
+    const hasNumeric = Boolean(password.split('').filter(char => $.isNumeric(char)).length)
+
+    if (!hasUpperAndLower || !hasSpecialCharacters || !hasNumeric || password.length < 8) {
+        passwordInput.classList.remove('is-valid')
+        passwordInput.classList.add('is-invalid')
+
+        confirmPasswordInput.classList.remove('is-valid')
+        confirmPasswordInput.classList.add('is-invalid')
+        
+        document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)'
+        document.getElementById('invalid-password').innerText = 'Digite uma senha válida.'
+        
+        return false
+    }
+    
+    if (!validConfirmPassword(confirmPasswordInput, form)) return false
+    
+    document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)'
+
+    passwordInput.classList.add('is-valid')
+    passwordInput.classList.remove('is-invalid')
+    
+    return true
+}
+
 function validConfirmPassword(confirmPasswordInput, form) {
     const confirmPassword = confirmPasswordInput.value.trim()
     const passwordInput = form.password
@@ -283,37 +273,73 @@ function validConfirmPassword(confirmPasswordInput, form) {
     return true
 }
 
-// passwords must be at laest 8 characters long, contain uppercase and lowercase letters, at least one special character and at least one numnber
-function validPassword(passwordInput, form) {
-    const password = passwordInput.value.trim()
-    const confirmPasswordInput = form.confirm_password
+// TODO: Refactor code and split apart valid from available
 
-    // checks if the password fills all requirements
-    const hasUpperAndLower = Boolean(password.split('').filter(char => char === char.toUpperCase()).length && password.split('').filter(char => char === char.toLowerCase()).length)
-    const hasSpecialCharacters = Boolean(password.split('').filter(char => !(/[^A-Za-z0-9]/.test(char))).length)
-    const hasNumeric = Boolean(password.split('').filter(char => $.isNumeric(char)).length)
+async function availableEmail(emailInput) {
 
-    if (!hasUpperAndLower || !hasSpecialCharacters || !hasNumeric || password.length < 8) {
-        passwordInput.classList.remove('is-valid')
-        passwordInput.classList.add('is-invalid')
+    // checks if the Email is already registered
+    var isAvaliable
+    await $.post('../php-scripts/user.php', { function: 'checkEmail', email: emailInput.value }, (response) => {
+        isAvaliable = !Boolean(parseInt(response))
+    }).then(() => {
+        if (!isAvaliable) { 
+            document.getElementById('invalid-email').innerText = 'Este E-mail já está em uso.'
+            emailInput.classList.remove('is-valid')
+            emailInput.classList.add('is-invalid')
+            
+            return
+        }
+    
+        // changes back the invalid-feedback message
+        document.getElementById('invalid-email').innerText = 'Digite um endereço de E-mail válido.'
+    })
 
-        confirmPasswordInput.classList.remove('is-valid')
-        confirmPasswordInput.classList.add('is-invalid')
+    return isAvaliable
+}
+
+async function availablePhone(phoneInput) {
+
+    // this indicates whether it's a whatsapp number or a phone number
+    const phoneType = phoneInput.name
+    
+    // checks if the phone or whatsapp number is already registered
+    var isAvaliable
+    await $.post('../php-scripts/user.php', { function: `check${phoneType[0].toUpperCase() + phoneType.substring(1)}`, phone: phoneInput.value }, (response) => {
+        isAvaliable = !Boolean(parseInt(response))
+    }).then(() => {
+        if (!isAvaliable) { 
+            // changes the invalid-feedback message
+            document.getElementById(`invalid-${phoneType}`).innerText = phoneType == 'phone' ? 'Este número de telefone já está em uso.' : 'Este número WhatsApp já está em uso.'
+            phoneInput.classList.remove('is-valid')
+            phoneInput.classList.add('is-invalid')
+            
+            return
+        }
         
-        document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)'
-        document.getElementById('invalid-password').innerText = 'Digite uma senha válida.'
-        
-        return false
-    }
-    
-    if (!validConfirmPassword(confirmPasswordInput, form)) return false
-    
-    document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)'
+        // changse back the invalid-feedback message
+        document.getElementById(`invalid-${phoneType}`).innerText = 'Digite um número ' + (phoneType == 'phone' ? 'de telefone' : 'WhatsApp') + ' válido.'
+    })
 
-    passwordInput.classList.add('is-valid')
-    passwordInput.classList.remove('is-invalid')
-    
-    return true
+    return isAvaliable
+}
+
+async function availableCPF(cpfInput) {
+
+    // checks if the CPF is already registered
+    var isAvaliable = false
+    await $.post('../php-scripts/user.php', { function: 'checkCPF', cpf: cpfInput.value }, (response) => {
+        isAvaliable = !Boolean(parseInt(response))
+    }).then(() => {
+        if (!isAvaliable) {            
+            document.getElementById('invalid-cpf').innerText = 'Este CPF já está em uso.'
+            cpfInput.classList.remove('is-valid')
+            cpfInput.classList.add('is-invalid')
+            
+            return
+        }
+    })
+
+    return isAvaliable
 }
 
 // an object containing every field validator
@@ -328,4 +354,12 @@ var validateField = {
     city: validCity,
     password: validPassword,
     confirm_password: validConfirmPassword
+}
+
+// an object containing availability check for every needed field
+var checkAvailable = {
+    email: availableEmail,
+    phone: availablePhone,
+    whatsapp: availablePhone,
+    cpf: availableCPF,
 }

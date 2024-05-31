@@ -91,7 +91,30 @@ async function checkFormValidity(form) {
 
             // the next valid fields won't change the result if there was an invalid field before
             // this won't stop the verification though, as all invalid fields should be warned to the user
-            allValid = !allValid ? false : validField
+            if (!validField) {
+                allValid = false
+            }
+        }
+    })
+
+    return allValid
+}
+
+async function checkFormAvailability(form) {
+    const formData = new FormData(form)
+    var allValid = true
+
+    await formData.entries().forEach(async input => {
+        if (validateField[input[0]]) {
+            const formInput = form[input[0]]
+            
+            const available = await checkAvailable[input[0]](formInput, form)
+
+            // the next valid fields won't change the result if there was an invalid field before
+            // this won't stop the verification though, as all invalid fields should be warned to the user
+            if (!available) {
+                allValid = false
+            }
         }
     })
 
