@@ -15,7 +15,7 @@ function login($email, $pass) {
     $userId = $query->fetchAll(PDO::FETCH_ASSOC)[0]['id_usuario'];
 
     $_SESSION['userId'] = $userId;
-    return true
+    return true;
 }
 
 $functions = [
