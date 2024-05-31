@@ -12,7 +12,7 @@ var form = document.querySelector('form.needs-validation')
 $('button#signup_btn').on('click', async () => {
     
     // boolean function, checks each field of form and returns true if it's all valid
-    const validForm = checkFormValidity(form)
+    const validForm = checkFormValidity(form) && await checkAvailable(form)
     
     if (!validForm) return
     
@@ -60,16 +60,16 @@ if ($('#signupModal')) {
 // validates invalid and valid fields again every time the user changes input values
 form.querySelectorAll('input[required], select[required]').forEach(field => {
     field.addEventListener('blur', async () => {
-        
         field.value = field.value.trim()
+        
         
         // only checks availability if the field needs it
         if (checkAvailable[field.name]) {
             const availableField = await checkAvailable[field.name](field)
-            
+
             if (!availableField) return
         }
-
+        
         validateField[field.name](field, form)
         
         // if state is changed, then city changes back and needs to be reverified

@@ -39,7 +39,7 @@ function validName(nameInput, form) {
     return true;
 }
 
-async function validEmail(emailInput, form) {
+function validEmail(emailInput, form) {
     const email = emailInput.value
 
     // this pattern would be *any characters but space*@*any characters but space*.*2 or 3 letters*
@@ -58,7 +58,7 @@ async function validEmail(emailInput, form) {
     return true;
 }
 
-async function validPhone(phoneInput, form) {
+function validPhone(phoneInput, form) {
     const phone = phoneInput.value
 
     // this pattern takes possible DDD digits combinations, first number being 9, and all numbers being filled in, into consideration

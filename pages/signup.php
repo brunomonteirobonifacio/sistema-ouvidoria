@@ -123,7 +123,7 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="password" name="password" id="password" class="form-control">
+                        <input type="password" name="password" id="password" class="form-control" required>
                         <label for="password">Senha *</label>
                         <div class="invalid-feedback" id="invalid-password" style="text-align: start">
                             Digite uma senha válida.
@@ -141,7 +141,7 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="password" name="confirm_password" id="confirm_password" class="form-control">
+                        <input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
                         <label for="confirm_password">Confirme sua Senha *</label>
                     </div>
                 </div>
