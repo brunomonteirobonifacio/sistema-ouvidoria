@@ -45,9 +45,9 @@ $functions = [
             exit();
         }
         
-        login($email);
-
         echo "Status 201";
+        
+        login($email);
         exit();
     },
 
