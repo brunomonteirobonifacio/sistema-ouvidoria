@@ -185,6 +185,18 @@ function validBirthdate(birthdateInput, form) {
     let minDate = new Date(Date.now())
     minDate.setFullYear(minDate.getFullYear() - 18)
 
+    // checks for an impossible birthdate
+    if (birthdate <= new Date('1900-12-31') || birthdate >= new Date(Date.now())) {
+        birthdateInput.classList.remove('is-valid')
+        birthdateInput.classList.add('is-invalid')
+    
+        document.getElementById('invalid-date').innerText = 'Digite uma data válida.'
+        
+        return false
+    }
+    
+    document.getElementById('invalid-date').innerText = 'É necessário ter mais de 18 anos para realizar o cadastro.'
+
     // checks if the birthdate adds up to at least 18 years
     if (birthdate > minDate) {
         birthdateInput.classList.remove('is-valid')
@@ -241,6 +253,7 @@ function validConfirmPassword(confirmPasswordInput, form) {
     if (password !== confirmPassword) {
         passwordInput.classList.remove('is-valid')
         passwordInput.classList.add('is-invalid')
+
         confirmPasswordInput.classList.remove('is-valid')
         confirmPasswordInput.classList.add('is-invalid')
         
@@ -249,11 +262,12 @@ function validConfirmPassword(confirmPasswordInput, form) {
         
         return false
     }
-    
+
     document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)'
 
     passwordInput.classList.add('is-valid')
     passwordInput.classList.remove('is-invalid')
+
     confirmPasswordInput.classList.add('is-valid')
     confirmPasswordInput.classList.remove('is-invalid')
 
@@ -266,14 +280,15 @@ function validPassword(passwordInput, form) {
     const confirmPasswordInput = form.confirm_password
     const confirmPassword = form.confirm_password.value
 
+    // checks if the password fills all requirements
     const hasUpperAndLower = Boolean(password.split('').filter(char => char === char.toUpperCase()).length && password.split('').filter(char => char === char.toLowerCase()).length)
     const hasSpecialCharacters = Boolean(password.split('').filter(char => !(/[^A-Za-z0-9]/.test(char))).length)
     const hasNumeric = Boolean(password.split('').filter(char => $.isNumeric(char)).length)
 
-
     if (!hasUpperAndLower || !hasSpecialCharacters || !hasNumeric || password.length < 8) {
         passwordInput.classList.remove('is-valid')
         passwordInput.classList.add('is-invalid')
+
         confirmPasswordInput.classList.remove('is-valid')
         confirmPasswordInput.classList.add('is-invalid')
         

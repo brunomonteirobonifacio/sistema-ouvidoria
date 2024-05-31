@@ -96,6 +96,7 @@ async function checkFormValidity(form) {
     return allValid
 }
     
+// check form validity, then sign up
 if ($('button#signup_btn')) {
     $('button#signup_btn').on('click', async () => {
         var form = document.querySelector('form.needs-validation')
@@ -108,12 +109,13 @@ if ($('button#signup_btn')) {
         const formData = new FormData(form)
         const dataObj = Object.fromEntries(formData.entries())
         
-        alert('é pra dar')
-        // createUser(dataObj).then();
+        const responseStatus = await createUser(dataObj)
+
+        debugger
     })
 }
 
-if ($('form.needs-validation')) {
+if ($('form#signup.needs-validation')) {
     form = document.querySelector('form.needs-validation')
 
     // validates invalid and valid fields again every time the user changes input values
