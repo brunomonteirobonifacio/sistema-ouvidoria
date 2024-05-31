@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/05/2024 às 22:47
+-- Tempo de geração: 31/05/2024 às 04:03
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -5660,8 +5660,7 @@ INSERT INTO `estado` (`id_estado`, `nome_estado`, `sigla_estado`) VALUES
 (24, 'Santa Catarina', 'SC'),
 (25, 'São Paulo', 'SP'),
 (26, 'Sergipe', 'SE'),
-(27, 'Tocantins', 'TO'),
-(28, 'Distrito Federal', 'DF');
+(27, 'Tocantins', 'TO');
 
 -- --------------------------------------------------------
 
@@ -5722,12 +5721,21 @@ CREATE TABLE `usuario` (
   `cpf_usuario` char(14) DEFAULT NULL,
   `email_usuario` varchar(256) DEFAULT NULL,
   `senha_usuario` varchar(128) DEFAULT NULL,
-  `telefone_usuario` char(14) DEFAULT NULL,
+  `telefone_usuario` char(15) DEFAULT NULL,
   `whatsapp_usuario` char(15) DEFAULT NULL,
   `data_nasc` date DEFAULT NULL,
-  `cod_cidade` int(11) DEFAULT NULL,
-  `cod_estado` int(11) DEFAULT NULL
+  `cod_cidade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `cpf_usuario`, `email_usuario`, `senha_usuario`, `telefone_usuario`, `whatsapp_usuario`, `data_nasc`, `cod_cidade`) VALUES
+(2, 'BRUNO', '071.243.709-65', 'bruno@gmail.com', 'cdf1d5f030c8a3a9f1405a277b7315cba3d5bc10706b6a3e76a5013a0b4deec36bd27a57f9354dc91da86a83443b0c35278059545abcbb9f84235b493d9ab9f0', '(48) 99678-4264', '(48) 99678-4264', '2005-12-19', 4521),
+(3, 'A A', '645.249.310-82', 'a@gmail.com', '65a491173f21b15fb597171536944ccd310892456fd769dd52caee53e2b73d21e21752678074a03d64bf9484dffcdb3538db858b656ed81a2da0ef2ae2868d31', '(99) 99999-9999', '(99) 99999-9999', '2000-02-16', 1131),
+(4, 'A B', '340.574.220-05', 'an@gmail.com', '2eb1042e6c2988db8177ac705fe530e3ac56d652160c35e92f90cfb470d75efca561cb1554c9a4c0b776fc4d00e16803319a577298beface41b5035939b396ec', '(48) 99999-9999', '(48) 99999-9999', '2005-02-23', 2562),
+(5, 'A C', '713.740.320-42', 'c@gmail.com', '2eb1042e6c2988db8177ac705fe530e3ac56d652160c35e92f90cfb470d75efca561cb1554c9a4c0b776fc4d00e16803319a577298beface41b5035939b396ec', '(48) 99997-9999', '(48) 99997-9999', '1988-06-05', 2568);
 
 --
 -- Índices para tabelas despejadas
@@ -5824,7 +5832,7 @@ ALTER TABLE `tipo_ouvidoria`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restrições para tabelas despejadas
