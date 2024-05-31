@@ -26,11 +26,10 @@
       </div>
     </div>
 
-    <div class="container text-center p-3 mx-auto my-3 border rounded w-50">
+    <div class="container text-center p-3 mx-auto my-3 border border-dark-subtle rounded w-50">
         <div class="row align-items-center m-2 d-inline-flex">
             <div class="col">
-                <h1 class="m-2 pd-2 display-2">Entrar</h1>
-                <hr>
+                <h1 class="m-2 pd-2 display-2 border-dark-subtle border-bottom">Entrar</h1>
             </div>
         </div>
         
