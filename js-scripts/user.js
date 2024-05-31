@@ -20,7 +20,8 @@ async function loginUser(email, password) {
     var successfulLogin
 
     await $.post('../php-scripts/user.php', { function: 'loginUser', email, password }, (response) => {
-        successfulLogin = Boolean(response)
+        // function will retrieve 1 if login was successful, 0 if it wasn't
+        successfulLogin = Boolean(parseInt(response))
         debugger
     })
 }
