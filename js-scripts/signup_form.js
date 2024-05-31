@@ -6,13 +6,13 @@
 // it won't do anything by standard, only if the user registration was successful will it redirect to homepage
 var closeModalAction = () => {}
 
+var form = document.querySelector('form.needs-validation')
+
 // check form validity, then sign up
 $('button#signup_btn').on('click', async () => {
-    var form = document.querySelector('form.needs-validation')
-
     
     // boolean function, checks each field of form and returns true if it's all valid
-    const validForm = await checkFormValidity(form)
+    const validForm = checkFormValidity(form)
     
     if (!validForm) return
     
@@ -41,7 +41,7 @@ $('button#signup_btn').on('click', async () => {
         window.location.href = '../'
     }
 
-    // else activate success message modal
+    // activate success message modal
     $('#signupModalLabel').text('Sucesso!')
     $('.modal-body').text('Seu cadastro foi realizado com sucesso!')
 
@@ -57,26 +57,24 @@ if ($('#signupModal')) {
     })
 }
 
-if ($('form#signup.needs-validation')) {
-    form = document.querySelector('form.needs-validation')
+// validates invalid and valid fields again every time the user changes input values
+form.querySelectorAll('input[required], select[required]').forEach(field => {
+    field.addEventListener('blur', async () => {
+        
+        field.value = field.value.trim()
+        
+        // only checks availability if the field needs it
+        if (checkAvailable[field.name]) {
+            const availableField = await checkAvailable[field.name](field)
+            
+            if (!availableField) return
+        }
 
-    // validates invalid and valid fields again every time the user changes input values
-    form.querySelectorAll('input').forEach(field => {
-        field.addEventListener('blur', () => {
-            field.value = field.value.trim()
-            validateField[field.name](field, form)
-        })
+        validateField[field.name](field, form)
+        
+        // if state is changed, then city changes back and needs to be reverified
+        if (field.name == 'state') {
+            validateField['city'](form.city)
+        }
     })
-
-    // also validates as before but with select fields
-    form.querySelectorAll('select').forEach(field => {
-        field.addEventListener('change', () => {
-            validateField[field.name](field)
-
-            // if state is changed, then city changes back as well
-            if (field.name == 'state') {
-                validateField['city'](form.city)
-            }
-        })
-    })
-}
+})
