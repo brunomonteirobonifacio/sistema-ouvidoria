@@ -78,7 +78,7 @@
                     <div class="form-floating">
                         <input type="date" name="birthdate" id="birthdate" class="form-control" autocomplete="off" require>
                         <label for="birthdate">Data de Nascimento</label>
-                        <div class="invalid-feedback" style="text-align: start">
+                        <div class="invalid-feedback" id="invalid-date" style="text-align: start">
                             É necessário ter mais de 18 anos para realizar o cadastro.
                         </div>
                     </div>
