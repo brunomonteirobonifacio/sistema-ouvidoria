@@ -1,4 +1,7 @@
-// This file is dedicated to get user-related data from database, such as sign-up and log-in
+// =========================================================================================
+// this file is dedicated to get user-related data from database, such as signup and login
+// =========================================================================================
+
 async function createUser(data) {
     var statusCode
     await $.post('../php-scripts/user.php', { function: 'createUser', ...data }, (response) => {
@@ -13,8 +16,11 @@ async function createUser(data) {
     return true
 }
 
-async function loginUser(email) {
-    await $.post('../php-scripts/user.php', { function: 'loginUser', email }, (response) => {
+async function loginUser(email, password) {
+    var successfulLogin
 
+    await $.post('../php-scripts/user.php', { function: 'loginUser', email, password }, (response) => {
+        successfulLogin = Boolean(response)
+        debugger
     })
 }

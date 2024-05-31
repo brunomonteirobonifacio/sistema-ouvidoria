@@ -1,9 +1,11 @@
 <?php
-// This file is dedicated to user-related functions in database, such as sign-up and log-in
+// =========================================================================================
+// this file is dedicated to user-related functions in database, such as signup and login
+// =========================================================================================
+
 function login($email, $pass) {
     include "../db-connection/connection.php";
-    session_start();
-
+    
     $query = $connection->prepare("SELECT id_usuario FROM usuario WHERE email_usuario = :email AND senha_usuario = SHA2(:pass, 512)");
     $query->bindParam('email', $email);
     $query->bindParam('pass', $pass);
@@ -11,10 +13,16 @@ function login($email, $pass) {
     if (!$query->execute()) {
         return false;
     }
+    
+    if (!$query->rowCount()) {
+        return false;
+    }
 
     $userId = $query->fetchAll(PDO::FETCH_ASSOC)[0]['id_usuario'];
-
+    
+    session_start();
     $_SESSION['userId'] = $userId;
+
     return true;
 }
 
@@ -50,12 +58,12 @@ $functions = [
         
         echo "Status 201";
         
-        login($email);
+        login($email, $pass);
         exit();
     },
 
     'loginUser' => function() {
-        login($_POST['email']);
+        echo login($_POST['email'], $_POST['password']) ? "1" : "0";
         exit();
     },
 
@@ -96,7 +104,7 @@ $functions = [
             exit();
         }
 
-                // checks if there was any user already registered with given e-mail
+        // checks if there was any user already registered with given e-mail
         echo $query->rowCount() > 0 ? $query->rowCount() : "0";
         exit();
     },
