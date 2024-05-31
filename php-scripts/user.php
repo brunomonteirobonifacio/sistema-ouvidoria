@@ -1,18 +1,21 @@
 <?php
 // This file is dedicated to user-related functions in database, such as sign-up and log-in
-function login($email) {
+function login($email, $pass) {
     include "../db-connection/connection.php";
     session_start();
 
-    $query = $connection->prepare("SELECT id_usuario FROM usuario WHERE email_usuario = :email");
+    $query = $connection->prepare("SELECT id_usuario FROM usuario WHERE email_usuario = :email AND senha_usuario = SHA2(:pass, 512)");
     $query->bindParam('email', $email);
+    $query->bindParam('pass', $pass);
     
-    $query->execute();
+    if (!$query->execute()) {
+        return false;
+    }
 
     $userId = $query->fetchAll(PDO::FETCH_ASSOC)[0]['id_usuario'];
 
     $_SESSION['userId'] = $userId;
-    exit();
+    return true
 }
 
 $functions = [
@@ -57,8 +60,10 @@ $functions = [
     },
 
     'logoffUser' => function() {
+        // ends session, where userId was stored
         session_start();
         session_destroy();
+
         exit();
     },
 
@@ -74,6 +79,7 @@ $functions = [
             exit();
         }
 
+        // checks if there was any user already registered with given cpf
         echo $query->rowCount() > 0 ? $query->rowCount() : "0";
         exit();
     },
@@ -90,6 +96,7 @@ $functions = [
             exit();
         }
 
+                // checks if there was any user already registered with given e-mail
         echo $query->rowCount() > 0 ? $query->rowCount() : "0";
         exit();
     },
@@ -106,6 +113,7 @@ $functions = [
             exit();
         }
 
+        // checks if there was any user already registered with given phone number
         echo $query->rowCount() > 0 ? $query->rowCount() : "0";
         exit();
     },
@@ -122,6 +130,7 @@ $functions = [
             exit();
         }
 
+        // checks if there was any user already registered with given whatsapp number
         echo $query->rowCount() > 0 ? $query->rowCount() : "0";
         exit();
     },
