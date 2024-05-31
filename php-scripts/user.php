@@ -19,7 +19,7 @@ $functions = [
     'createUser' => function() {
         include "../db-connection/connection.php";
 
-        $username = $_POST['name'];
+        $username = strtoupper($_POST['name']);
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $whatsapp = $_POST['whatsapp'];
@@ -28,8 +28,8 @@ $functions = [
         $birthdate = $_POST['birthdate'];
         $pass = $_POST['password'] . $_ENV['pepper'];
 
-        $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_estado, cod_cidade, senha_usuario) VALUES
-        (:username, :email, :phone, :whatsapp, :cpf, :birthdate, :stateId, :cityId, SHA2(:pass, 512))");
+        $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_cidade, senha_usuario) VALUES
+        (:username, :email, :phone, :whatsapp, :cpf, :birthdate, :cityId, SHA2(:pass, 512))");
 
         $query->bindParam('username', $username);
         $query->bindParam('email', $email);

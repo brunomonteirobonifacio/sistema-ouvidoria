@@ -2,8 +2,12 @@
 async function createUser(data) {
     var statusCode
     await $.post('../php-scripts/user.php', { function: 'createUser', ...data }, (response) => {
-        statusCode = parseInt(response.split(' ')[1]) || 500
+        statusCode = response
     })
+
+    statusCode = parseInt(statusCode.split(' ')[1]) || 500
+
+    return statusCode
 
     if (statusCode != 201) return false
 
