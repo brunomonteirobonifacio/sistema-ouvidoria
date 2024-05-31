@@ -5,7 +5,7 @@ function login($email) {
     session_start();
 
     $query = $connection->prepare("SELECT id_usuario FROM usuario WHERE email_usuario = :email");
-    $query->bindvalue('email', $email);
+    $query->bindParam('email', $email);
     
     $query->execute();
 
@@ -25,20 +25,20 @@ $functions = [
         $whatsapp = $_POST['whatsapp'];
         $cpf = $_POST['cpf'];
         $cityId = $_POST['city'];
-        $birthDate = $_POST['birthdate'];
+        $birthdate = $_POST['birthdate'];
         $pass = $_POST['password'] . $_ENV['pepper'];
 
         $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_estado, cod_cidade, senha_usuario) VALUES
-        (:username, :email, :phone, :whatsapp, :cpf, :birthDate, :stateId, :cityId, SHA2(:pass, 512))");
+        (:username, :email, :phone, :whatsapp, :cpf, :birthdate, :stateId, :cityId, SHA2(:pass, 512))");
 
-        $query->bindValue('username', $username);
-        $query->bindValue('email', $email);
-        $query->bindValue('phone', $phone);
-        $query->bindValue('whatsapp', $whatsapp);
-        $query->bindValue('cpf', $cpf);
-        $query->bindValue('birthDate', $birthDate);
-        $query->bindValue('cityId', $cityId);
-        $query->bindValue('pass', $pass);
+        $query->bindParam('username', $username);
+        $query->bindParam('email', $email);
+        $query->bindParam('phone', $phone);
+        $query->bindParam('whatsapp', $whatsapp);
+        $query->bindParam('cpf', $cpf);
+        $query->bindParam('birthdate', $birthdate);
+        $query->bindParam('cityId', $cityId);
+        $query->bindParam('pass', $pass);
 
         if (!$query->execute()) {
             echo "Status 500";
