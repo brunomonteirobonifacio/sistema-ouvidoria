@@ -1,0 +1,5 @@
+Ouvidoria will have an unique protocol
+it will be form by: date, affected department, incremental number
+
+EXAMPLE: 2024060101002
+EXAMPLE: 20240601|01|0002
