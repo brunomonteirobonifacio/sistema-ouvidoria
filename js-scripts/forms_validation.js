@@ -2,26 +2,6 @@
 // this file will contain field validation functions
 // =========================================================================================
 
-function checkEmptyFields(form) {
-    var hasEmpty = false;
-
-    // goes through every field and checks if they are empty
-    form.querySelectorAll('input[required], select[required]').forEach(field => {
-        if (!field.value.trim()) {
-            field.classList.add('is-invalid');
-            field.classList.remove('is-valid');
-            
-            hasEmpty = true;
-            return;
-        }
-
-        field.classList.remove('is-invalid');
-        field.classList.add('is-valid');
-    })
-
-    return !hasEmpty;
-}
-
 function validName(nameInput, form) {
     const name = nameInput.value;
 
@@ -223,54 +203,54 @@ function validPassword(passwordInput, form) {
         confirmPasswordInput.classList.remove('is-valid');
         confirmPasswordInput.classList.add('is-invalid');
         
-        document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)'
-        document.getElementById('invalid-password').innerText = 'Digite uma senha válida.'
+        document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)';
+        document.getElementById('invalid-password').innerText = 'Digite uma senha válida.';
         
-        return false
+        return false;
     }
     
-    if (!validConfirmPassword(confirmPasswordInput, form)) return false
+    if (!validConfirmPassword(confirmPasswordInput, form)) return false;
     
-    document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)'
+    document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)';
 
-    passwordInput.classList.add('is-valid')
-    passwordInput.classList.remove('is-invalid')
+    passwordInput.classList.add('is-valid');
+    passwordInput.classList.remove('is-invalid');
     
-    return true
+    return true;
 }
 
 function validConfirmPassword(confirmPasswordInput, form) {
-    const confirmPassword = confirmPasswordInput.value.trim()
-    const passwordInput = form.password
-    const password = form.password.value.trim()
+    const confirmPassword = confirmPasswordInput.value.trim();
+    const passwordInput = form.password;
+    const password = form.password.value.trim();
     
     if (password !== confirmPassword || password == '' || confirmPassword == '') {
-        passwordInput.classList.remove('is-valid')
-        passwordInput.classList.add('is-invalid')
+        passwordInput.classList.remove('is-valid');
+        passwordInput.classList.add('is-invalid');
 
-        confirmPasswordInput.classList.remove('is-valid')
-        confirmPasswordInput.classList.add('is-invalid')
+        confirmPasswordInput.classList.remove('is-valid');
+        confirmPasswordInput.classList.add('is-invalid');
         
-        document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)'
+        document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)';
         
-        document.getElementById('invalid-password').innerText = 'Digite uma senha válida.'
+        document.getElementById('invalid-password').innerText = 'Digite uma senha válida.';
 
         if (password != '' || confirmPassword != '') {
-            document.getElementById('invalid-password').innerText = 'Ambas as senhas precisam ser iguais.'
+            document.getElementById('invalid-password').innerText = 'Ambas as senhas precisam ser iguais.';
         }
         
-        return false
+        return false;
     }
 
-    document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)'
+    document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)';
 
-    passwordInput.classList.add('is-valid')
-    passwordInput.classList.remove('is-invalid')
+    passwordInput.classList.add('is-valid');
+    passwordInput.classList.remove('is-invalid');
 
-    confirmPasswordInput.classList.add('is-valid')
-    confirmPasswordInput.classList.remove('is-invalid')
+    confirmPasswordInput.classList.add('is-valid');
+    confirmPasswordInput.classList.remove('is-invalid');
 
-    return true
+    return true;
 }
 
 // TODO: Refactor code and split apart valid from available
@@ -278,68 +258,68 @@ function validConfirmPassword(confirmPasswordInput, form) {
 async function availableEmail(emailInput) {
 
     // checks if the Email is already registered
-    var isAvaliable
+    var isAvaliable;
     await $.post('../php-scripts/user.php', { function: 'checkEmail', email: emailInput.value }, (response) => {
-        isAvaliable = !Boolean(parseInt(response))
+        isAvaliable = !Boolean(parseInt(response));
     }).then(() => {
         if (!isAvaliable) { 
-            document.getElementById('invalid-email').innerText = 'Este E-mail já está em uso.'
-            emailInput.classList.remove('is-valid')
-            emailInput.classList.add('is-invalid')
+            document.getElementById('invalid-email').innerText = 'Este E-mail já está em uso.';
+            emailInput.classList.remove('is-valid');
+            emailInput.classList.add('is-invalid');
             
-            return
+            return;
         }
     
         // changes back the invalid-feedback message
-        document.getElementById('invalid-email').innerText = 'Digite um endereço de E-mail válido.'
+        document.getElementById('invalid-email').innerText = 'Digite um endereço de E-mail válido.';
     })
 
-    return isAvaliable
+    return isAvaliable;
 }
 
 async function availablePhone(phoneInput) {
 
     // this indicates whether it's a whatsapp number or a phone number
-    const phoneType = phoneInput.name
+    const phoneType = phoneInput.name;
     
     // checks if the phone or whatsapp number is already registered
-    var isAvaliable
+    var isAvaliable;
     await $.post('../php-scripts/user.php', { function: `check${phoneType[0].toUpperCase() + phoneType.substring(1)}`, phone: phoneInput.value }, (response) => {
-        isAvaliable = !Boolean(parseInt(response))
+        isAvaliable = !Boolean(parseInt(response));
     }).then(() => {
         if (!isAvaliable) { 
             // changes the invalid-feedback message
-            document.getElementById(`invalid-${phoneType}`).innerText = phoneType == 'phone' ? 'Este número de telefone já está em uso.' : 'Este número WhatsApp já está em uso.'
-            phoneInput.classList.remove('is-valid')
-            phoneInput.classList.add('is-invalid')
+            document.getElementById(`invalid-${phoneType}`).innerText = phoneType == 'phone' ? 'Este número de telefone já está em uso.' : 'Este número WhatsApp já está em uso.';
+            phoneInput.classList.remove('is-valid');
+            phoneInput.classList.add('is-invalid');
             
-            return
+            return;
         }
         
         // changse back the invalid-feedback message
-        document.getElementById(`invalid-${phoneType}`).innerText = 'Digite um número ' + (phoneType == 'phone' ? 'de telefone' : 'WhatsApp') + ' válido.'
+        document.getElementById(`invalid-${phoneType}`).innerText = 'Digite um número ' + (phoneType == 'phone' ? 'de telefone' : 'WhatsApp') + ' válido.';
     })
 
-    return isAvaliable
+    return isAvaliable;
 }
 
 async function availableCPF(cpfInput) {
 
     // checks if the CPF is already registered
-    var isAvaliable = false
+    var isAvaliable = false;
     await $.post('../php-scripts/user.php', { function: 'checkCPF', cpf: cpfInput.value }, (response) => {
-        isAvaliable = !Boolean(parseInt(response))
+        isAvaliable = !Boolean(parseInt(response));
     }).then(() => {
         if (!isAvaliable) {            
-            document.getElementById('invalid-cpf').innerText = 'Este CPF já está em uso.'
-            cpfInput.classList.remove('is-valid')
-            cpfInput.classList.add('is-invalid')
+            document.getElementById('invalid-cpf').innerText = 'Este CPF já está em uso.';
+            cpfInput.classList.remove('is-valid');
+            cpfInput.classList.add('is-invalid');
             
-            return
+            return;
         }
     })
 
-    return isAvaliable
+    return isAvaliable;
 }
 
 // an object containing every field validator
