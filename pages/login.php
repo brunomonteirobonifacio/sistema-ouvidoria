@@ -38,9 +38,9 @@
                 <div class="col">
                     <div class="form-floating">
                         <input type="email" name="email" id="email" class="form-control" required>
-                        <label for="email">Endereço de E-mail *</label>
+                        <label for="email">Endereço de E-mail</label>
                         <div class="invalid-feedback" style="text-align: start" id="invalid-email">
-                                Este campo é obrigatório.
+                                Digite seu endereço de E-mail.
                         </div>
                     </div>
                 </div>
@@ -50,9 +50,9 @@
                 <div class="col">
                     <div class="form-floating">
                         <input type="password" name="password" id="password" class="form-control" required>
-                        <label for="nome">Senha *</label>
-                        <div class="invalid-feedback" style="text-align: start">
-                                Este campo é obrigatório.
+                        <label for="nome">Senha</label>
+                        <div class="invalid-feedback" style="text-align: start" id="invalid-password">
+                                Digite sua senha.
                         </div>
                     </div>
                 </div>
