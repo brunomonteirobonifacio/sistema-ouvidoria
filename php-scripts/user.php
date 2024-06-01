@@ -39,8 +39,12 @@ $functions = [
         $birthdate = $_POST['birthdate'];
         $pass = $_POST['password'] . $_ENV['pepper'];
 
-        $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_cidade, senha_usuario) VALUES
-        (:username, :email, :phone, :whatsapp, :cpf, :birthdate, :cityId, SHA2(:pass, 512))");
+        // this will be used to account activation
+        $activationToken = bin2hex(random_bytes(16));
+        $activationTokenHash = hash("sha256", $token);
+
+        $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_cidade, senha_usuario, hash_ativacao_usuario) VALUES
+        (:username, :email, :phone, :whatsapp, :cpf, :birthdate, :cityId, SHA2(:pass, 512), :activationHash)");
 
         $query->bindParam('username', $username);
         $query->bindParam('email', $email);
@@ -50,6 +54,7 @@ $functions = [
         $query->bindParam('birthdate', $birthdate);
         $query->bindParam('cityId', $cityId);
         $query->bindParam('pass', $pass);
+        $query->bindParam('activationHash', $activationTokenHash);
 
         if (!$query->execute()) {
             echo "Status 500";
