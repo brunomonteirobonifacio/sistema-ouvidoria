@@ -96,6 +96,15 @@ $functions = [
             exit();
         }
 
+        if (!$query->rowCount()) {
+            echo '0';
+            exit();
+        }
+
+        $username = $query->fetchAll(PDO::FETCH_ASSOC)[0][nome_usuario];
+        echo $username;
+
+        exit();
     },
 
     'checkCPF' => function() {
