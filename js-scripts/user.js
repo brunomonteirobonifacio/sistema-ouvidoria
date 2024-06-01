@@ -6,11 +6,12 @@ async function createUser(data) {
     var statusCode;
     await $.post('../php-scripts/user.php', { function: 'createUser', ...data }, (response) => {
         statusCode = response;
+        debugger
     })
 
     statusCode = parseInt(statusCode.split(' ')[1]) || 500;
 
-    // if registration failed,
+    // returns false if registration failed
     if (statusCode != 201) return false;
 
     return true;
@@ -19,10 +20,11 @@ async function createUser(data) {
 async function loginUser(email, password) {
     var successfulLogin;
 
-    await $.post('../php-scripts/user.php', { function: 'loginUser', email, password }, (response) => {
+    await $.post('../php-scripts/user.php', { function: 'loginUser', email: email, password: password }, (response) => {
         
         // function will retrieve 1 if login was successful, 0 if it wasn't
         successfulLogin = Boolean(parseInt(response));
-        debugger
     })
+
+    return successfulLogin;
 }

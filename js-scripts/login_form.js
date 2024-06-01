@@ -5,17 +5,16 @@
 var form = document.querySelector('form.needs-validation')
 
 $('button#login_btn').on('click', async () => {
+
     // only logs in if all fields are checked
     if (!checkEmptyFields(form)) return;
 
     // ... else it attempts to login
-    const email = form.email.value
-    const password = form.password.value;
+    const emailValue = form.email.value
+    const passwordValue = form.password.value;
 
     // function will return true if successful, false if failed
-    const userLogged = await loginUser(email, password).then(() => {
-        debugger
-    });
+    const userLogged = await loginUser(emailValue, passwordValue)
 
     if (!userLogged) {
         form.email.classList.add('is-invalid');    
