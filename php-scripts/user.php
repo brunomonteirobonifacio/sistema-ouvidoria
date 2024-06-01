@@ -83,6 +83,21 @@ $functions = [
         exit();
     },
 
+    'getLoggedUsername' => function() {
+        session_start();
+
+        include "../db-connection/connection.php";
+
+        $query = $connection->prepare("SELECT nome_usuario FROM usuario WHERE id_usuario = :id")
+        $query->bindParam('id', $_SESSION['userId']);
+
+        if (!$query->execute()) {
+            echo '0';
+            exit();
+        }
+
+    },
+
     'checkCPF' => function() {
         include "../db-connection/connection.php";
         $cpf = $_POST['cpf'];

@@ -20,11 +20,19 @@ async function createUser(data) {
 async function loginUser(email, password) {
     var successfulLogin;
 
-    await $.post('../php-scripts/user.php', { function: 'loginUser', email: email, password: password }, (response) => {
+    await $.post('../php-scripts/user.php', { function: 'loginUser', email, password }, (response) => {
         
         // function will retrieve 1 if login was successful, 0 if it wasn't
         successfulLogin = Boolean(parseInt(response));
     })
 
     return successfulLogin;
+}
+
+async function getLoggedUsername() {
+    var username;
+
+    await $.post('../php-cripts/user.php', { function: 'getLoggedUsername' }, (response) => {
+        username = response;
+    })
 }
