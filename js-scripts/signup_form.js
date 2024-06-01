@@ -12,7 +12,7 @@ var form = document.querySelector('form.needs-validation');
 $('button#signup_btn').on('click', async () => {
     
     // boolean function, checks each field of form and returns true if it's all valid
-    const validForm = checkFormValidity(form) && await checkAvailable(form);
+    const validForm = checkFormValidity(form) && await checkFormAvailability(form);
     
     if (!validForm) return;
     

@@ -161,8 +161,8 @@
 <script src="../jquery/jquery-mask/dist/jquery.mask.min.js"></script>
 
 <script src="../js-scripts/masks.js"></script>
-<script src="../js-scripts/forms.js"></script>
 <script src="../js-scripts/forms_validation.js"></script>
+<script src="../js-scripts/forms.js"></script>
 <script src="../js-scripts/user.js"></script>
 
 <script src="../js-scripts/signup_form.js"></script>
