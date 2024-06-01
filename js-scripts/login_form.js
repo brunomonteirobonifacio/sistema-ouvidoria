@@ -13,7 +13,9 @@ $('button#login_btn').on('click', async () => {
     const password = form.password.value;
 
     // function will return true if successful, false if failed
-    const userLogged = await loginUser(email, password);
+    const userLogged = await loginUser(email, password).then(() => {
+        debugger
+    });
 
     if (!userLogged) {
         form.email.classList.add('is-invalid');    
@@ -26,6 +28,7 @@ $('button#login_btn').on('click', async () => {
 
         return;
     }
+
 
     $('#loginModalLabel').text('Sucesso!');
     $('.modal-body').text('Login realizado com sucesso!');

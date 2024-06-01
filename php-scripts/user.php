@@ -6,6 +6,9 @@
 function login($email, $pass) {
     include "../db-connection/connection.php";
     
+    // include password peppering
+    $pass = $pass . $_ENV['pepper'];
+
     $query = $connection->prepare("SELECT id_usuario FROM usuario WHERE email_usuario = :email AND senha_usuario = SHA2(:pass, 512)");
     $query->bindParam('email', $email);
     $query->bindParam('pass', $pass);
