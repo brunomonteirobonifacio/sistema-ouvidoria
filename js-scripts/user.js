@@ -3,25 +3,26 @@
 // =========================================================================================
 
 async function createUser(data) {
-    var statusCode
+    var statusCode;
     await $.post('../php-scripts/user.php', { function: 'createUser', ...data }, (response) => {
-        statusCode = response
+        statusCode = response;
     })
 
-    statusCode = parseInt(statusCode.split(' ')[1]) || 500
+    statusCode = parseInt(statusCode.split(' ')[1]) || 500;
 
     // if registration failed,
-    if (statusCode != 201) return false
+    if (statusCode != 201) return false;
 
-    return true
+    return true;
 }
 
 async function loginUser(email, password) {
-    var successfulLogin
+    var successfulLogin;
 
     await $.post('../php-scripts/user.php', { function: 'loginUser', email, password }, (response) => {
+        
         // function will retrieve 1 if login was successful, 0 if it wasn't
-        successfulLogin = Boolean(parseInt(response))
+        successfulLogin = Boolean(parseInt(response));
         debugger
     })
 }

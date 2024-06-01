@@ -1,22 +1,41 @@
 // =========================================================================================
 // this file contains functions used for form utilities within the system
 // =========================================================================================
+
 var form = document.querySelector('form.needs-validation')
 
 $('button#login_btn').on('click', async () => {
     // only logs in if all fields are checked
-    if (!checkEmptyFields(form)) return
+    if (!checkEmptyFields(form)) return;
 
+    // ... else it attempts to login
+    const email = form.email.value
+    const password = form.password.value;
 
+    // function will return true if successful, false if failed
+    const userLogged = await loginUser(email, password);
+
+    if (!userLogged) {
+        form.email.classList.add('is-invalid');    
+        form.email.classList.remove('is-valid');
+        $('#invalid-email').text('');
+        
+        form.password.classList.add('is-invalid');        
+        form.password.classList.remove('is-valid');
+        $('#invalid-password').text('Endereço de E-mail ou senha digitados estão incorretos.');
+
+        return;
+    }
+
+    $('#loginModalLabel').text('Sucesso!');
+    $('.modal-body').text('Login realizado com sucesso!');
+
+    $('#closeModalBtn').hide();
+    $('#confirmModalBtn').show();
+
+    $('#loginModal').modal('show');
 })
 
-
-// validates invalid and valid fields again every time the user changes input values
-form.querySelectorAll('input[required]').forEach(field => {
-    field.addEventListener('blur', () => {
-        field.value = field.value.trim()
-
-        validateField[field.name](field, form)
-        debugger
-    })
+$('#loginModal').on('hide.bs.modal', () => {
+    window.location.href = '../';
 })

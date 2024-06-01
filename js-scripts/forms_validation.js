@@ -3,225 +3,225 @@
 // =========================================================================================
 
 function checkEmptyFields(form) {
-    var hasEmpty = false
+    var hasEmpty = false;
 
     // goes through every field and checks if they are empty
     form.querySelectorAll('input[required], select[required]').forEach(field => {
         if (!field.value.trim()) {
-            field.classList.add('is-invalid')
-            field.classList.remove('is-valid')
+            field.classList.add('is-invalid');
+            field.classList.remove('is-valid');
             
-            hasEmpty = true
-            return
+            hasEmpty = true;
+            return;
         }
 
-        field.classList.remove('is-invalid')
-        field.classList.add('is-valid')
+        field.classList.remove('is-invalid');
+        field.classList.add('is-valid');
     })
 
-    return !hasEmpty
+    return !hasEmpty;
 }
 
 function validName(nameInput, form) {
-    const name = nameInput.value
+    const name = nameInput.value;
 
     // checks if the "full name" is at least 2 words long
     if (name.split(' ').length < 2) {
-        nameInput.classList.remove('is-valid')
-        nameInput.classList.add('is-invalid')
+        nameInput.classList.remove('is-valid');
+        nameInput.classList.add('is-invalid');
         
         return false;
     }
 
-    nameInput.classList.add('is-valid')
-    nameInput.classList.remove('is-invalid')
+    nameInput.classList.add('is-valid');
+    nameInput.classList.remove('is-invalid');
 
     return true;
 }
 
 function validEmail(emailInput, form) {
-    const email = emailInput.value
+    const email = emailInput.value;
 
     // this pattern would be *any characters but space*@*any characters but space*.*2 or 3 letters*
-    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
     if (!emailPattern.test(email)) {
-        emailInput.classList.remove('is-valid')
-        emailInput.classList.add('is-invalid')
+        emailInput.classList.remove('is-valid');
+        emailInput.classList.add('is-invalid');
 
         return false;
     }
     
-    emailInput.classList.remove('is-invalid')
-    emailInput.classList.add('is-valid')
+    emailInput.classList.remove('is-invalid');
+    emailInput.classList.add('is-valid');
 
     return true;
 }
 
 function validPhone(phoneInput, form) {
-    const phone = phoneInput.value
+    const phone = phoneInput.value;
 
     // this pattern takes possible DDD digits combinations, first number being 9, and all numbers being filled in, into consideration
-    const phonePattern = /^\((?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\) (?:[2-8]|9[0-9])[0-9]{3}\-[0-9]{4}$/
+    const phonePattern = /^\((?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\) (?:[2-8]|9[0-9])[0-9]{3}\-[0-9]{4}$/;
     
     if (!phonePattern.test(phone)) {
-        phoneInput.classList.remove('is-valid')
-        phoneInput.classList.add('is-invalid')
+        phoneInput.classList.remove('is-valid');
+        phoneInput.classList.add('is-invalid');
 
         return false;
     }
     
-    phoneInput.classList.remove('is-invalid')
-    phoneInput.classList.add('is-valid')
+    phoneInput.classList.remove('is-invalid');
+    phoneInput.classList.add('is-valid');
 
     return true;
 }
 
 function validCPF(cpfInput, form) {
-    const cpf = $(cpfInput).cleanVal()  // getting the value without its mask
+    const cpf = $(cpfInput).cleanVal();     // getting the value without its mask
 
-    var sum = 0, rest
+    var sum = 0, rest;
         
     // checks if all cpf digits are the same
     if (cpf.split('').filter((digit, index) => digit == cpf[index - 1] || !cpf[index - 1]).join('') == cpf) {
-        cpfInput.classList.remove('is-valid')
-        cpfInput.classList.add('is-invalid')
+        cpfInput.classList.remove('is-valid');
+        cpfInput.classList.add('is-invalid');
         
-        return false
+        return false;
     }
 
     for (i = 1; i <= 9; i++) {
-        sum = sum + parseInt(cpf.substring(i - 1, i)) * (11 - i)
+        sum = sum + parseInt(cpf.substring(i - 1, i)) * (11 - i);
     }
     
-    rest = (sum * 10) % 11
+    rest = (sum * 10) % 11;
   
     if ((rest == 10) || (rest == 11)) {
-        rest = 0
+        rest = 0;
     }
 
     if (rest != parseInt(cpf.substring(9, 10))) {
-        cpfInput.classList.remove('is-valid')
-        cpfInput.classList.add('is-invalid')
+        cpfInput.classList.remove('is-valid');
+        cpfInput.classList.add('is-invalid');
 
-        return false
+        return false;
     }
   
     sum = 0
     for (i = 1; i <= 10; i++) {
-        sum = sum + parseInt(cpf.substring(i-1, i)) * (12 - i)
+        sum = sum + parseInt(cpf.substring(i-1, i)) * (12 - i);
     }
     
-    rest = (sum * 10) % 11
+    rest = (sum * 10) % 11;
   
     if ((rest == 10) || (rest == 11)) {
-        rest = 0
+        rest = 0;
     }
 
     if (rest != parseInt(cpf.substring(10, 11))) {
-        cpfInput.classList.remove('is-valid')
-        cpfInput.classList.add('is-invalid')
+        cpfInput.classList.remove('is-valid');
+        cpfInput.classList.add('is-invalid');
         
         return false
     }
 
-    cpfInput.classList.add('is-valid')
-    cpfInput.classList.remove('is-invalid')
+    cpfInput.classList.add('is-valid');
+    cpfInput.classList.remove('is-invalid');
     
-    return true
+    return true;
     
 }
 
 function validBirthdate(birthdateInput, form) {
     if (!birthdateInput.value) {
-        birthdateInput.classList.remove('is-valid')
-        birthdateInput.classList.add('is-invalid')
+        birthdateInput.classList.remove('is-valid');
+        birthdateInput.classList.add('is-invalid');
     
-        return false
+        return false;
     }
 
-    const birthdate = new Date(birthdateInput.value)
+    const birthdate = new Date(birthdateInput.value);
 
     // minDate = today - 18 years
-    let minDate = new Date(Date.now())
-    minDate.setFullYear(minDate.getFullYear() - 18)
+    let minDate = new Date(Date.now());
+    minDate.setFullYear(minDate.getFullYear() - 18);
 
     // checks for an impossible birthdate
     if (birthdate <= new Date('1900-12-31') || birthdate >= new Date(Date.now())) {
-        birthdateInput.classList.remove('is-valid')
-        birthdateInput.classList.add('is-invalid')
+        birthdateInput.classList.remove('is-valid');
+        birthdateInput.classList.add('is-invalid');
     
-        document.getElementById('invalid-date').innerText = 'Digite uma data válida.'
+        document.getElementById('invalid-date').innerText = 'Digite uma data válida.';
         
-        return false
+        return false;
     }
     
-    document.getElementById('invalid-date').innerText = 'É necessário ter mais de 18 anos para realizar o cadastro.'
+    document.getElementById('invalid-date').innerText = 'É necessário ter mais de 18 anos para realizar o cadastro.';
 
     // checks if the birthdate adds up to at least 18 years
     if (birthdate > minDate) {
-        birthdateInput.classList.remove('is-valid')
-        birthdateInput.classList.add('is-invalid')
+        birthdateInput.classList.remove('is-valid');
+        birthdateInput.classList.add('is-invalid');
     
-        return false
+        return false;
     }
 
-    birthdateInput.classList.add('is-valid')
-    birthdateInput.classList.remove('is-invalid')
+    birthdateInput.classList.add('is-valid');
+    birthdateInput.classList.remove('is-invalid');
 
-    return true
+    return true;
 }
 
 function validState(stateInput, form) {
-    const state = parseInt(stateInput.value) || 0
+    const state = parseInt(stateInput.value) || 0;
 
     // checks if the state chosen has am invalid ID
     if (state < 1 || state > 27) {
-        stateInput.classList.remove('is-valid')
-        stateInput.classList.add('is-invalid')
+        stateInput.classList.remove('is-valid');
+        stateInput.classList.add('is-invalid');
         
-        return false
+        return false;
     }
     
-    stateInput.classList.add('is-valid')
-    stateInput.classList.remove('is-invalid')
+    stateInput.classList.add('is-valid');
+    stateInput.classList.remove('is-invalid');
     
-    return true
+    return true;
 }
 
 function validCity(cityInput, form) {
-    const city = parseInt(cityInput.value) || 0
+    const city = parseInt(cityInput.value) || 0;
     
     // checks if the city chosen has am invalid ID
     if (city < 1 || city > 5564) {
-        cityInput.classList.remove('is-valid')
-        cityInput.classList.add('is-invalid')
+        cityInput.classList.remove('is-valid');
+        cityInput.classList.add('is-invalid');
         
-        return false
+        return false;
     }
 
-    cityInput.classList.add('is-valid')
-    cityInput.classList.remove('is-invalid')
+    cityInput.classList.add('is-valid');
+    cityInput.classList.remove('is-invalid');
     
-    return true
+    return true;
 }
 
 // passwords must be at laest 8 characters long, contain uppercase and lowercase letters, at least one special character and at least one numnber
 function validPassword(passwordInput, form) {
-    const password = passwordInput.value.trim()
-    const confirmPasswordInput = form.confirm_password
+    const password = passwordInput.value.trim();
+    const confirmPasswordInput = form.confirm_password;
 
-    // checks if the password fills all requirements
-    const hasUpperAndLower = Boolean(password.split('').filter(char => char === char.toUpperCase()).length && password.split('').filter(char => char === char.toLowerCase()).length)
-    const hasSpecialCharacters = Boolean(password.split('').filter(char => !(/[^A-Za-z0-9]/.test(char))).length)
-    const hasNumeric = Boolean(password.split('').filter(char => $.isNumeric(char)).length)
+    // checks if there is at least a lowercase and an uppercase letter
+    const hasUpperAndLower = Boolean(password.split('').filter(char => char === char.toUpperCase()).length && password.split('').filter(char => char === char.toLowerCase()).length);
+    const hasSpecialCharacters = Boolean(password.split('').filter(char => !(/[^A-Za-z0-9]/.test(char))).length);
+    const hasNumeric = Boolean(password.split('').filter(char => $.isNumeric(char)).length);
 
     if (!hasUpperAndLower || !hasSpecialCharacters || !hasNumeric || password.length < 8) {
-        passwordInput.classList.remove('is-valid')
-        passwordInput.classList.add('is-invalid')
+        passwordInput.classList.remove('is-valid');
+        passwordInput.classList.add('is-invalid');
 
-        confirmPasswordInput.classList.remove('is-valid')
-        confirmPasswordInput.classList.add('is-invalid')
+        confirmPasswordInput.classList.remove('is-valid');
+        confirmPasswordInput.classList.add('is-invalid');
         
         document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)'
         document.getElementById('invalid-password').innerText = 'Digite uma senha válida.'
