@@ -10,11 +10,11 @@ $('button#login_btn').on('click', async () => {
     if (!checkEmptyFields(form)) return;
 
     // ... else it attempts to login
-    const emailValue = form.email.value
+    const emailValue = form.email.value;
     const passwordValue = form.password.value;
 
     // function will return true if successful, false if failed
-    const userLogged = await loginUser(emailValue, passwordValue)
+    const userLogged = await loginUser(emailValue, passwordValue);
 
     if (!userLogged) {
         form.email.classList.add('is-invalid');    
