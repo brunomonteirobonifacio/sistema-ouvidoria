@@ -46,7 +46,7 @@ if ($('city')) {
     document.getElementsByName('state').forEach(element => 
         element.addEventListener('change', () => {
 
-            document.getElementsByName('city').forEach(selector => selector.innerHTML = `<option selected>Cidade</option>`);
+            document.getElementsByName('city').forEach(selector => selector.innerHTML = `<option selected>Cidade *</option>`);
 
             var state = $(element).val();
             
@@ -105,7 +105,7 @@ async function checkFormAvailability(form) {
     var allValid = true;
 
     await formData.entries().forEach(async input => {
-        if (validateField[input[0]]) {
+        if (checkAvailable[input[0]]) {
             const formInput = form[input[0]];
             
             const available = await checkAvailable[input[0]](formInput, form);
