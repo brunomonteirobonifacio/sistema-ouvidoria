@@ -27,7 +27,8 @@
         <?php
             } else {
                 ?>
-                Para criar uma ouvidoria, <a href="pages/create_manifestation.php">Clique aqui</a>
+                Para criar uma ouvidoria, <a href="pages/create_manifestation.php">clique aqui</a>
+                <br>Para sair de sua conta, clique aqui
                 <?php
             }
         ?>
