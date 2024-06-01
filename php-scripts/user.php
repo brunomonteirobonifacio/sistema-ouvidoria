@@ -3,32 +3,6 @@
 // this file is dedicated to user-related functions in database, such as signup and login
 // =========================================================================================
 
-function login($email, $pass) {
-    include "../db-connection/connection.php";
-    
-    // include password peppering
-    $pass = $pass . $_ENV['pepper'];
-
-    $query = $connection->prepare("SELECT id_usuario FROM usuario WHERE email_usuario = :email AND senha_usuario = SHA2(:pass, 512)");
-    $query->bindParam('email', $email);
-    $query->bindParam('pass', $pass);
-    
-    if (!$query->execute()) {
-        return false;
-    }
-    
-    if (!$query->rowCount()) {
-        return false;
-    }
-
-    $userId = $query->fetchAll(PDO::FETCH_ASSOC)[0]['id_usuario'];
-    
-    session_start();
-    $_SESSION['userId'] = $userId;
-
-    return true;
-}
-
 $functions = [
     'createUser' => function() {
         include "../db-connection/connection.php";
@@ -43,11 +17,11 @@ $functions = [
         $pass = $_POST['password'] . $_ENV['pepper'];
 
         // this will be used to account activation
-        $activationToken = bin2hex(random_bytes(16));
-        $activationTokenHash = hash("sha256", $token);
+        // $activationToken = bin2hex(random_bytes(16));
+        // $activationTokenHash = hash("sha256", $token);
 
-        $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_cidade, senha_usuario, hash_ativacao_usuario) VALUES
-        (:username, :email, :phone, :whatsapp, :cpf, :birthdate, :cityId, SHA2(:pass, 512), :activationHash)");
+        $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_cidade, senha_usuario) VALUES
+        (:username, :email, :phone, :whatsapp, :cpf, :birthdate, :cityId, SHA2(:pass, 512))");
 
         $query->bindParam('username', $username);
         $query->bindParam('email', $email);
@@ -57,7 +31,7 @@ $functions = [
         $query->bindParam('birthdate', $birthdate);
         $query->bindParam('cityId', $cityId);
         $query->bindParam('pass', $pass);
-        $query->bindParam('activationHash', $activationTokenHash);
+        // $query->bindParam('activationHash', $activationTokenHash);
 
         if (!$query->execute()) {
             echo "Status 500";
@@ -65,13 +39,39 @@ $functions = [
         }
         
         echo "Status 201";
-        
-        login($email, $pass);
         exit();
     },
 
     'loginUser' => function() {
-        echo login($_POST['email'], $_POST['password']) ? "1" : "0";
+        include "../db-connection/connection.php";
+    
+        $email = $_POST['email'];
+        $pass = $_POST['password'];
+
+        // include password peppering
+        $pass = $pass . $_ENV['pepper'];
+    
+        $query = $connection->prepare("SELECT id_usuario FROM usuario WHERE email_usuario = :email AND senha_usuario = SHA2(:pass, 512)");
+        $query->bindParam('email', $email);
+        $query->bindParam('pass', $pass);
+        
+        if (!$query->execute()) {
+            echo '0';   
+            exit();
+        }
+        
+        if (!$query->rowCount()) {
+            echo '0';
+            exit();
+        }
+        
+        $userId = $query->fetchAll(PDO::FETCH_ASSOC)[0]['id_usuario'];
+        
+        session_start();
+
+        $_SESSION['userId'] = $userId;
+
+        echo '1';
         exit();
     },
 
