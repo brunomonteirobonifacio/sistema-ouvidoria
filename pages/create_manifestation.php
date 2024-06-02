@@ -74,14 +74,14 @@
                     </div>
                     <div style="text-align: start" class="lead fs-6">
                         * Anexe aqui fotos e documentos referentes à sua ouvidoria <br>
-                        &nbsp; (Permitidos apenas os tipos JPEG e PDF)
+                        * (Permitidos apenas os tipos JPEG e PDF)
                     </div>
                 </div>
             </div>
 
             <div class="row align-items-center m-2 p-2">
                 <div class="col">
-                    <button type="button" class="btn btn-primary p-2 validate_form" id="signup_btn">Cadastrar-se</button>
+                    <button type="button" class="btn btn-primary p-2 validate_form" id="create_manifestation_btn">Abrir ouvidoria</button>
                 </div>
             </div>
         </form>
@@ -92,5 +92,7 @@
 <script src="../jquery/jquery-mask/dist/jquery.mask.js"></script>
 <script src="../jquery/jquery-mask/dist/jquery.mask.min.js"></script>
 
-<script src="../js-scripts/user.js"></script>
+<script src="../js-scripts/general.js"></script>
+<script src="../js-scripts/forms.js"></script>
+<script src="../js-scripts/manfestation_form.js"></script>
 </html>
