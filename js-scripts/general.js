@@ -16,9 +16,3 @@ function getPhpPath() {
 
     return phpPath
 }
-
-if ($('.username')) {
-    getLoggedUsername().then(response => {
-        document.querySelector('.username').innerText = response
-    })
-}

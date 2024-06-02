@@ -38,3 +38,9 @@ async function getLoggedUsername() {
 
     return username
 }
+
+if ($('.username')) {
+    getLoggedUsername().then(response => {
+        document.querySelector('.username').innerText = response
+    })
+}
