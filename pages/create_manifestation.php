@@ -68,9 +68,13 @@
             
             <div class="row align-items-start m-2">
                 <div class="col">
-                    <div class="input-group mb-3">
-                      <label class="input-group-text" for="inputGroupFile01">Anexos</label>
-                      <input type="file" class="form-control" id="manifestation-attachments" multiple="multiple"    >
+                    <div id="attachments" class="input-group">
+                        <label class="input-group-text" for="manifestation-attachments">Anexos</label>
+                        <input type="file" class="form-control" id="manifestation-attachments" multiple="multiple">
+                    </div>
+                    <div style="text-align: start" class="lead fs-6">
+                        * Anexe aqui fotos e documentos referentes à sua ouvidoria <br>
+                        &nbsp; (Permitidos apenas os tipos JPEG e PDF)
                     </div>
                 </div>
             </div>
