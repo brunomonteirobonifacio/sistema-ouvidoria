@@ -31,7 +31,7 @@ $functions = [
 
         $stateId = $_POST['state'];
 
-        $query = $connection->prepare("SELECT * FROM cidade WHERE cod_estado = '$stateId' ORDER BY nome_cidade");
+        $query = $connection->prepare("SELECT id_cidade, nome_cidade FROM cidade WHERE cod_estado = '$stateId' ORDER BY nome_cidade");
 
         if (!$query->execute()) {
             echo "[]";
