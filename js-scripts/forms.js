@@ -6,20 +6,20 @@ async function getStates() {
     var states = [];
 
     // gets all states from table `estado` and adds them all as Objects to states array
-    await $.post('../php-scripts/address.php', { function: 'getStates' }, (response) => {
+    await $.post(`${getPhpPath()}/address.php`, { function: 'getStates' }, (response) => {
         const responseArr = response.split('//\\').filter(state => state.trim());
         
         responseArr.forEach(state => states.push(JSON.parse(state)));
     })
     
-    return states
+    return states;
 }
 
 async function getCities(stateId) {
     var cities = [];
 
     // gets all cities from table `cidade` from given state and adds them all as Objects to cities array
-    await $.post('../php-scripts/address.php', { function: 'getCities', state: stateId }, (response) => {
+    await $.post(`${getPhpPath()}/address.php`, { function: 'getCities', state: stateId }, (response) => {
         const responseArr = response.split('//\\').filter(state => state.trim());
 
         responseArr.forEach(city => cities.push(JSON.parse(city)));

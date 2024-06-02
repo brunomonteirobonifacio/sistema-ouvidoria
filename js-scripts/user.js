@@ -4,7 +4,7 @@
 
 async function createUser(data) {
     var statusCode;
-    await $.post('../php-scripts/user.php', { function: 'createUser', ...data }, (response) => {
+    await $.post(`${getPhpPath()}/user.php`, { function: 'createUser', ...data }, (response) => {
         statusCode = response;
         debugger
     })
@@ -20,7 +20,7 @@ async function createUser(data) {
 async function loginUser(email, password) {
     var successfulLogin;
 
-    await $.post('../php-scripts/user.php', { function: 'loginUser', email, password }, (response) => {
+    await $.post(`${getPhpPath()}/user.php`, { function: 'loginUser', email, password }, (response) => {
         
         // function will retrieve 1 if login was successful, 0 if it wasn't
         successfulLogin = Boolean(parseInt(response));
@@ -32,7 +32,9 @@ async function loginUser(email, password) {
 async function getLoggedUsername() {
     var username;
 
-    await $.post('../php-cripts/user.php', { function: 'getLoggedUsername' }, (response) => {
+    await $.post(`${getPhpPath()}/user.php`, { function: 'getLoggedUsername' }, (response) => {
         username = response;
     })
+
+    return username
 }
