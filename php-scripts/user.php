@@ -88,7 +88,7 @@ $functions = [
 
         include "../db-connection/connection.php";
 
-        $query = $connection->prepare("SELECT nome_usuario FROM usuario WHERE id_usuario = :id")
+        $query = $connection->prepare("SELECT nome_usuario FROM usuario WHERE id_usuario = :id");
         $query->bindParam('id', $_SESSION['userId']);
 
         if (!$query->execute()) {
@@ -101,7 +101,7 @@ $functions = [
             exit();
         }
 
-        $username = $query->fetchAll(PDO::FETCH_ASSOC)[0][nome_usuario];
+        $username = $query->fetchAll(PDO::FETCH_ASSOC)[0]['nome_usuario'];
         echo $username;
 
         exit();
