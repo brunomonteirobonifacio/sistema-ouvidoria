@@ -71,6 +71,7 @@
 <script src="../jquery/jquery-mask/dist/jquery.mask.js"></script>
 <script src="../jquery/jquery-mask/dist/jquery.mask.min.js"></script>
 
+<script src="../js-scripts/general.js"></script>
 <script src="../js-scripts/forms.js"></script>
 <script src="../js-scripts/forms_validation.js"></script>
 <script src="../js-scripts/user.js"></script>
