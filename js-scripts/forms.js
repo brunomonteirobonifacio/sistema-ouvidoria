@@ -28,19 +28,30 @@ async function getCities(stateId) {
     return cities;
 }
 
-if ($('state')) {
-    getStates().then(states => {
-        // creates an option in the selector for each state
-        states.forEach(state => {
+window.addEventListener('load', () => {
 
-            const option = document.createElement('option');
-            option.value = state.id_estado;
-            option.innerText = state.nome_estado;
-            
-            document.getElementsByName('state').forEach(selector => selector.append(option));
+    if ($('state')) {
+        getStates().then(states => {
+            // creates an option in the selector for each state
+            states.forEach(state => {
+
+                const option = document.createElement('option');
+                option.value = state.id_estado;
+                option.innerText = state.nome_estado;
+                
+                document.getElementsByName('state').forEach(selector => selector.append(option));
+            })
         })
-    })
-}
+    }
+
+    if ($('service-type')) {
+
+    }
+
+    if ($('manifestation-type')) {
+
+    }
+})
 
 if ($('city')) {
     document.getElementsByName('state').forEach(element => 
