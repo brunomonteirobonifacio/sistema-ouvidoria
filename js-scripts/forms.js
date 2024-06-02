@@ -45,7 +45,9 @@ window.addEventListener('load', () => {
     }
 
     if ($('service-type')) {
+        getServiceTypes().then(serviceType => {
 
+        })
     }
 
     if ($('manifestation-type')) {
@@ -136,8 +138,21 @@ function checkEmptyFields(form) {
     var hasEmpty = false;
 
     // goes through every field and checks if they are empty
-    form.querySelectorAll('input[required], select[required]').forEach(field => {
+    form.querySelectorAll('input[required]').forEach(field => {
         if (!field.value.trim()) {
+            field.classList.add('is-invalid');
+            field.classList.remove('is-valid');
+            
+            hasEmpty = true;
+        }
+    })
+
+    if (hasEmpty) {
+        return false;
+    }
+
+    form.querySelectorAll('select[required]').forEach(field => {
+        if (!$.isNumeric(field.value)) {
             field.classList.add('is-invalid');
             field.classList.remove('is-valid');
             
