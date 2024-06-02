@@ -28,7 +28,7 @@
             } else {
                 ?>
                 Para criar uma ouvidoria, <a href="pages/create_manifestation.php">clique aqui</a>
-                <br>Para sair de sua conta, clique aqui
+                
                 <?php
             }
         ?>
@@ -40,4 +40,5 @@
 <script src="jquery/jquery-mask/dist/jquery.mask.min.js"></script>
 
 <script src="js-scripts/user.js"></script>
+<script src="js-scripts/general.js"></script>
 </html>
