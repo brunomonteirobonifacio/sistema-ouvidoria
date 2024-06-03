@@ -93,6 +93,7 @@
 <script src="../jquery/jquery-mask/dist/jquery.mask.min.js"></script>
 
 <script src="../js-scripts/general.js"></script>
+<script src="../js-scripts/manifestation.js"></script>
+<script src="../js-scripts/manifestation_form.js"></script>
 <script src="../js-scripts/forms.js"></script>
-<script src="../js-scripts/manfestation_form.js"></script>
 </html>
