@@ -7,6 +7,12 @@
     <title>Ouvidoria</title>
 </head>
 <body>
+    <nav class="nav">
+      <a class="nav-link active" aria-current="page" href="#">Active</a>
+      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+    </nav>
     <div class="container">
         <p>
             Logado como <span class="username"></span>
@@ -39,6 +45,6 @@
 <script src="jquery/jquery-mask/dist/jquery.mask.js"></script>
 <script src="jquery/jquery-mask/dist/jquery.mask.min.js"></script>
 
-<script src="js-scripts/user.js"></script>
 <script src="js-scripts/general.js"></script>
+<script src="js-scripts/user.js"></script>
 </html>
