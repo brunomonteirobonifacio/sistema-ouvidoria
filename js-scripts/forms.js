@@ -2,32 +2,6 @@
 // this file contains functions used for form utilities within the system
 // =========================================================================================
 
-async function getStates() {
-    var states = [];
-
-    // gets all states from table `estado` and adds them all as Objects to states array
-    await $.post(`${getPhpPath()}/address.php`, { function: 'getStates' }, (response) => {
-        const responseArr = response.split('//\\').filter(state => state.trim());
-        
-        responseArr.forEach(state => states.push(JSON.parse(state)));
-    })
-    
-    return states;
-}
-
-async function getCities(stateId) {
-    var cities = [];
-
-    // gets all cities from table `cidade` from given state and adds them all as Objects to cities array
-    await $.post(`${getPhpPath()}/address.php`, { function: 'getCities', state: stateId }, (response) => {
-        const responseArr = response.split('//\\').filter(state => state.trim());
-
-        responseArr.forEach(city => cities.push(JSON.parse(city)));
-    })
-
-    return cities;
-}
-
 window.addEventListener('load', () => {
 
     if (document.querySelector('#state')) {
@@ -46,24 +20,35 @@ window.addEventListener('load', () => {
 
     if (document.querySelector('#service-type')) {
         getServiceTypes().then(serviceTypes => {
+            debugger    
             // creates an option in the selector for each service type
             serviceTypes.forEach(serviceType => {
             
                 const option = document.createElement('option');
-                option.value = serviceType.id_estado;
-                option.innerText = serviceType.nome_estado;
+                option.value = serviceType.id_servico;
+                option.innerText = serviceType.nome_servico;
                 
                 document.getElementsByName('service-type').forEach(selector => selector.append(option));
             })
         })
     }
 
-    if ($('manifestation-type')) {
+    if (document.querySelector('#manifestation-type')) {
+        getManifestationTypes().then(manifestationTypes => {
+            // creates an option in the selector for each manifestation type
+            manifestationTypes.forEach(manifestationType => {
 
+                const option = document.createElement('option');
+                option.value = manifestationType.id_tipo;
+                option.innerText = manifestationType.nome_tipo;
+                
+                document.getElementsByName('manifestation-type').forEach(selector => selector.append(option));
+            })
+        })
     }
 })
 
-if ($('city')) {
+if (document.querySelector('#city')) {
     document.getElementsByName('state').forEach(element => 
         element.addEventListener('change', () => {
 
