@@ -115,7 +115,7 @@ $functions = [
         $query->bindValue('cpf', $cpf);
 
         if (!$query->execute()) {
-            echo "500";
+            echo "Status 500";
             exit();
         }
 
@@ -132,7 +132,7 @@ $functions = [
         $query->bindValue('email', $email);
 
         if (!$query->execute()) {
-            echo "500";
+            echo "Status 500";
             exit();
         }
 
@@ -149,7 +149,7 @@ $functions = [
         $query->bindValue('telefone', $phone);
 
         if (!$query->execute()) {
-            echo "500";
+            echo "Status 500";
             exit();
         }
 
@@ -166,7 +166,7 @@ $functions = [
         $query->bindValue('whatsapp', $whatsapp);
 
         if (!$query->execute()) {
-            echo "500";
+            echo "Status 500";
             exit();
         }
 

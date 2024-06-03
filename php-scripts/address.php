@@ -10,12 +10,11 @@ $functions = [
         $query = $connection->prepare("SELECT id_estado, nome_estado FROM estado ORDER BY nome_estado");
 
         if (!$query->execute()) {
-            echo "[]";
+            echo "Status 500";
             exit();
         }
 
         if (!$query->rowCount()) {
-            echo "[]";
             exit();
         }
 
@@ -36,12 +35,11 @@ $functions = [
         $query = $connection->prepare("SELECT id_cidade, nome_cidade FROM cidade WHERE cod_estado = '$stateId' ORDER BY nome_cidade");
 
         if (!$query->execute()) {
-            echo "[]";
+            echo "Status 500";
             exit();
         }
 
         if (!$query->rowCount()) {
-            echo "[]";
             exit();
         }
 
