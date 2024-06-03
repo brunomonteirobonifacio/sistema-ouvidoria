@@ -30,7 +30,7 @@ async function getCities(stateId) {
 
 window.addEventListener('load', () => {
 
-    if ($('state')) {
+    if (document.querySelector('#state')) {
         getStates().then(states => {
             // creates an option in the selector for each state
             states.forEach(state => {
@@ -44,9 +44,17 @@ window.addEventListener('load', () => {
         })
     }
 
-    if ($('service-type')) {
-        getServiceTypes().then(serviceType => {
-
+    if (document.querySelector('#service-type')) {
+        getServiceTypes().then(serviceTypes => {
+            // creates an option in the selector for each service type
+            serviceTypes.forEach(serviceType => {
+            
+                const option = document.createElement('option');
+                option.value = serviceType.id_estado;
+                option.innerText = serviceType.nome_estado;
+                
+                document.getElementsByName('service-type').forEach(selector => selector.append(option));
+            })
         })
     }
 
