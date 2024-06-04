@@ -2,11 +2,11 @@
 // this file is dedicated to get user-related data from database, such as signup and login
 // =========================================================================================
 
+// function receives a data object containing the fields and their respective values
 async function createUser(data) {
     var statusCode;
     await $.post(`${getPhpPath()}/user.php`, { function: 'createUser', ...data }, (response) => {
         statusCode = response;
-        debugger
     })
 
     statusCode = parseInt(statusCode.split(' ')[1]) || 500;
