@@ -1,7 +1,7 @@
-$('#create_manifestation_btn').on('click', () => {
+$('#create_manifestation_btn').on('click', async () => {
     const form = document.querySelector('form.needs-validation');
     
-    if (!checkEmptyFields(form)) return;
+    // if (!checkEmptyFields(form)) return;
     
     // TODO: Insert data on `ouvidoria` table and get its ID, then insert attachments in `anexo` table linked to the manifestation's ID
 
@@ -9,8 +9,10 @@ $('#create_manifestation_btn').on('click', () => {
 
     // assures the files are inside an array, even if its a single file
     const files = [ ...fileInput.files ];
+    var filesInB64 = [];
 
-    const extensionPattern = /\.(jpe?g|pdf|png)$/i
+    const extensionPattern = /\.(jpe?g|pdf|png)$/i;
+    var validFiles = true;
     
     files.forEach(file => {
         // checks if file is type PDF or JPEG
@@ -19,6 +21,7 @@ $('#create_manifestation_btn').on('click', () => {
             fileInput.classList.add('is-invalid');
             fileInput.classList.remove('is-valid');
             
+            validFiles = false;
             return;
         }
         
@@ -27,13 +30,26 @@ $('#create_manifestation_btn').on('click', () => {
         fileInput.classList.remove('is-invalid');
 
         // convert attached files to B64 and insert in database
-        const reader = new FileReader()
+        const reader = new FileReader();
         
-        reader.readAsDataURL(file)
         reader.onload = () => {
-            const base64Image = reader.result;
+            filesInB64.push(reader.result);
 
             // TODO: insert attachments linked to the manifestation's ID
+            debugger;
         }
+        
+        reader.readAsDataURL(file)
+
+        debugger
     })
+
+    // doesnt proceed if one of the vailes had invalid type (different from jpeg, pdf and png)
+    if (!validFiles) return;
+    
+    const formData = new FormData(form);
+    let formDataObj = Object.fromEntries(formData.entries());
+
+    // adding images as base64 to the form Data object
+    formDataObj.files = filesInB64;
 })
