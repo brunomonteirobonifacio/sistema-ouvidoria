@@ -69,8 +69,8 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div id="attachments" class="input-group">
-                        <label class="input-group-text" for="manifestation-attachments">Anexos</label>
-                        <input type="file" class="form-control" id="manifestation-attachments" multiple="multiple" required>
+                        <label class="input-group-text" for="attachments">Anexos</label>
+                        <input type="file" class="form-control" id="attachments" multiple="multiple" required>
                         <div class="invalid-feedback" style="text-align: start" id="invalid-attachment">
                             É necessário pelo menos um anexo.
                         </div>
