@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 31/05/2024 às 04:03
+-- Tempo de geração: 04/06/2024 às 20:33
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -5672,7 +5672,9 @@ CREATE TABLE `ouvidoria` (
   `id_ouvidoria` int(11) NOT NULL,
   `descricao_ouvidoria` varchar(500) DEFAULT NULL,
   `cod_tipo` int(11) DEFAULT NULL,
-  `cod_servico` int(11) DEFAULT NULL
+  `cod_servico` int(11) DEFAULT NULL,
+  `protocolo_ouvidoria` varchar(14) NOT NULL,
+  `data_ouvidoria` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -5724,18 +5726,21 @@ CREATE TABLE `usuario` (
   `telefone_usuario` char(15) DEFAULT NULL,
   `whatsapp_usuario` char(15) DEFAULT NULL,
   `data_nasc` date DEFAULT NULL,
-  `cod_cidade` int(11) DEFAULT NULL
+  `cod_cidade` int(11) DEFAULT NULL,
+  `hash_ativacao_usuario` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `cpf_usuario`, `email_usuario`, `senha_usuario`, `telefone_usuario`, `whatsapp_usuario`, `data_nasc`, `cod_cidade`) VALUES
-(2, 'BRUNO', '071.243.709-65', 'bruno@gmail.com', 'cdf1d5f030c8a3a9f1405a277b7315cba3d5bc10706b6a3e76a5013a0b4deec36bd27a57f9354dc91da86a83443b0c35278059545abcbb9f84235b493d9ab9f0', '(48) 99678-4264', '(48) 99678-4264', '2005-12-19', 4521),
-(3, 'A A', '645.249.310-82', 'a@gmail.com', '65a491173f21b15fb597171536944ccd310892456fd769dd52caee53e2b73d21e21752678074a03d64bf9484dffcdb3538db858b656ed81a2da0ef2ae2868d31', '(99) 99999-9999', '(99) 99999-9999', '2000-02-16', 1131),
-(4, 'A B', '340.574.220-05', 'an@gmail.com', '2eb1042e6c2988db8177ac705fe530e3ac56d652160c35e92f90cfb470d75efca561cb1554c9a4c0b776fc4d00e16803319a577298beface41b5035939b396ec', '(48) 99999-9999', '(48) 99999-9999', '2005-02-23', 2562),
-(5, 'A C', '713.740.320-42', 'c@gmail.com', '2eb1042e6c2988db8177ac705fe530e3ac56d652160c35e92f90cfb470d75efca561cb1554c9a4c0b776fc4d00e16803319a577298beface41b5035939b396ec', '(48) 99997-9999', '(48) 99997-9999', '1988-06-05', 2568);
+INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `cpf_usuario`, `email_usuario`, `senha_usuario`, `telefone_usuario`, `whatsapp_usuario`, `data_nasc`, `cod_cidade`, `hash_ativacao_usuario`) VALUES
+(2, 'BRUNO', '071.243.709-65', 'bruno@gmail.com', 'cdf1d5f030c8a3a9f1405a277b7315cba3d5bc10706b6a3e76a5013a0b4deec36bd27a57f9354dc91da86a83443b0c35278059545abcbb9f84235b493d9ab9f0', '(48) 99678-4264', '(48) 99678-4264', '2005-12-19', 4521, NULL),
+(3, 'A A', '645.249.310-82', 'a@gmail.com', '65a491173f21b15fb597171536944ccd310892456fd769dd52caee53e2b73d21e21752678074a03d64bf9484dffcdb3538db858b656ed81a2da0ef2ae2868d31', '(99) 99999-9999', '(99) 99999-9999', '2000-02-16', 1131, NULL),
+(4, 'A B', '340.574.220-05', 'an@gmail.com', '2eb1042e6c2988db8177ac705fe530e3ac56d652160c35e92f90cfb470d75efca561cb1554c9a4c0b776fc4d00e16803319a577298beface41b5035939b396ec', '(48) 99999-9999', '(48) 99999-9999', '2005-02-23', 2562, NULL),
+(5, 'A C', '713.740.320-42', 'c@gmail.com', '2eb1042e6c2988db8177ac705fe530e3ac56d652160c35e92f90cfb470d75efca561cb1554c9a4c0b776fc4d00e16803319a577298beface41b5035939b396ec', '(48) 99997-9999', '(48) 99997-9999', '1988-06-05', 2568, NULL),
+(6, 'A D', '396.249.960-16', 'ad@gmail.com', '65a491173f21b15fb597171536944ccd310892456fd769dd52caee53e2b73d21e21752678074a03d64bf9484dffcdb3538db858b656ed81a2da0ef2ae2868d31', '(47) 99999-9999', '(47) 99999-9999', '2004-05-17', 3188, NULL),
+(7, 'A D', '563.511.010-00', 'ae@gmail.com', 'fa09a6f4fdb72236d5291e1cb62a6b1c5d841a5a15d2b1756f3172dcd78e4ad10ccb8dacb8e642454916621a608ea1f3850148f2c5d44ec82c04505829c51de5', '(55) 99999-9999', '(55) 99999-9999', '2000-02-23', 3376, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -5766,6 +5771,7 @@ ALTER TABLE `estado`
 --
 ALTER TABLE `ouvidoria`
   ADD PRIMARY KEY (`id_ouvidoria`),
+  ADD UNIQUE KEY `protocolo_ouvidoria` (`protocolo_ouvidoria`),
   ADD KEY `cod_tipo` (`cod_tipo`),
   ADD KEY `cod_servico` (`cod_servico`);
 
@@ -5786,6 +5792,7 @@ ALTER TABLE `tipo_ouvidoria`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `hash_ativacao_usuario` (`hash_ativacao_usuario`) USING BTREE,
   ADD KEY `cod_cidade` (`cod_cidade`);
 
 --
@@ -5832,7 +5839,7 @@ ALTER TABLE `tipo_ouvidoria`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restrições para tabelas despejadas
