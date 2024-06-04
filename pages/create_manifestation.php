@@ -33,7 +33,7 @@
             </div>
         </div>
         
-        <form method="post" id="signup" class="needs-validation" novalidate>
+        <form method="post" id="create_manifestation" class="needs-validation" novalidate>
             
             <div class="row align-items-start m-2">
                 <div class="col">
@@ -70,7 +70,10 @@
                 <div class="col">
                     <div id="attachments" class="input-group">
                         <label class="input-group-text" for="manifestation-attachments">Anexos</label>
-                        <input type="file" class="form-control" id="manifestation-attachments" multiple="multiple">
+                        <input type="file" class="form-control" id="manifestation-attachments" multiple="multiple" required>
+                        <div class="invalid-feedback" style="text-align: start" id="invalid-attachment">
+                            É necessário pelo menos um anexo.
+                        </div>
                     </div>
                     <div style="text-align: start" class="lead fs-6">
                         * Anexe aqui fotos e documentos referentes à sua ouvidoria <br>
