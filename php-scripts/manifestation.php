@@ -4,6 +4,17 @@
 // =========================================================================================
 
 $functions = [
+    'createManifestation' => function() {
+        include "../db-connection/connection.php";
+
+        $description = $_POST['description'];
+        $serviceType = $_POST['service-type'];
+        $manifestationType = $_POST['manifestation-type'];
+        $attachments = $_POST['files'];
+
+        $query = $connection->prepare("INSERT INTO ")
+    },
+
     'getServiceTypes' => function() {
         include "../db-connection/connection.php";
 
