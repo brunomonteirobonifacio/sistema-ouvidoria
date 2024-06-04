@@ -19,8 +19,7 @@ window.addEventListener('load', () => {
     }
 
     if (document.querySelector('#service-type')) {
-        getServiceTypes().then(serviceTypes => {
-            debugger    
+        getServiceTypes().then(serviceTypes => {   
             // creates an option in the selector for each service type
             serviceTypes.forEach(serviceType => {
             
@@ -131,26 +130,30 @@ function checkEmptyFields(form) {
     var hasEmpty = false;
 
     // goes through every field and checks if they are empty
-    form.querySelectorAll('input[required]').forEach(field => {
+    form.querySelectorAll('input[required], textarea[required]').forEach(field => {
         if (!field.value.trim()) {
             field.classList.add('is-invalid');
             field.classList.remove('is-valid');
             
             hasEmpty = true;
+            return;
         }
+
+        // if its not empty, return to the original no-warning form
+        field.classList.remove('is-invalid');
     })
-
-    if (hasEmpty) {
-        return false;
-    }
-
+    
     form.querySelectorAll('select[required]').forEach(field => {
         if (!$.isNumeric(field.value)) {
             field.classList.add('is-invalid');
             field.classList.remove('is-valid');
             
             hasEmpty = true;
+            return;
         }
+        
+        // if its not empty, return to the original no-warning form
+        field.classList.remove('is-invalid');
     })
 
     return !hasEmpty;
