@@ -11,8 +11,20 @@ $functions = [
         $serviceType = $_POST['service-type'];
         $manifestationType = $_POST['manifestation-type'];
         $attachments = $_POST['files'];
+        
+        $protocol = date('Ymd') . $manifestationType;
 
-        $query = $connection->prepare("INSERT INTO ")
+        // search for the last added protocol number
+        $query = $connection->prepare("SELECT protocolo_ouvidoria FROM ouvidoria WHERE protocolo_ouvidoria LIKE ':protocol%'");
+        $query->bindParam('protocol', $protocol);
+        
+        if (!$query->execute()) {
+            echo "Status 500";
+        }
+
+        $protocol .=
+        
+        $query = $connection->prepare("INSERT INTO ouvidoria(id_ouvidoria, descricao_ouvidoria, cod_tipo, cod_servico, protocolo_ouvidoria");
     },
 
     'getServiceTypes' => function() {
