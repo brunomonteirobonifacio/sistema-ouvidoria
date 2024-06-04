@@ -18,10 +18,10 @@ $('button#signup_btn').on('click', async () => {
     
     // using FormData.entries() to create an object structured as {*input[i]_name*: *input[i]_value*}
     const formData = new FormData(form);
-    const dataObj = Object.fromEntries(formData.entries());
+    const formDataObj = Object.fromEntries(formData.entries());
     
     // sign up user with given data, function returns true for successful, false for failure
-    const userCreated = await createUser(dataObj);
+    const userCreated = await createUser(formDataObj);
     
     // activate error message modal if there was an error in user registration
     if (!userCreated) {
