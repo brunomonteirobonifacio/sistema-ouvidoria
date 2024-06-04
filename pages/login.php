@@ -33,7 +33,7 @@
             </div>
         </div>
         
-        <form action="" method="post" class="needs-validation">
+        <form method="post" class="needs-validation">
             <div class="row align-items-start m-2">
                 <div class="col">
                     <div class="form-floating">
