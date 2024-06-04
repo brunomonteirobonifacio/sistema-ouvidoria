@@ -6,7 +6,6 @@ async function getServiceTypes() {
         const responseArr = response.split('//\\').filter(serviceType => serviceType.trim());
         
         responseArr.forEach(serviceType => serviceTypes.push(JSON.parse(serviceType)));
-        debugger
     })
     
     return serviceTypes;
@@ -23,4 +22,18 @@ async function getManifestationTypes() {
     })
 
     return manifestationTypes;
+}
+
+// function receives a data object containing the fields and their respective values
+async function createManifestation(data) {
+    var statusCode;
+    
+    await $.post(`${getPhpPath()}/manifestation.php`, { function: 'createManifestation', ...data }, (response) => {
+        statusCode = parseInt(statusCode.split(' ')[1]) || 500;
+
+        // returns false if registration failed
+        if (statusCode != 201) return false;
+    
+        return true;
+    })
 }
