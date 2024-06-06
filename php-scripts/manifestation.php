@@ -6,11 +6,13 @@
 $functions = [
     'createManifestation' => function() {
         include "../db-connection/connection.php";
+        session_start();
 
         $description = $_POST['description'];
         $serviceType = $_POST['service-type'];
         $manifestationType = $_POST['manifestation-type'];
         $attachments = $_POST['files'];
+        $userId = $_SESSION['userId'];
         
         $protocol = date('Ymd') . sprintf("%02d", $manifestationType);
 
@@ -28,12 +30,13 @@ $functions = [
         // adds the sequential number, either incrementing to the last added or starting with 0001 if there was nothing before
         $protocol = $lastProtocol ? intval($lastProtocol) + 1 : $protocol . '0001';
         
-        $query = $connection->prepare("INSERT INTO ouvidoria(descricao_ouvidoria, cod_tipo, cod_servico, protocolo_ouvidoria) VALUES (:descript, :manifestationType, :serviceType, :protocol)");
+        $query = $connection->prepare("INSERT INTO ouvidoria(descricao_ouvidoria, cod_tipo, cod_servico, protocolo_ouvidoria, cod_usuario) VALUES (:descript, :manifestationType, :serviceType, :protocol, :userId)");
         
         $query->bindParam('descript', $description);
         $query->bindParam('manifestationType', $manifestationType);
         $query->bindParam('serviceType', $serviceType);
         $query->bindParam('protocol', $protocol);
+        $query->bindParam('userId', $userId);
 
         if (!$query->execute()) {
             echo "Status 500";
