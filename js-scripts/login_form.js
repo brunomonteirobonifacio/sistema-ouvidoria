@@ -5,6 +5,8 @@
 var form = document.querySelector('form.needs-validation')
 
 $('button#login_btn').on('click', async () => {
+    
+    trimFields(form);
 
     // only logs in if all fields are checked
     if (!checkEmptyFields(form)) return;

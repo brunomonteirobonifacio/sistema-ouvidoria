@@ -131,7 +131,7 @@ function checkEmptyFields(form) {
 
     // goes through every field and checks if they are empty
     form.querySelectorAll('input[required], textarea[required]').forEach(field => {
-        if (!field.value.trim()) {
+        if (!field.value) {
             field.classList.add('is-invalid');
             field.classList.remove('is-valid');
             
@@ -157,4 +157,11 @@ function checkEmptyFields(form) {
     })
 
     return !hasEmpty;
+}
+
+function trimFields(form) {
+    // iterates through every field and trims its value
+    form.querySelectorAll('input, textarea, select').forEach(field => {
+        field.value = field.value.trim();
+    })
 }

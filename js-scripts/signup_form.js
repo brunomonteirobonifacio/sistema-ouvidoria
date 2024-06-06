@@ -10,6 +10,8 @@ var form = document.querySelector('form.needs-validation');
 
 // check form validity, then sign up
 $('button#signup_btn').on('click', async () => {
+
+    trimFields(form);
     
     // boolean function, checks each field of form and returns true if it's all valid
     const validForm = checkFormValidity(form) && await checkFormAvailability(form);

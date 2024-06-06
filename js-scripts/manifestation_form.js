@@ -2,17 +2,18 @@
 // this file contains functions used exclusively in manifestation creation
 // =========================================================================================
 
+var form = document.querySelector('form.needs-validation');
+
 // this will be the function called when success or failure modal closes, and it will determine what will happen when modal is hidden
 // it won't do anything by standard, only if the user registration was successful will it redirect to homepage
 var closeModalAction = () => {}
 
 $('#create_manifestation_btn').on('click', async () => {
-    const form = document.querySelector('form.needs-validation');
-    
-    // if (!checkEmptyFields(form)) return;
-    
-    // TODO: Insert data on `ouvidoria` table and get its ID, then insert attachments in `anexo` table linked to the manifestation's ID
 
+    trimFields(form);
+
+    if (!checkEmptyFields(form)) return;
+    
     const fileInput = form.querySelector('input#attachments');
 
     // assures the files are inside an array, even if its a single file
@@ -55,6 +56,8 @@ $('#create_manifestation_btn').on('click', async () => {
             // creates manifestation with given data, function returns protocol for successful, false for failure
             const manifestationProtocol = await createManifestation(formDataObj);
     
+            debugger;
+
             if (!manifestationProtocol) {
                 $('#createManifestModalLabel').text('Erro na criação da ouvidoria');
                 $('.modal-body').text('Ocorreu um erro na criação de sua ouvidoria. Por favor, tente novamente mais tarde');
@@ -72,9 +75,7 @@ $('#create_manifestation_btn').on('click', async () => {
                 window.location.href = '../';
             }
 
-            $('#createManifestModalLabel').text('Sucesso!');
-            $('.modal-body').text('Ouvidoria criada com sucesso!');
-            $('.modal-body').html('<br>');
+            $('#createManifestModalLabel').text('Ouvidoria criada com sucesso!');
             $('.modal-body').text(`Número de protocolo: ${manifestationProtocol}`);
         
             $('#closeModalBtn').hide();
@@ -90,4 +91,35 @@ $('#create_manifestation_btn').on('click', async () => {
 
 $('#createManifestModal').on('hide.bs.modal', () => {
     closeModalAction();
+})
+
+// goes through every field and checks if they are empty
+form.querySelectorAll('input[required], textarea[required]').forEach(field => {
+    $(field).on('change', () => {
+
+        if (!field.value.trim()) {
+            field.classList.add('is-invalid');
+            field.classList.remove('is-valid');
+            
+            return;
+        }
+        
+        // if its not empty, return to the original no-warning form
+        field.classList.remove('is-invalid');
+    })
+})
+
+form.querySelectorAll('select[required]').forEach(field => {
+    $(field).on('change', () => {
+
+        if (!$.isNumeric(field.value)) {
+            field.classList.add('is-invalid');
+            field.classList.remove('is-valid');
+            
+            return;
+        }
+        
+        // if its not empty, return to the original no-warning form
+        field.classList.remove('is-invalid');
+    })
 })
