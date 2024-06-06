@@ -31,10 +31,11 @@ async function createManifestation(data) {
     await $.post(`${getPhpPath()}/manifestation.php`, { function: 'createManifestation', ...data }, (response) => {
         protocol = response
 
-        // returns false if registration failed
-        if (protocol.split(' ')[1] == '500') return false;
-    
-        // returns the manifestation protocol if it was succeeded
-        return protocol;
     })
+    
+    // returns false if registration failed
+    if (protocol.split(' ')[1] == '500') return false;
+
+    // returns the manifestation protocol if it was succeeded
+    return protocol;
 }
