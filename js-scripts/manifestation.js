@@ -29,7 +29,7 @@ async function createManifestation(data) {
     var statusCode;
     
     await $.post(`${getPhpPath()}/manifestation.php`, { function: 'createManifestation', ...data }, (response) => {
-        statusCode = parseInt(statusCode.split(' ')[1]) || 500;
+        statusCode = parseInt(response.split(' ')[1]) || 500;
 
         // returns false if registration failed
         if (statusCode != 201) return false;
