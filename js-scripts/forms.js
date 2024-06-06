@@ -162,6 +162,8 @@ function checkEmptyFields(form) {
 function trimFields(form) {
     // iterates through every field and trims its value
     form.querySelectorAll('input, textarea, select').forEach(field => {
+        // doesn't try trimming if input is type file
+        if (field == form.querySelector('input[type=file]')) return;
         field.value = field.value.trim();
     })
 }
