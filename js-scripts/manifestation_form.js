@@ -5,15 +5,13 @@ $('#create_manifestation_btn').on('click', async () => {
     
     // TODO: Insert data on `ouvidoria` table and get its ID, then insert attachments in `anexo` table linked to the manifestation's ID
 
-    const fileInput = form.querySelector('#attachments');
+    const fileInput = form.querySelector('input#attachments');
 
     // assures the files are inside an array, even if its a single file
     const files = [ ...fileInput.files ];
     var filesInB64 = [];
 
     const extensionPattern = /\.(jpe?g|pdf|png)$/i;
-    var validFiles = true;
-
     
     files.forEach(file => {
         // checks if file is type PDF or JPEG
@@ -22,7 +20,6 @@ $('#create_manifestation_btn').on('click', async () => {
             fileInput.classList.add('is-invalid');
             fileInput.classList.remove('is-valid');
             
-            validFiles = false;
             return;
         }
         
@@ -35,13 +32,10 @@ $('#create_manifestation_btn').on('click', async () => {
             
         reader.onload = () => {
             filesInB64.push(reader.result);
-    
-            // TODO: insert attachments linked to the manifestation's ID
-            debugger;
         }
         
         reader.onloadend = async () => {
-            // checks if all files were added to the array
+            // assures that the action will only be done after all files are added to the array
             if (files.length != filesInB64.length) return;
             
             const formData = new FormData(form);
@@ -51,18 +45,14 @@ $('#create_manifestation_btn').on('click', async () => {
             formDataObj.files = filesInB64;
             
             // creates manifestation with given data, function returns true for successful, false for failure
-            const manifestationCreated = await createManifestation(formDataObj)
+            const manifestationCreated = await createManifestation(formDataObj);
     
             if (!manifestationCreated) {
-    
+                
             }
         }
 
         reader.readAsDataURL(file)
 
     })
-    
-    // doesnt proceed if one of the vailes had invalid type (different from jpeg, pdf and png)
-    if (!validFiles) return;
-
 })
