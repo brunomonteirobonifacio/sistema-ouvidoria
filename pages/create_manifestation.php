@@ -28,21 +28,20 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="../">Ouvidoria Municipal</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-            <a class="nav-link" href="#">Features</a>
-            <a class="nav-link" href="#">Pricing</a>
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            <a class="nav-link" aria-current="page" href="../">Início</a>
+            <a class="nav-link active" href="create_manifestation.php">Criar ouvidoria</a>
+            <a class="nav-link" href="view_manifestation.php">Visualizar suas ouvidorias</a>
           </div>
         </div>
       </div>
     </nav>
-    
+
     <div class="container text-center p-3 mx-auto my-3 border border-dark-subtle rounded w-50">
         <div class="row align-items-center m-2 d-inline-flex">
             <div class="col">
