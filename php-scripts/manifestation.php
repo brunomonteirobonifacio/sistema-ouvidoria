@@ -12,11 +12,11 @@ $functions = [
         $manifestationType = $_POST['manifestation-type'];
         $attachments = $_POST['files'];
         
-        $protocol = date('Ymd') . $manifestationType;
+        $protocol = date('Ymd') . sprintf("%02d", $manifestationType);
 
         // search for the last added protocol number
-        $query = $connection->prepare("SELECT MAX(protocolo_ouvidoria) as ultimo_protocolo FROM ouvidoria WHERE protocolo_ouvidoria LIKE ':protocol%'");
-        $query->bindParam('protocol', $protocol);
+        $query = $connection->prepare("SELECT MAX(protocolo_ouvidoria) AS ultimo_protocolo FROM ouvidoria WHERE protocolo_ouvidoria LIKE :protocol");
+        $query->bindValue('protocol', $protocol . '%');
         
         if (!$query->execute()) {
             echo "Status 500";
@@ -26,7 +26,7 @@ $functions = [
         $lastProtocol = $query->fetchAll(PDO::FETCH_ASSOC)[0]['ultimo_protocolo'];
         
         // adds the sequential number, either incrementing to the last added or starting with 0001 if there was nothing before
-        $protocol = $lastProtocol != 'NULL' ? intval($lastProtocol) + 1 : $protocol . '0001';
+        $protocol = $lastProtocol ? intval($lastProtocol) + 1 : $protocol . '0001';
         
         $query = $connection->prepare("INSERT INTO ouvidoria(descricao_ouvidoria, cod_tipo, cod_servico, protocolo_ouvidoria) VALUES (:descript, :manifestationType, :serviceType, :protocol)");
         
@@ -55,6 +55,9 @@ $functions = [
                 exit();
             }
         }
+
+        echo "Status 201";
+        exit();
     },
 
     'getServiceTypes' => function() {
