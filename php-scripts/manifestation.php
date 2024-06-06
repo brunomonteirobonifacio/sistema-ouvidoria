@@ -15,16 +15,44 @@ $functions = [
         $protocol = date('Ymd') . $manifestationType;
 
         // search for the last added protocol number
-        $query = $connection->prepare("SELECT protocolo_ouvidoria FROM ouvidoria WHERE protocolo_ouvidoria LIKE ':protocol%'");
+        $query = $connection->prepare("SELECT MAX(protocolo_ouvidoria) as ultimo_protocolo FROM ouvidoria WHERE protocolo_ouvidoria LIKE ':protocol%'");
         $query->bindParam('protocol', $protocol);
         
         if (!$query->execute()) {
             echo "Status 500";
+            exit();
         }
 
-        $protocol .=
+        $lastProtocol = $query->fetchAll(PDO::FETCH_ASSOC)[0]['ultimo_protocolo'];
         
-        $query = $connection->prepare("INSERT INTO ouvidoria(id_ouvidoria, descricao_ouvidoria, cod_tipo, cod_servico, protocolo_ouvidoria");
+        // adds the sequential number, either incrementing to the last added or starting with 0001 if there was nothing before
+        $protocol = $lastProtocol != 'NULL' ? intval($lastProtocol) + 1 : $protocol . '0001';
+        
+        $query = $connection->prepare("INSERT INTO ouvidoria(descricao_ouvidoria, cod_tipo, cod_servico, protocolo_ouvidoria) VALUES (:descript, :manifestationType, :serviceType, :protocol)");
+        
+        $query->bindParam('descript', $description);
+        $query->bindParam('manifestationType', $manifestationType);
+        $query->bindParam('serviceType', $serviceType);
+        $query->bindParam('protocol', $protocol);
+
+        if (!$query->execute()) {
+            echo "Status 500";
+            exit();
+        }
+
+        // add attachments to `anexo` table
+        $manifestationId = $connection->lastInsertId();
+
+        $query = $connection->prepare("INSERT INTO anexo(arquivo_anexo, cod_ouvidoria) VALUES (:attachment, :manifestationId)");
+
+        foreach ($attachments as $attachment) {
+            $query->bindParam('attachment', $attachment);
+
+            if (!$query->execute()) {
+                echo "Status 500";
+                exit();
+            }
+        }
     },
 
     'getServiceTypes' => function() {
