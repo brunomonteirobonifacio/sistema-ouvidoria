@@ -40,13 +40,15 @@ $functions = [
             exit();
         }
 
-        // add attachments to `anexo` table
+        // adds attachments to `anexo` table
         $manifestationId = $connection->lastInsertId();
 
         $query = $connection->prepare("INSERT INTO anexo(arquivo_anexo, cod_ouvidoria) VALUES (:attachment, :manifestationId)");
 
+        // adds each attachment to a separate row linked to the same manifestationId
         foreach ($attachments as $attachment) {
             $query->bindParam('attachment', $attachment);
+            $query->bindParam('manifestationId', $manifestationId);
 
             if (!$query->execute()) {
                 echo "Status 500";
