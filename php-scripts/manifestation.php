@@ -56,7 +56,7 @@ $functions = [
             }
         }
 
-        echo "Status 201";
+        echo $protocol;
         exit();
     },
 

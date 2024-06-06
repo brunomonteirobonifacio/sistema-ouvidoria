@@ -1,3 +1,11 @@
+// =========================================================================================
+// this file contains functions used exclusively in manifestation creation
+// =========================================================================================
+
+// this will be the function called when success or failure modal closes, and it will determine what will happen when modal is hidden
+// it won't do anything by standard, only if the user registration was successful will it redirect to homepage
+var closeModalAction = () => {}
+
 $('#create_manifestation_btn').on('click', async () => {
     const form = document.querySelector('form.needs-validation');
     
@@ -27,9 +35,9 @@ $('#create_manifestation_btn').on('click', async () => {
         $('#invalid-attachment').text('É necessário pelo menos um anexo.')
         fileInput.classList.remove('is-invalid');
         
-        // convert attached files to B64 and insert in database
         var reader = new FileReader();
             
+        // after if reads, the B64 file is added to filesInB64 array
         reader.onload = () => {
             filesInB64.push(reader.result);
         }
@@ -44,15 +52,42 @@ $('#create_manifestation_btn').on('click', async () => {
             // adding images as base64 to the form Data object
             formDataObj.files = filesInB64;
             
-            // creates manifestation with given data, function returns true for successful, false for failure
-            const manifestationCreated = await createManifestation(formDataObj);
+            // creates manifestation with given data, function returns protocol for successful, false for failure
+            const manifestationProtocol = await createManifestation(formDataObj);
     
-            if (!manifestationCreated) {
-                
+            if (!manifestationProtocol) {
+                $('#createManifestModalLabel').text('Erro na criação da ouvidoria');
+                $('.modal-body').text('Ocorreu um erro na criação de sua ouvidoria. Por favor, tente novamente mais tarde');
+            
+                $('#closeModalBtn').show();
+                $('#confirmModalBtn').hide();
+            
+                $('#createManifestModal').modal('show');
+
+                return;
             }
+
+            // will set closeModalAction to direct to homepage if registration was successful
+            closeModalAction = () => {
+                window.location.href = '../';
+            }
+
+            $('#createManifestModalLabel').text('Sucesso!');
+            $('.modal-body').text('Ouvidoria criada com sucesso!');
+            $('.modal-body').html('<br>');
+            $('.modal-body').text(`Número de protocolo: ${manifestationProtocol}`);
+        
+            $('#closeModalBtn').hide();
+            $('#confirmModalBtn').show();
+        
+            $('#createManifestModal').modal('show');
         }
 
+        // reads file as B64
         reader.readAsDataURL(file)
-
     })
+})
+
+$('#createManifestModal').on('hide.bs.modal', () => {
+    closeModalAction();
 })

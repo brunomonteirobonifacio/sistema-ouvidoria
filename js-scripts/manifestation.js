@@ -26,14 +26,15 @@ async function getManifestationTypes() {
 
 // function receives a data object containing the fields and their respective values
 async function createManifestation(data) {
-    var statusCode;
+    var protocol;
     
     await $.post(`${getPhpPath()}/manifestation.php`, { function: 'createManifestation', ...data }, (response) => {
-        statusCode = parseInt(response.split(' ')[1]) || 500;
+        protocol = response
 
         // returns false if registration failed
-        if (statusCode != 201) return false;
+        if (protocol.split(' ')[1] == '500') return false;
     
-        return true;
+        // returns the manifestation protocol if it was succeeded
+        return protocol;
     })
 }
