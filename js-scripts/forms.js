@@ -125,7 +125,7 @@ if (document.querySelector('#accordionManifestations')) {
         var i = 1;
 
         // creates an accordion item for each manifestation
-        manifestations.forEach(manifestation => {
+        manifestations.forEach(async manifestation => {
             const item = document.createElement('div.accordion-item');
 
             const itemHeader = document.createElement('h2.accordion-header');
@@ -134,15 +134,23 @@ if (document.querySelector('#accordionManifestations')) {
             const itemCollapse = document.createElement(`div#item${i}.accordion-collapse.collapse[data-bs-parent="#accordionManifestations]`);
             const itemBody = document.createElement('div.accordion-body');
             const itemDescription = document.createElement('div.row#description');
-            const itemImages = document.createElement('div.row#images');
+            const itemAttachments = document.createElement('div.row#Attachments');
 
             // adds values to their places
             let data = new Date(manifestation.data_ouvidoria);
             data = data.getDate() + '/' + data.getMonth() + '/' + data.getFullYear();
 
             itemTitle.innerHTML = `Protocolo: ${manifestation.protocolo_ouvidoria} <div class="vr"></div> ${manifestation.tipo_ouvidoria}, ${manifestation.tipo_servico_afetado} <div class="vr"></div> Data: ${data}`;
-            itemBody.innerText = ``
             
+            itemDescription.innerHTML = `<div class="col">Descrição: ${manifestation.descricao_ouvidoria}</div>`;
+            
+            // adds images right below description
+            const attachments = await getManifestationAttachments(manifestation.protocolo_ouvidoria);
+
+            attachments.forEach(attachment => {
+                
+            })
+
             // appends all elements to accordion
             itemHeader.append(itemTitle);
             itemCollapse.append(itemBody);

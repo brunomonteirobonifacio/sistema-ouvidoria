@@ -50,3 +50,15 @@ async function getManifestations() {
 
     return manifestations;
 }
+
+async function getManifestationAttachments(protocol) {
+    var attachments = [];
+
+    await $.post(`${getPhpPath()}/manifestation.php`, { function: 'getManifestationAttachments', protocol }, (response) => {
+        const responseArr = response.split('//\\').filter(attachment => attachment.trim());
+        
+        responseArr.forEach(attachment => attachments.push(JSON.parse(attachment)));
+    })
+    
+    return attachments;
+}

@@ -49,7 +49,7 @@ $functions = [
         $query = $connection->prepare("INSERT INTO anexo(arquivo_anexo, cod_ouvidoria) VALUES (:attachment, :manifestationId)");
 
         // adds each attachment to a separate row linked to the same manifestationId
-        foreach ($attachments as $attachment) {
+        foreach($attachments as $attachment) {
             $query->bindParam('attachment', $attachment);
             $query->bindParam('manifestationId', $manifestationId);
 
@@ -69,6 +69,7 @@ $functions = [
 
         $userId = $_SESSION['userId'];
 
+        // selects manifestations created by logged user
         $query = $connection->prepare("SELECT o.id_ouvidoria, o.descricao_ouvidoria, s.nome_servico AS tipo_servico_afetado, t.nome_tipo AS tipo_ouvidoria, o.protocolo_ouvidoria, o.data_ouvidoria FROM ouvidoria AS o INNER JOIN tipo_ouvidoria AS t INNER JOIN servico_afetado AS s ON t.id_tipo = o.cod_tipo AND s.id_servico = o.cod_servico AND cod_usuario = :userId");
         $query->bindParam('userId', $userId);
 
@@ -86,6 +87,29 @@ $functions = [
         // retrieves data as JSON separate by '//\\', which will be used to split it into an array of objects later
         foreach($manifestations as $manifestation) {
             echo json_encode($manifestation) . '//\\';
+        }
+
+        exit();
+    },
+
+    'getManifestationAttachments' => function() {
+        include "../db-connection/connection.php";
+
+        $protocol = $_POST['protocol'];
+
+        $query = $connection->prepare("SELECT anexo.arquivo_anexo FROM anexo AS a INNER JOIN ouvidoria AS o WHERE a.cod_ouvidoria = o.id_ouvidoria AND o.protocolo_ouvidoria = :protocol");
+        $query->bindParam('protocol', $protocol);
+
+        if (!$query->execute() || !$query->rowCount()) {
+            echo "Status 500";
+            exit();
+        }
+
+        $attachments = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        // retrieves data as JSON separate by '//\\', which will be used to split it into an array of objects later
+        foreach($attachments as $attachment) {
+            echo json_encode($attachment) . '//\\';
         }
 
         exit();
