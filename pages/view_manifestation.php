@@ -35,7 +35,7 @@
         <div class="row text-end">
             <div class="col">Digite o número de seu protocolo para pesquisa: </div>
             <div class="col d-flex">
-                <input type="text" name="search_input" id="searchInput" class="search_protocol form-control">
+                <input type="search" name="search_input" id="searchInput" class="search_protocol form-control">
             </div>
         </div>
 

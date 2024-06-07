@@ -108,11 +108,13 @@ function loadManifestationsAccordion(search = '') {
     })
 }
 
-if (document.querySelector('#accordionManifestations')) {
-    loadManifestationsAccordion()
+window.onload = () => {
+    if (document.querySelector('#accordionManifestations')) {
+        loadManifestationsAccordion()
+    }
 }
 
-$('#searchInput').on('change', async () => {
+$('#searchInput').on('change', () => {
     const search = $('#searchInput').val().trim();
     loadManifestationsAccordion(search);
 })
