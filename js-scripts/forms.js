@@ -83,6 +83,79 @@ if (document.querySelector('#city')) {
     )
 }
 
+if (document.querySelector('#city')) {
+    document.getElementsByName('state').forEach(element => 
+        element.addEventListener('change', () => {
+
+            document.getElementsByName('city').forEach(selector => selector.innerHTML = `<option selected>Cidade *</option>`);
+
+            var state = $(element).val();
+            
+            
+            // if there was no selected state (the selected state having no numeric value), it disables the city selector and doesn't proceed
+            if (!parseInt(state)) {
+                document.getElementsByName('city').forEach(selector => selector.setAttribute('disabled', true));
+                return;
+            }
+
+            // ... or it enables if any state was selected
+            document.getElementsByName('city').forEach(selector => selector.removeAttribute('disabled'));
+            
+            getCities(state).then(cities => {
+
+                // creates an option in the selector for each state
+                cities.forEach(city => {
+
+                    const option = document.createElement('option');
+                    option.value = city.id_cidade;
+                    option.innerText = city.nome_cidade;
+
+                    document.getElementsByName('city').forEach(selector => selector.append(option));
+                })
+            }
+            )
+
+        })
+    )
+}
+
+if (document.querySelector('#accordionManifestations')) {
+    getManifestations().then(manifestations => {
+        const accordion = document.querySelector('#accordionManifestations');
+        var i = 1;
+
+        // creates an accordion item for each manifestation
+        manifestations.forEach(manifestation => {
+            const item = document.createElement('div.accordion-item');
+
+            const itemHeader = document.createElement('h2.accordion-header');
+            const itemTitle = document.createElement(`button.accordion-button.collapsed[type="button"][data-bs-toggle="collapse"][data-bs-target="item${i}"][aria-expanded="false"][aria-controls="item${i}"]`);
+            
+            const itemCollapse = document.createElement(`div#item${i}.accordion-collapse.collapse[data-bs-parent="#accordionManifestations]`);
+            const itemBody = document.createElement('div.accordion-body');
+            const itemDescription = document.createElement('div.row#description');
+            const itemImages = document.createElement('div.row#images');
+
+            // adds values to their places
+            let data = new Date(manifestation.data_ouvidoria);
+            data = data.getDate() + '/' + data.getMonth() + '/' + data.getFullYear();
+
+            itemTitle.innerHTML = `Protocolo: ${manifestation.protocolo_ouvidoria} <div class="vr"></div> ${manifestation.tipo_ouvidoria}, ${manifestation.tipo_servico_afetado} <div class="vr"></div> Data: ${data}`;
+            itemBody.innerText = ``
+            
+            // appends all elements to accordion
+            itemHeader.append(itemTitle);
+            itemCollapse.append(itemBody);
+
+            item.append(itemHeader);
+            item.append(itemCollapse);
+            
+            accordion.append(item);
+            i++;
+        })
+    })
+}
+
 // TODO: make this vaildateForm() work and use it instead of Bootstraps
 function checkFormValidity(form) {
     const formData = new FormData(form);

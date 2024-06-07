@@ -69,7 +69,7 @@ $functions = [
 
         $userId = $_SESSION['userId'];
 
-        $query = $connection->prepare("SELECT * FROM ouvidoria WHERE cod_usuario = :userId");
+        $query = $connection->prepare("SELECT o.id_ouvidoria, o.descricao_ouvidoria, s.nome_servico AS tipo_servico_afetado, t.nome_tipo AS tipo_ouvidoria, o.protocolo_ouvidoria, o.data_ouvidoria FROM ouvidoria AS o INNER JOIN tipo_ouvidoria AS t INNER JOIN servico_afetado AS s ON t.id_tipo = o.cod_tipo AND s.id_servico = o.cod_servico AND cod_usuario = :userId");
         $query->bindParam('userId', $userId);
 
         if (!$query->execute()) {
