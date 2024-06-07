@@ -20,7 +20,7 @@ async function getManifestationTypes() {
         
         responseArr.forEach(manifestationType => manifestationTypes.push(JSON.parse(manifestationType)));
     })
-
+    
     return manifestationTypes;
 }
 
@@ -29,13 +29,24 @@ async function createManifestation(data) {
     var protocol;
     
     await $.post(`${getPhpPath()}/manifestation.php`, { function: 'createManifestation', ...data }, (response) => {
-        protocol = response
-
+        protocol = response;
     })
     
     // returns false if registration failed
     if (protocol.split(' ')[1] == '500') return false;
-
+    
     // returns the manifestation protocol if it was succeeded
     return protocol;
+}
+
+async function getManifestations() {
+    var manifestations = [];
+    
+    await $.post(`${getPhpPath()}/manifestation.php`, { function: 'getManifestations' }, (response) => {
+        const responseArr = response.split('//\\').filter(manifestation => manifestation.trim());
+        
+        responseArr.forEach(manifestation => manifestations.push(JSON.parse(manifestation)));
+    })
+
+    return manifestations;
 }
