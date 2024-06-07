@@ -24,9 +24,9 @@
       </div>
     </nav>
 
-    <div class="container p-3 mx-auto my-3">
+    <div class="container p-3 mx-auto my-3 align-self-center">
         <!-- Accordion -->
-        <div class="accordion" id="accordionManifestations">
+        <div class="accordion accordion-flush" id="accordionManifestations">
         </div>
 
         <!-- Pagination -->

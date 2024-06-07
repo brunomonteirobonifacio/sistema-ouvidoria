@@ -10,6 +10,8 @@ if (document.querySelector('#accordionManifestations')) {
             
             // setting classes
             item.classList.add('accordion-item');
+            item.classList.add('my-2');
+            item.classList.add('border');
 
             const itemHeader = document.createElement('h2');
 
@@ -62,7 +64,7 @@ if (document.querySelector('#accordionManifestations')) {
             let data = new Date(manifestation.data_ouvidoria);
             data = data.getDate() + '/' + data.getMonth() + '/' + data.getFullYear();
 
-            itemButton.innerHTML = `${manifestation.protocolo_ouvidoria} <div class="vr mx-1"></div> ${manifestation.tipo_ouvidoria}, ${manifestation.tipo_servico_afetado} <div class="vr mx-1"></div> Data: ${data}`;
+            itemButton.innerHTML = `${manifestation.protocolo_ouvidoria} <div class="vr mx-2"></div> ${manifestation.tipo_ouvidoria}, ${manifestation.tipo_servico_afetado} <div class="vr mx-2"></div> Data: ${data}`;
             
             itemDescription.innerHTML = `<div class="col"><span class="fw-bold">Descrição:</span> ${manifestation.descricao_ouvidoria}</div>`;
             
