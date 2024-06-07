@@ -17,7 +17,7 @@
           <div class="navbar-nav">
             <a class="nav-link active" aria-current="page" href="">Início</a>
             <a class="nav-link" href="pages/create_manifestation.php">Criar ouvidoria</a>
-            <a class="nav-link" href="pages/view_manifestation.php">Visualizar suas ouvidorias</a>
+            <a class="nav-link" href="pages/view_manifestation.php">Minhas ouvidorias</a>
           </div>
         </div>
       </div>
