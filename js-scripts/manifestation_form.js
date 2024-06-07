@@ -55,8 +55,6 @@ $('#create_manifestation_btn').on('click', async () => {
             
             // creates manifestation with given data, function returns protocol for successful, false for failure
             const manifestationProtocol = await createManifestation(formDataObj);
-    
-            debugger;
 
             if (!manifestationProtocol) {
                 $('#createManifestModalLabel').text('Erro na criação da ouvidoria');
