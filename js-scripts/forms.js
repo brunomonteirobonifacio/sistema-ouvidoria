@@ -119,51 +119,6 @@ if (document.querySelector('#city')) {
     )
 }
 
-if (document.querySelector('#accordionManifestations')) {
-    getManifestations().then(manifestations => {
-        const accordion = document.querySelector('#accordionManifestations');
-        var i = 1;
-
-        // creates an accordion item for each manifestation
-        manifestations.forEach(async manifestation => {
-            const item = document.createElement('div.accordion-item');
-
-            const itemHeader = document.createElement('h2.accordion-header');
-            const itemTitle = document.createElement(`button.accordion-button.collapsed[type="button"][data-bs-toggle="collapse"][data-bs-target="item${i}"][aria-expanded="false"][aria-controls="item${i}"]`);
-            
-            const itemCollapse = document.createElement(`div#item${i}.accordion-collapse.collapse[data-bs-parent="#accordionManifestations]`);
-            const itemBody = document.createElement('div.accordion-body');
-            const itemDescription = document.createElement('div.row#description');
-            const itemAttachments = document.createElement('div.row#Attachments');
-
-            // adds values to their places
-            let data = new Date(manifestation.data_ouvidoria);
-            data = data.getDate() + '/' + data.getMonth() + '/' + data.getFullYear();
-
-            itemTitle.innerHTML = `Protocolo: ${manifestation.protocolo_ouvidoria} <div class="vr"></div> ${manifestation.tipo_ouvidoria}, ${manifestation.tipo_servico_afetado} <div class="vr"></div> Data: ${data}`;
-            
-            itemDescription.innerHTML = `<div class="col">Descrição: ${manifestation.descricao_ouvidoria}</div>`;
-            
-            // adds images right below description
-            const attachments = await getManifestationAttachments(manifestation.protocolo_ouvidoria);
-
-            attachments.forEach(attachment => {
-                
-            })
-
-            // appends all elements to accordion
-            itemHeader.append(itemTitle);
-            itemCollapse.append(itemBody);
-
-            item.append(itemHeader);
-            item.append(itemCollapse);
-            
-            accordion.append(item);
-            i++;
-        })
-    })
-}
-
 // TODO: make this vaildateForm() work and use it instead of Bootstraps
 function checkFormValidity(form) {
     const formData = new FormData(form);
