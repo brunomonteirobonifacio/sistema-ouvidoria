@@ -57,4 +57,5 @@
 
 <script src="../js-scripts/general.js"></script>
 <script src="../js-scripts/manifestation.js"></script>
+<script src="../js-scripts/manifestation_view.js"></script>
 </html>
