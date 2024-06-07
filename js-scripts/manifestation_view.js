@@ -69,13 +69,26 @@ if (document.querySelector('#accordionManifestations')) {
             // adds attachments right below the description
             const attachments = await getManifestationAttachments(manifestation.protocolo_ouvidoria);
 
-            itemAttachments.innerHTML = '<span class="fw-bold"> Anexos: </span><div class="row">';
+            itemAttachments.innerHTML = '<span class="fw-bold"> Anexos: </span> <div class="row align-self-start">';
 
             attachments.forEach(attachment => {
-                
-            })
+                const file = attachment['arquivo_anexo'];
 
-            itemAttachments.innerHTML += '</div>'
+                // shows image if file is PNG JPEG or JPG, shows 
+
+                // attachment type will be image or application (PDF)
+                const attachmentType = file.split('/')[0].substring(5);
+
+                if (attachmentType == 'image') {
+                    itemAttachments.innerHTML += `<img src="${file}" class="img-thumbnail img-preview mx-2"/>`;
+                    
+                    return;
+                }
+
+                itemAttachments.innerHTML += `<iframe src="${file}" style="width:600px; height:500px;" frameborder="0"></iframe>
+                `
+
+            })
 
             // appends all elements to accordion
             itemBody.append(itemDescription);
