@@ -63,6 +63,34 @@ $functions = [
         exit();
     },
 
+    'getManifestations' => function() {
+        include "../db-connection/connection.php";
+        session_start();
+
+        $userId = $_SESSION['userId'];
+
+        $query = $connection->prepare("SELECT * FROM ouvidoria WHERE cod_usuario = :userId");
+        $query->bindParam('userId', $userId);
+
+        if (!$query->execute()) {
+            echo "Status 500";
+            exit();
+        }
+
+        if (!$query->rowCount()) {
+            exit();
+        }
+
+        $manifestations = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        // retrieves data as JSON separate by '//\\', which will be used to split it into an array of objects later
+        foreach($manifestations as $manifestation) {
+            echo json_encode($manifestation) . '//\\';
+        }
+
+        exit();
+    },
+
     'getServiceTypes' => function() {
         include "../db-connection/connection.php";
 
@@ -79,29 +107,31 @@ $functions = [
 
         $serviceTypes = $query->fetchAll(PDO::FETCH_ASSOC);
 
+        // retrieves data as JSON separate by '//\\', which will be used to split it into an array of objects later
         foreach($serviceTypes as $serviceType) {
             echo json_encode($serviceType) . ' //\\ ';
         }
-
+        
         exit();
     },
-
+    
     'getManifestationTypes' => function() {
         include "../db-connection/connection.php";
-
+        
         $query = $connection->prepare("SELECT id_tipo, nome_tipo FROM tipo_ouvidoria ORDER BY nome_tipo");
-
+        
         if (!$query->execute()) {
             echo "Status 500";
             exit();
         }
-
+        
         if (!$query->rowCount()) {
             exit();
         }
-
+        
         $serviceTypes = $query->fetchAll(PDO::FETCH_ASSOC);
-
+        
+        // retrieves data as JSON separate by '//\\', which will be used to split it into an array of objects later
         foreach($serviceTypes as $serviceType) {
             echo json_encode($serviceType) . ' //\\ ';
         }
