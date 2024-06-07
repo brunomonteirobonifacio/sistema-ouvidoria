@@ -20,6 +20,7 @@ $functions = [
 
         $states = $query->fetchAll(PDO::FETCH_ASSOC);
 
+        // retrieves data as JSON separate by '//\\', which will be used to split it into an array of objects later
         foreach($states as $state) {
             echo json_encode($state) . ' //\\ ';
         }
@@ -43,10 +44,11 @@ $functions = [
             exit();
         }
 
-        $states = $query->fetchAll(PDO::FETCH_ASSOC);
+        $cities = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach($states as $state) {
-            echo json_encode($state) . ' //\\ ';
+        // retrieves data as JSON separate by '//\\', which will be used to split it into an array of objects later
+        foreach($cities as $city) {
+            echo json_encode($city) . ' //\\ ';
         }
         
         exit();
