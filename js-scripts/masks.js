@@ -7,3 +7,7 @@ if ($('.cpf')) {
 if ($('.phone')) {
     $('.phone').mask('(00) 00000-0000');
 }
+
+if ($('.search_protocol')) {
+    $('.search_protocol').mask('00000000000000');
+}

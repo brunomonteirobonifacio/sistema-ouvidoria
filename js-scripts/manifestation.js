@@ -39,10 +39,10 @@ async function createManifestation(data) {
     return protocol;
 }
 
-async function getManifestations() {
+async function getManifestations(search = '') {
     var manifestations = [];
     
-    await $.post(`${getPhpPath()}/manifestation.php`, { function: 'getManifestations' }, (response) => {
+    await $.post(`${getPhpPath()}/manifestation.php`, { function: 'getManifestations', search }, (response) => {
         const responseArr = response.split('//\\').filter(manifestation => manifestation.trim());
         
         responseArr.forEach(manifestation => manifestations.push(JSON.parse(manifestation)));

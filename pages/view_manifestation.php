@@ -31,9 +31,16 @@
             </div>
         </div>
 
+        <!-- Search query -->
+        <div class="row text-end">
+            <div class="col">Digite o número de seu protocolo para pesquisa: </div>
+            <div class="col d-flex">
+                <input type="text" name="search_input" id="searchInput" class="search_protocol form-control">
+            </div>
+        </div>
+
         <!-- Accordion -->
-        <input type="text" name="search" id="">
-        <div class="accordion accordion-flush" id="accordionManifestations">
+        <div class="accordion accordion-flush" id="accordionManifestations" class="">
         </div>
 
         <div class="row d-flex align-self-center">
@@ -58,6 +65,7 @@
 <script src="../jquery/jquery-mask/dist/jquery.mask.min.js"></script>
 
 <script src="../js-scripts/general.js"></script>
+<script src="../js-scripts/masks.js"></script>
 <script src="../js-scripts/manifestation.js"></script>
 <script src="../js-scripts/manifestation_view.js"></script>
 </html>

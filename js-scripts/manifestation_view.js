@@ -1,7 +1,9 @@
-if (document.querySelector('#accordionManifestations')) {
+function loadManifestationsAccordion(search = '') {
     var i = 0;
-    getManifestations().then(manifestations => {
+    getManifestations(search).then(manifestations => {
         const accordion = document.querySelector('#accordionManifestations');
+
+        accordion.innerHTML = '';
 
         // creates an accordion item for each manifestation
         manifestations.forEach(async manifestation => {
@@ -37,8 +39,6 @@ if (document.querySelector('#accordionManifestations')) {
             itemCollapse.id = `item${i}`;
             itemCollapse.classList.add('accordion-collapse');
             itemCollapse.classList.add('collapse');
-
-            debugger;
             
             // setting bootstrap attributes
             itemCollapse.setAttribute('data-bs-parent', '#accordionManifestations');
@@ -52,12 +52,14 @@ if (document.querySelector('#accordionManifestations')) {
 
             // setting ID and classes
             itemDescription.classList.add('row');
+            itemDescription.classList.add('text-start');
             itemDescription.id = 'description';
             
             const itemAttachments = document.createElement('div');
             
             // setting ID and classes
             itemAttachments.classList.add('row');
+            itemAttachments.classList.add('text-start');
             itemAttachments.id = 'attachments';
 
             // adds values to their places
@@ -87,9 +89,7 @@ if (document.querySelector('#accordionManifestations')) {
                     return;
                 }
 
-                itemAttachments.innerHTML += `<iframe src="${file}" style="width:600px; height:500px;" frameborder="0"></iframe>
-                `
-
+                itemAttachments.innerHTML += `<iframe src="${file}" style="width:600px; height:500px;" frameborder="0"></iframe>`;
             })
 
             // appends all elements to accordion
@@ -107,3 +107,12 @@ if (document.querySelector('#accordionManifestations')) {
         })
     })
 }
+
+if (document.querySelector('#accordionManifestations')) {
+    loadManifestationsAccordion()
+}
+
+$('#searchInput').on('change', async () => {
+    const search = $('#searchInput').val().trim();
+    loadManifestationsAccordion(search);
+})

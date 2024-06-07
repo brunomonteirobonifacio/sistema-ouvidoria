@@ -68,9 +68,16 @@ $functions = [
         session_start();
 
         $userId = $_SESSION['userId'];
+        $search = $_POST['search'];
 
         // selects manifestations created by logged user
-        $query = $connection->prepare("SELECT o.id_ouvidoria, o.descricao_ouvidoria AS descricao_ouvidoria, s.nome_servico AS tipo_servico_afetado, t.nome_tipo AS tipo_ouvidoria, o.protocolo_ouvidoria, o.data_ouvidoria FROM ouvidoria AS o INNER JOIN tipo_ouvidoria AS t INNER JOIN servico_afetado AS s ON t.id_tipo = o.cod_tipo AND s.id_servico = o.cod_servico AND o.cod_usuario = :userId");
+        if ($search) {
+            $query = $connection->prepare("SELECT o.id_ouvidoria, o.descricao_ouvidoria AS descricao_ouvidoria, s.nome_servico AS tipo_servico_afetado, t.nome_tipo AS tipo_ouvidoria, o.protocolo_ouvidoria, o.data_ouvidoria FROM ouvidoria AS o INNER JOIN tipo_ouvidoria AS t INNER JOIN servico_afetado AS s ON t.id_tipo = o.cod_tipo AND s.id_servico = o.cod_servico AND o.cod_usuario = :userId AND o.protocolo_ouvidoria = :search");
+            $query->bindParam('search', $search);
+        } else {
+            $query = $connection->prepare("SELECT o.id_ouvidoria, o.descricao_ouvidoria AS descricao_ouvidoria, s.nome_servico AS tipo_servico_afetado, t.nome_tipo AS tipo_ouvidoria, o.protocolo_ouvidoria, o.data_ouvidoria FROM ouvidoria AS o INNER JOIN tipo_ouvidoria AS t INNER JOIN servico_afetado AS s ON t.id_tipo = o.cod_tipo AND s.id_servico = o.cod_servico AND o.cod_usuario = :userId");
+        }
+
         $query->bindParam('userId', $userId);
 
         if (!$query->execute()) {
