@@ -14,11 +14,27 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="">Início</a>
-            <a class="nav-link" href="pages/create_manifestation.php">Criar ouvidoria</a>
-            <a class="nav-link" href="pages/view_manifestation.php">Minhas ouvidorias</a>
-          </div>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="">Início</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="pages/create_manifestation.php">Criar ouvidoria</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="pages/view_manifestation.php">Minhas ouvidorias</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Olá, <span class="username"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Sair</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
