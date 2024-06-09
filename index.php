@@ -66,7 +66,8 @@
     
     <div class="container">
         <p>
-            Bem vindo ao site da Ouvidoria pública. 
+            Bem vindo ao site da Ouvidoria pública.
+            
             <?php
                 session_start();
 
