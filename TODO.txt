@@ -1,5 +1,12 @@
-Ouvidoria will have an unique protocol
-it will be form by: date, affected department, incremental number
+TEXT FOR HOMEPAGE
 
-EXAMPLE: 2024060101002
-EXAMPLE: 20240601|01|0002
+Bem vindo à ouvidoria municipal.
+
+(se não estiver logado):
+    para começar, crie uma conta ou entre em uma conta já existente
+
+(se estiver logado):
+    Você pode criar novas ouvidorias, ou visualizar suas ouvidorias já existentes
+    
+    Criação de ouvidorias: Caso queira criar uma nova ouvidoria ou manifestação, clique em "criar ouvidoria".
+    Será pedido para vc fazer uma descrição detalhada sobre o motivo de sua manifestação, escolher o tipo de serviço que será afetado ( *mostrar tipos de serviço* ), a natureza da manifestação ( *mostrar tipos de manifestação em formato de acordeão* ), e anexar ao menos um arquivo de imagem ou documento (formatos aceitos são PDF, JPeG, JPG e PNG)
