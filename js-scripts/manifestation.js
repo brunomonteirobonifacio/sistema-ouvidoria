@@ -62,3 +62,17 @@ async function getManifestationAttachments(protocol) {
     
     return attachments;
 }
+
+window.onload = async () => {
+    if (document.querySelector('span.service-types')) {
+        const serviceTypes = await getServiceTypes();
+
+        // display service types on span
+        $('span.service-types').text(serviceTypes.map(serviceType => serviceType.nome_servico).join(', '))
+    }
+
+    if (document.querySelector('ul.manifestation-types-list')) {
+        const manifestationTypes = await getManifestationTypes();
+        
+    }
+}

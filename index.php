@@ -38,10 +38,10 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="">Início</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item user-logged">
                         <a class="nav-link" href="pages/create_manifestation.php">Criar ouvidoria</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item user-logged">
                         <a class="nav-link" href="pages/view_manifestation.php">Minhas ouvidorias</a>
                     </li>
                     <li class="nav-item dropdown user-logged user-options" style="display: none;">
@@ -87,6 +87,29 @@
                 <?php
             }
         ?>
+        <!-- Introduction to website -->
+
+        <p>
+            Você pode criar novas ouvidorias, ou visualizar suas ouvidorias já existentes
+        </p>
+    
+        <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Criação de ouvidorias</h2>
+        <p>
+            Para criar uma nova ouvidoria ou manifestação, clique em "criar ouvidoria".
+            <br>Você deverá fazer uma descrição detalhada sobre o motivo de sua manifestação, escolher o tipo de serviço que será afetado, a natureza da manifestação ( *mostrar tipos de manifestação em formato de acordeão* ), e anexar ao menos um arquivo de imagem ou documento
+        </p>
+        <p>
+            <span class="fw-bold">Tipos de serviço afetados:</span> (<span class="service-types"></span>) 
+        </p>
+        <p>
+            <span class="fw-bold">Tipos de manifestação:</span>
+            <ul class="manifestation-types-list"></ul>
+        </p>
+        <p>
+            OBS: Formatos aceitos são PDF, JPeG, JPG e PNG
+        </p>
+    
+        <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Minhas ouvidorias</h2>
     </div>
 </body>
 <script src="jquery/jquery.js"></script>
@@ -96,4 +119,5 @@
 
 <script src="js-scripts/general.js"></script>
 <script src="js-scripts/user.js"></script>
+<script src="js-scripts/manifestation.js"></script>
 </html>
