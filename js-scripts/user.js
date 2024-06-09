@@ -65,8 +65,13 @@ async function getCities(stateId) {
     return cities;
 }
 
+async function logoffUser() {
+    await $.post(`${getPhpPath()}/user.php`, { function: 'logoffUser' });
+}
+
 window.onload = () => {
     if (document.querySelector('.username')) {
+        // returns username if logged, '0' if not logged
         getLoggedUsername().then(response => {
             // gets first name of logged user
             $('.username').text(response.split(' ')[0]);
@@ -75,7 +80,33 @@ window.onload = () => {
 
     if (document.querySelector('.user-options')) {
         getLoggedUsername().then(response => {
+            const username = response;
 
+            // if user is not logged, show create account and login options
+            if (username == '0') {
+                debugger;
+                $('.user-logged').hide();
+                $('.user-not-logged').show();
+
+                return;
+            }
+
+            $('.user-not-logged').hide();
+            $('.user-logged').show();
         })
     }
 }
+
+$('#logoff').on('click', () => {
+    $('#logoffModalLabel').text('Sair da conta');
+    $('.modal-body').text('Deseja realmente sair de sua conta?');
+
+    $('#logoffModal').modal('show');
+})
+
+$('#logoffModalBtn').on('click', async () => {
+    await logoffUser();
+    
+    // reload page
+    window.history.go(0);
+})
