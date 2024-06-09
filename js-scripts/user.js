@@ -107,6 +107,6 @@ $('#logoff').on('click', () => {
 $('#logoffModalBtn').on('click', async () => {
     await logoffUser();
     
-    // reload page
-    window.history.go(0);
+    // send user to homepage after logging off
+    window.location.href = 'index.php';
 })
