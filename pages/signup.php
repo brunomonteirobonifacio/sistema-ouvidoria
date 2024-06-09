@@ -10,7 +10,7 @@
     <?php
         // checks if the user is already logged in
         session_start();
-        if ($_SESSION['userId']) {
+        if (isset($_SESSION['userId'])) {
             header('location: ../index.php');
         }
     ?>
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-<!-- Logoff Modal -->
+    <!-- Logoff Modal -->
     <div class="modal fade" id="logoffModal" tabindex="-1" aria-labelledby="logoffModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -56,19 +56,19 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="">Ouvidoria Municipal</a>
+            <a class="navbar-brand" href="../">Ouvidoria Municipal</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Início</a>
+                        <a class="nav-link active" aria-current="page" href="../">Início</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item user-logged" style="display: none;">
                         <a class="nav-link" href="create_manifestation.php">Criar ouvidoria</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item user-logged" style="display: none;">
                         <a class="nav-link" href="view_manifestation.php">Minhas ouvidorias</a>
                     </li>
                     <li class="nav-item dropdown user-logged user-options" style="display: none;">
@@ -81,7 +81,7 @@
                         </ul>
                     </li>
                     <li class="nav-item user-not-logged">
-                        <a href="pages/signup.php" class="nav-link">Criar conta</a>
+                        <a href="" class="nav-link active">Criar conta</a>
                     </li>
                     <li class="nav-item user-not-logged">
                         <a href="pages/login.php" class="nav-link">Entrar</a>
