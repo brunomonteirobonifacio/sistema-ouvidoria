@@ -69,6 +69,7 @@ async function logoffUser() {
     await $.post(`${getPhpPath()}/user.php`, { function: 'logoffUser' });
 }
 
+// doesn't rewrite current onload action, instead it just adds to it
 window.addEventListener('load', () => {
     if (document.querySelector('.username')) {
         // returns username if logged, '0' if not logged
