@@ -91,7 +91,6 @@ if (document.querySelector('#city')) {
 
             var state = $(element).val();
             
-            
             // if there was no selected state (the selected state having no numeric value), it disables the city selector and doesn't proceed
             if (!parseInt(state)) {
                 document.getElementsByName('city').forEach(selector => selector.setAttribute('disabled', true));
