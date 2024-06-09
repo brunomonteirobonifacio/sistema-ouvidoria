@@ -104,7 +104,7 @@ $functions = [
 
         $protocol = $_POST['protocol'];
 
-        $query = $connection->prepare("SELECT a.nome_anexo, a.arquivo_anexo FROM anexo AS a INNER JOIN ouvidoria AS o WHERE a.cod_ouvidoria = o.id_ouvidoria AND o.protocolo_ouvidoria = :protocol");
+        $query = $connection->prepare("SELECT a.arquivo_anexo FROM anexo AS a INNER JOIN ouvidoria AS o WHERE a.cod_ouvidoria = o.id_ouvidoria AND o.protocolo_ouvidoria = :protocol");
         $query->bindParam('protocol', $protocol);
 
         if (!$query->execute() || !$query->rowCount()) {
