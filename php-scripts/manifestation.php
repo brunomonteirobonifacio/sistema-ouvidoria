@@ -149,7 +149,7 @@ $functions = [
     'getManifestationTypes' => function() {
         include "../db-connection/connection.php";
         
-        $query = $connection->prepare("SELECT id_tipo, nome_tipo FROM tipo_ouvidoria ORDER BY nome_tipo");
+        $query = $connection->prepare("SELECT id_tipo, nome_tipo, descricao_tipo FROM tipo_ouvidoria ORDER BY nome_tipo");
         
         if (!$query->execute()) {
             echo "Status 500";
