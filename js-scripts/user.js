@@ -65,8 +65,17 @@ async function getCities(stateId) {
     return cities;
 }
 
-if ($('.username')) {
-    getLoggedUsername().then(response => {
-        document.querySelector('.username').innerText = response
-    })
+window.onload = () => {
+    if (document.querySelector('.username')) {
+        getLoggedUsername().then(response => {
+            // gets first name of logged user
+            $('.username').text(response.split(' ')[0]);
+        })
+    }
+
+    if (document.querySelector('.user-options')) {
+        getLoggedUsername().then(response => {
+
+        })
+    }
 }

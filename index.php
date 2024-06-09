@@ -24,13 +24,12 @@
             <li class="nav-item">
               <a class="nav-link" href="pages/view_manifestation.php">Minhas ouvidorias</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <li class="nav-item dropdown user-options">
+              <a class="nav-link dropdown-toggle" id="helloUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Olá, <span class="username"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Alterar dados cadastrais</a></li>
                 <li><a class="dropdown-item" href="#">Sair</a></li>
               </ul>
             </li>
