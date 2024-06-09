@@ -8,5 +8,7 @@ Bem vindo à ouvidoria municipal.
 (se estiver logado):
     Você pode criar novas ouvidorias, ou visualizar suas ouvidorias já existentes
     
-    Criação de ouvidorias: Caso queira criar uma nova ouvidoria ou manifestação, clique em "criar ouvidoria".
-    Será pedido para vc fazer uma descrição detalhada sobre o motivo de sua manifestação, escolher o tipo de serviço que será afetado ( *mostrar tipos de serviço* ), a natureza da manifestação ( *mostrar tipos de manifestação em formato de acordeão* ), e anexar ao menos um arquivo de imagem ou documento (formatos aceitos são PDF, JPeG, JPG e PNG)
+    Criação de ouvidorias: Para criar uma nova ouvidoria ou manifestação, clique em "criar ouvidoria".
+    Será pedido para você fazer uma descrição detalhada sobre o motivo de sua manifestação, escolher o tipo de serviço que será afetado ( *mostrar tipos de serviço* ), a natureza da manifestação ( *mostrar tipos de manifestação em formato de acordeão* ), e anexar ao menos um arquivo de imagem ou documento (formatos aceitos são PDF, JPeG, JPG e PNG)
+
+    Minhas ouvidorias:
