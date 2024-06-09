@@ -69,7 +69,7 @@ async function logoffUser() {
     await $.post(`${getPhpPath()}/user.php`, { function: 'logoffUser' });
 }
 
-window.onload = () => {
+window.addEventListener('load', () => {
     if (document.querySelector('.username')) {
         // returns username if logged, '0' if not logged
         getLoggedUsername().then(response => {
@@ -95,7 +95,7 @@ window.onload = () => {
             $('.user-logged').show();
         })
     }
-}
+})
 
 $('#logoff').on('click', () => {
     $('#logoffModalLabel').text('Sair da conta');

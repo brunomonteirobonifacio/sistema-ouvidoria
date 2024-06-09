@@ -15,7 +15,7 @@
             header('location: ../index.php');
         }
     ?>
-    
+
     <!-- Logoff Modal -->
     <div class="modal fade" id="logoffModal" tabindex="-1" aria-labelledby="logoffModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog">
@@ -115,8 +115,9 @@
 <script src="../jquery/jquery-mask/dist/jquery.mask.js"></script>
 <script src="../jquery/jquery-mask/dist/jquery.mask.min.js"></script>
 
-<script src="../js-scripts/general.js"></script>
 <script src="../js-scripts/masks.js"></script>
-<script src="../js-scripts/manifestation.js"></script>
+<script src="../js-scripts/general.js"></script>
 <script src="../js-scripts/manifestation_view.js"></script>
+<script src="../js-scripts/user.js"></script>   
+<script src="../js-scripts/manifestation.js"></script>
 </html>
