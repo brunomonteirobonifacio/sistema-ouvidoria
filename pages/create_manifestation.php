@@ -104,7 +104,7 @@
                 <div class="col">
                     <div class="form-floating">
                         <textarea name="description" id="description" class="form-control" autocomplete="off" rows="3" required></textarea>
-                        <label for="description">Descreva o motivo de sua ouvidoria *</label>
+                        <label for="description" class="text-dark">Descreva o motivo de sua ouvidoria *</label>
                         <div class="invalid-feedback" style="text-align: start">
                             Este campo é obrigatório.
                         </div>
@@ -135,7 +135,7 @@
                 <div class="col">
                     <div id="attachments" class="input-group">
                         <label class="input-group-text" for="attachments">Anexos</label>
-                        <input type="file" class="form-control" id="attachments" multiple="multiple" required>
+                        <input type="file" class="form-control rounded-end" id="attachments" multiple="multiple" required>
                         <div class="invalid-feedback" style="text-align: start" id="invalid-attachment">
                             É necessário pelo menos um anexo.
                         </div>

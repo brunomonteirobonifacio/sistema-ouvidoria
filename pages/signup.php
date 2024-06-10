@@ -104,7 +104,7 @@
                 <div class="col">
                     <div class="form-floating">
                         <input type="text" name="name" id="name" class="form-control" autocomplete="off" required>
-                        <label for="name">Nome Completo *</label>
+                        <label for="name" class="text-dark">Nome Completo *</label>
                         <div class="invalid-feedback" style="text-align: start">
                             Por favor, digite seu nome completo.
                         </div>
@@ -116,7 +116,7 @@
                 <div class="col">
                     <div class="form-floating">
                         <input type="email" name="email" id="email" class="form-control" autocomplete="off" required>
-                        <label for="email">Endereço de E-mail *</label>
+                        <label for="email" class="text-dark">Endereço de E-mail *</label>
                         <div class="invalid-feedback" id="invalid-email" style="text-align: start">
                             Digite um endereço de E-mail válido.
                         </div>
@@ -128,7 +128,7 @@
                 <div class="col">
                     <div class="form-floating">
                         <input type="text" name="phone" id="phone" class="form-control phone" autocomplete="off" required>
-                        <label for="phone">Telefone *</label>
+                        <label for="phone" class="text-dark">Telefone *</label>
                         <div class="invalid-feedback" id="invalid-phone" style="text-align: start">
                             Digite um número de telefone válido.
                         </div>
@@ -137,7 +137,7 @@
                 <div class="col">
                     <div class="form-floating">
                         <input type="text" name="whatsapp" id="whatsapp" class="form-control phone" autocomplete="off" required>
-                        <label for="whatsapp">Número WhatsApp *</label>
+                        <label for="whatsapp" class="text-dark">Número WhatsApp *</label>
                         <div class="invalid-feedback" id="invalid-whatsapp" style="text-align: start">
                             Digite um número WhatsApp válido.
                         </div>
@@ -149,7 +149,7 @@
                 <div class="col">
                     <div class="form-floating">
                         <input type="text" name="cpf" id="cpf" class="form-control cpf" autocomplete="off" required>
-                        <label for="cpf">CPF *</label>
+                        <label for="cpf" class="text-dark">CPF *</label>
                         <div class="invalid-feedback" id="invalid-cpf" style="text-align: start">
                             Digite um CPF válido.
                         </div>
@@ -158,7 +158,7 @@
                 <div class="col">
                     <div class="form-floating">
                         <input type="date" name="birthdate" id="birthdate" class="form-control" autocomplete="off" required>
-                        <label for="birthdate">Data de Nascimento *</label>
+                        <label for="birthdate" class="text-dark">Data de Nascimento *</label>
                         <div class="invalid-feedback" id="invalid-date" style="text-align: start">
                             É necessário ter mais de 18 anos para realizar o cadastro.
                         </div>
@@ -189,7 +189,7 @@
                 <div class="col">
                     <div class="form-floating">
                         <input type="password" name="password" id="password" class="form-control" required>
-                        <label for="password">Senha *</label>
+                        <label for="password" class="text-dark">Senha *</label>
                         <div class="invalid-feedback" id="invalid-password" style="text-align: start">
                             Digite uma senha válida.
                         </div>
@@ -207,7 +207,7 @@
                 <div class="col">
                     <div class="form-floating">
                         <input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
-                        <label for="confirm_password">Confirme sua Senha *</label>
+                        <label for="confirm_password" class="text-dark">Confirme sua Senha *</label>
                     </div>
                 </div>
             </div>
