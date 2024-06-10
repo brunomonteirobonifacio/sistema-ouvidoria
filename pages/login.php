@@ -65,10 +65,10 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="../">Início</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item user-logged">
                         <a class="nav-link" href="create_manifestation.php">Criar ouvidoria</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item user-logged">
                         <a class="nav-link" href="view_manifestation.php">Minhas ouvidorias</a>
                     </li>
                     <li class="nav-item dropdown user-logged user-options" style="display: none;">
@@ -81,7 +81,7 @@
                         </ul>
                     </li>
                     <li class="nav-item user-not-logged">
-                        <a href="pages/signup.php" class="nav-link">Criar conta</a>
+                        <a href="signup.php" class="nav-link">Criar conta</a>
                     </li>
                     <li class="nav-item user-not-logged">
                         <a href="" class="nav-link active">Entrar</a>
