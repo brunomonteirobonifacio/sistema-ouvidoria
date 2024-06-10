@@ -5,6 +5,16 @@ function loadManifestationsAccordion(search = '') {
 
         accordion.innerHTML = '';
 
+        // if there were no manifestations, print on the screen and don't proceed the code
+        if (!manifestations.length) {
+            accordion.classList.add('text-center');
+            accordion.innerHTML = '<p class="lead border fs-4 my-3 py-3">Nenhuma ouvidoria encontrada</p>';
+            
+            return;
+        }
+
+        accordion.classList.remove('text-center');
+        
         // creates an accordion item for each manifestation
         manifestations.forEach(async manifestation => {
             i++
