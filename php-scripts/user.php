@@ -25,8 +25,8 @@ $functions = [
         $activationToken = bin2hex(random_bytes(16));
         $activationTokenHash = hash("sha256", $activationToken);
 
-        $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_cidade, senha_usuario) VALUES
-        (:username, :email, :phone, :whatsapp, :cpf, :birthdate, :cityId, SHA2(:pass, 512))");
+        $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_cidade, senha_usuario, hash_ativacao_usuario) VALUES
+        (:username, :email, :phone, :whatsapp, :cpf, :birthdate, :cityId, SHA2(:pass, 512), :activationHash)");
 
         $query->bindParam('username', $username);
         $query->bindParam('email', $email);
@@ -36,10 +36,29 @@ $functions = [
         $query->bindParam('birthdate', $birthdate);
         $query->bindParam('cityId', $cityId);
         $query->bindParam('pass', $pass);
-        // $query->bindParam('activationHash', $activationTokenHash);
+        $query->bindParam('activationHash', $activationTokenHash);
 
         if (!$query->execute()) {
             echo "Status 500";
+            exit();
+        }
+
+        // send email
+        $mail = require __DIR__ . "/mailer.php";
+
+        $mail->setFrom('noreply@example.com');
+        $mail->setAddress($email);
+        $mail->Subject = 'Ativação de conta';
+        $mail->Body = <<<END
+
+        Clique <a href="localhost/sistema-ouvidoria-web-brain/pages/activate_account.php?token=$activationToken">aqui</a> para ativar sua conta.
+
+        END;
+
+        try {
+            $mail->send();
+        } catch (Exception $e) {
+            echo "A mensagem não pôde ser enviada. Erro: {$mail->ErrorInfo}";
             exit();
         }
         
