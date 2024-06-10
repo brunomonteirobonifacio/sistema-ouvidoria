@@ -22,8 +22,8 @@ $functions = [
         $pass = $_POST['password'] . $_ENV['pepper'];
 
         // this will be used to account activation
-        // $activationToken = bin2hex(random_bytes(16));
-        // $activationTokenHash = hash("sha256", $token);
+        $activationToken = bin2hex(random_bytes(16));
+        $activationTokenHash = hash("sha256", $activationToken);
 
         $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_cidade, senha_usuario) VALUES
         (:username, :email, :phone, :whatsapp, :cpf, :birthdate, :cityId, SHA2(:pass, 512))");
