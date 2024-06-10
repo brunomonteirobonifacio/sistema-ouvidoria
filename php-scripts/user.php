@@ -44,7 +44,7 @@ $functions = [
         }
 
         // send email
-        $mail = require __DIR__ . "/mailer.php";
+        $mail = require "mailer.php";
 
         $mail->setFrom('noreply@example.com');
         $mail->setAddress($email);
