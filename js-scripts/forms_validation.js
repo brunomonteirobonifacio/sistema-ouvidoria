@@ -191,9 +191,13 @@ function validPassword(passwordInput, form) {
     const password = passwordInput.value.trim();
     const confirmPasswordInput = form.confirm_password;
 
-    // checks if there is at least a lowercase and an uppercase letter
-    const hasUpperAndLower = Boolean(password.split('').filter(char => char === char.toUpperCase()).length && password.split('').filter(char => char === char.toLowerCase()).length);
+    // checks if there is at least one lowercase and one uppercase letter
+    const hasUpperAndLower = Boolean(password.split('').filter(char => char === char.toUpperCase() && /[a-zA-Z]/.test(char)).length && password.split('').filter(char => char === char.toLowerCase() && /[a-zA-Z]/.test(char)).length);
+    
+    // checks if there is at least one special character
     const hasSpecialCharacters = Boolean(password.split('').filter(char => !(/[^A-Za-z0-9]/.test(char))).length);
+    
+    // checks if there is at least one numeric character
     const hasNumeric = Boolean(password.split('').filter(char => $.isNumeric(char)).length);
 
     if (!hasUpperAndLower || !hasSpecialCharacters || !hasNumeric || password.length < 8) {
@@ -209,7 +213,6 @@ function validPassword(passwordInput, form) {
         return false;
     }
     
-    if (!validConfirmPassword(confirmPasswordInput, form)) return false;
     
     document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)';
 
@@ -239,6 +242,19 @@ function validConfirmPassword(confirmPasswordInput, form) {
             document.getElementById('invalid-password').innerText = 'Ambas as senhas precisam ser iguais.';
         }
         
+        return false;
+    }
+
+    if (!validPassword(passwordInput, form)) {
+        passwordInput.classList.remove('is-valid');
+        passwordInput.classList.add('is-invalid');
+
+        confirmPasswordInput.classList.remove('is-valid');
+        confirmPasswordInput.classList.add('is-invalid');
+
+        document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)';
+        document.getElementById('invalid-password').innerText = 'Digite uma senha válida.';
+
         return false;
     }
 
