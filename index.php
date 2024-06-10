@@ -66,28 +66,10 @@
     
     <div class="container">
         <div class="text-center">
-            <p class="fs-2">
-                Bem vindo ao site da Ouvidoria Pública.
-            </p>
-                
-            <?php
-                session_start();
-
-                if (!isset($_SESSION['userId'])) {
-            ?>
-            Para ter acesso à criação de ouvidorias,
-            <a href="pages/signup.php">Crie uma conta</a>
             <p>
-                Já tem uma conta? <a href="pages/login.php">Fazer login</a>
+                <span class="fs-2">Bem vindo ao site da Ouvidoria Pública</span>
+                <br>Abaixo uma breve introdução às funções oferecidas pelo serviço.
             </p>
-            <?php
-                } else {
-                    ?>
-                    Para criar uma ouvidoria, <a href="pages/create_manifestation.php">clique aqui</a>
-
-                    <?php
-                }
-            ?>
         </div>
 
         <!-- Introduction selection -->
@@ -105,7 +87,7 @@
 
             <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Criação de ouvidorias</h2>
             <p>
-                Para criar uma nova ouvidoria ou manifestação, clique em "Criar ouvidoria".
+                Para criar uma nova ouvidoria ou manifestação, clique em "Criar ouvidoria". Caso não encontre, certifique-se que está conectado em sua conta.
                 <br>Você deverá fazer uma descrição detalhada sobre o motivo de sua manifestação, escolher o tipo de serviço que será afetado, a natureza da manifestação, e anexar ao menos um arquivo de imagem ou documento
                 <br>OBS: Formatos aceitos são PDF, JPeG, JPG e PNG
             </p>
@@ -125,7 +107,7 @@
 
             <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Minhas ouvidorias</h2>
             <p>
-                Você pode visualizar suas ouvidorias através da página "Minhas ouvidorias".
+                Você pode visualizar suas ouvidorias através da página "Minhas ouvidorias". Caso não encontre, certifique-se que está conectado em sua conta.
             </p>
             <p>
                 Por meio desta página, você poderá encontrar todas suas ouvidorias e manifestações, contendo o tipo de manifestação e o tipo de serviço afetado, além do número de protocolo.
