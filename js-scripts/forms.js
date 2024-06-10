@@ -87,7 +87,7 @@ if (document.querySelector('#city')) {
     document.getElementsByName('state').forEach(element => 
         element.addEventListener('change', () => {
 
-            document.getElementsByName('city').forEach(selector => selector.innerHTML = `<option selected>Cidade *</option>`);
+            document.getElementsByName('city').forEach(selector => selector.innerHTML = `<option selected>Cidade (selecione)*</option>`);
 
             var state = $(element).val();
             
