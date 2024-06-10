@@ -46,7 +46,7 @@ $functions = [
         // send Email
         $mail = require "mailer.php";
 
-        $mail->setFrom('noreply@example.com');
+        $mail->setFrom('naoresponda.ouvidoriapublica@gmail.com');
         $mail->setAddress($email);
         $mail->Subject = 'Ativação de conta';
         $mail->Body = <<<END
