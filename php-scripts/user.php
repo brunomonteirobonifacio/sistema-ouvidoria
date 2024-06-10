@@ -3,6 +3,11 @@
 // this file is dedicated to user-related functions in database, such as signup and login
 // =========================================================================================
 
+// prevents from accessing this page through URL
+if (!isset($_POST['function'])) {
+    header("location: javascript:history.go(-1)");
+}
+
 $functions = [
     'createUser' => function() {
         include "../db-connection/connection.php";

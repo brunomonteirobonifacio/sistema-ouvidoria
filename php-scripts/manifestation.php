@@ -3,6 +3,11 @@
 // this file will contain functions referring to `ouvidoria` table
 // =========================================================================================
 
+// prevents from accessing this page through URL
+if (!isset($_POST['function'])) {
+    header("location: javascript:history.go(-1)");
+}
+
 $functions = [
     'createManifestation' => function() {
         include "../db-connection/connection.php";

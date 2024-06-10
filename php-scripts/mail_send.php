@@ -1,6 +1,11 @@
 <?php
 include "../db-connection/connection.php";
 
+// prevents from accessing this page through URL
+if (!isset($_POST['function'])) {
+    header("location: javascript:history.go(-1)");
+}
+
 if (empty($_POST["name"])) {
     die("Name is required");
 }
