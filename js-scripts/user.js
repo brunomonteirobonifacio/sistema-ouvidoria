@@ -108,6 +108,6 @@ $('#logoff').on('click', () => {
 $('#logoffModalBtn').on('click', async () => {
     await logoffUser();
     
-    // send user to homepage after logging off
-    window.location.href = 'index.php';
+    // send user to homepage after logging off, assuring it always goes to homepage
+    window.location.href = `${getPhpPath()}/../index.php`;
 })
