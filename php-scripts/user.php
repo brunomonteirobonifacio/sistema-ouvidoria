@@ -43,7 +43,7 @@ $functions = [
             exit();
         }
 
-        // send email
+        // send Email
         $mail = require "mailer.php";
 
         $mail->setFrom('noreply@example.com');
