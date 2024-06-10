@@ -29,7 +29,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="">Ouvidoria Municipal</a>
+            <a class="navbar-brand" href="">Ouvidoria Pública</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -67,7 +67,7 @@
     <div class="container">
         <div class="text-center">
             <p class="fs-2">
-                Bem vindo ao site da Ouvidoria pública.
+                Bem vindo ao site da Ouvidoria Pública.
             </p>
                 
             <?php
@@ -105,7 +105,7 @@
 
             <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Criação de ouvidorias</h2>
             <p>
-                Para criar uma nova ouvidoria ou manifestação, clique em "Criar Ouvidoria".
+                Para criar uma nova ouvidoria ou manifestação, clique em "Criar ouvidoria".
                 <br>Você deverá fazer uma descrição detalhada sobre o motivo de sua manifestação, escolher o tipo de serviço que será afetado, a natureza da manifestação, e anexar ao menos um arquivo de imagem ou documento
                 <br>OBS: Formatos aceitos são PDF, JPeG, JPG e PNG
             </p>
@@ -125,7 +125,7 @@
 
             <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Minhas ouvidorias</h2>
             <p>
-                Você pode visualizar suas ouvidorias através da página "Minhas Ouvidorias".
+                Você pode visualizar suas ouvidorias através da página "Minhas ouvidorias".
             </p>
             <p>
                 Por meio desta página, você poderá encontrar todas suas ouvidorias e manifestações, contendo o tipo de manifestação e o tipo de serviço afetado, além do número de protocolo.
