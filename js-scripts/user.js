@@ -7,6 +7,8 @@ async function createUser(data) {
     var statusCode;
     await $.post(`${getPhpPath()}/user.php`, { function: 'createUser', ...data }, (response) => {
         statusCode = response;
+
+        debugger;
     })
 
     statusCode = parseInt(statusCode.split(' ')[1]) || 500;
@@ -85,7 +87,7 @@ window.addEventListener('load', () => {
 
             // if user is not logged, show create account and login options
             if (username == '0') {
-                debugger;
+                
                 $('.user-logged').hide();
                 $('.user-not-logged').show();
 
