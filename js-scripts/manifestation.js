@@ -42,6 +42,7 @@ async function createManifestation(data) {
 async function getManifestations(search = '') {
     var manifestations = [];
     
+    // gets all service types from table `ouvidoria` and adds them all as Objects to manifestations array
     await $.post(`${getPhpPath()}/manifestation.php`, { function: 'getManifestations', search }, (response) => {
         const responseArr = response.split('//\\').filter(manifestation => manifestation.trim());
         
@@ -54,6 +55,7 @@ async function getManifestations(search = '') {
 async function getManifestationAttachments(protocol) {
     var attachments = [];
 
+    // gets all service types from table `anexo` where manifestationId matches on table `anexo` and adds them all as Objects to attachments array
     await $.post(`${getPhpPath()}/manifestation.php`, { function: 'getManifestationAttachments', protocol }, (response) => {
         const responseArr = response.split('//\\').filter(attachment => attachment.trim());
 
