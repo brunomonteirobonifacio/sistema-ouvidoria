@@ -84,7 +84,7 @@
                         <a href="" class="nav-link active">Criar conta</a>
                     </li>
                     <li class="nav-item user-not-logged">
-                        <a href="pages/login.php" class="nav-link">Entrar</a>
+                        <a href="login.php" class="nav-link">Entrar</a>
                     </li>
                 </ul>
             </div>
