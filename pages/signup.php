@@ -169,7 +169,7 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <select class="form-select"  name="state" id="state" required>
-                        <option selected>Estado *</option>
+                        <option selected>Estado (selecione)*</option>
                     </select>
                     <div class="invalid-feedback" style="text-align: start">
                             Por favor, escolha seu estado.
@@ -177,7 +177,7 @@
                 </div>
                 <div class="col">
                     <select class="form-select" name="city" id="city" disabled required>
-                        <option selected>Cidade *</option>
+                        <option selected>Cidade (selecione)*</option>
                     </select>
                     <div class="invalid-feedback" style="text-align: start">
                             Por favor, escolha sua cidade.
