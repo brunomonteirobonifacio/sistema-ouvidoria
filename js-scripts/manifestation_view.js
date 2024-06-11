@@ -18,17 +18,22 @@ function loadManifestationsAccordion(search = '') {
         // creates an accordion item for each manifestation
         manifestations.forEach(async manifestation => {
             i++
-            const item = document.createElement('div');
+            const verticalRule = document.createElement(`div`);
             
             // setting classes
-            item.classList.add('accordion-item');
-            item.classList.add('my-2');
-            item.classList.add('border');
+            verticalRule.classList.add('vr', 'mx-2')
+
+
+            const item = document.createElement('div');
+
+            // setting classes
+            item.classList.add('accordion-item', 'my-2','border');
 
             const itemHeader = document.createElement('h2');
 
             // setting classes
             itemHeader.classList.add('accordion-header');
+
 
             const itemButton = document.createElement('button');
 
@@ -43,42 +48,63 @@ function loadManifestationsAccordion(search = '') {
             itemButton.setAttribute('aria-expanded', 'true');
             itemButton.setAttribute('aria-controls', 'item' + i);
             
+
             const itemCollapse = document.createElement('div');
 
             // setting ID and classes
             itemCollapse.id = `item${i}`;
-            itemCollapse.classList.add('accordion-collapse');
-            itemCollapse.classList.add('collapse');
+            itemCollapse.classList.add('accordion-collapse', 'collapse');
             
             // setting bootstrap attributes
             itemCollapse.setAttribute('data-bs-parent', '#accordionManifestations');
+
 
             const itemBody = document.createElement('div');
 
             // setting ID and classes
             itemBody.classList.add('accordion-body');
             
+
             const itemDescription = document.createElement('div');
 
             // setting ID and classes
-            itemDescription.classList.add('row');
-            itemDescription.classList.add('text-start');
             itemDescription.id = 'description';
+            itemDescription.classList.add('row','text-start');
             
+
             const itemAttachments = document.createElement('div');
             
             // setting ID and classes
-            itemAttachments.classList.add('row');
-            itemAttachments.classList.add('text-start');
             itemAttachments.id = 'attachments';
+            itemAttachments.classList.add('row', 'text-start');
 
-            // adds values to their places
-            let data = new Date(manifestation.data_ouvidoria);
-            data = data.getDate() + '/' + data.getMonth() + '/' + data.getFullYear();
+            // adds values to text spans
+            let date = new Date(manifestation.data_ouvidoria);
+            date = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
 
-            itemButton.innerHTML = `${manifestation.protocolo_ouvidoria} <div class="vr mx-2"></div> ${manifestation.tipo_ouvidoria}, ${manifestation.tipo_servico_afetado} <div class="vr mx-2"></div> Data: ${data}`;
+            const protocolText = document.createElement('span');
+            protocolText.textContent = manifestation.protocolo_ouvidoria;
             
-            itemDescription.innerHTML = `<div class="col"><span class="fw-bold">Descrição:</span> ${manifestation.descricao_ouvidoria}</div>`;
+            const typesText = document.createElement('span');
+            typesText.textContent = manifestation.tipo_servico_afetado + ', ' + manifestation.tipo_ouvidoria;
+
+            const dateText = document.createElement('span');
+            dateText.textContent = 'Data: ' + date
+            
+            // adds all text spans
+            itemButton.append(protocolText, verticalRule.cloneNode(true), typesText, verticalRule.cloneNode(true), dateText)
+            
+            const descriptionDiv = document.createElement('div');
+            descriptionDiv.classList.add('col');
+
+            // adds description title to a bold-stlyled span, then description right after it
+            const descriptionTitle = document.createElement('span');
+            descriptionTitle.classList.add('fw-bold');
+            descriptionTitle.textContent = 'Descrição: ';
+
+            descriptionDiv.append(descriptionTitle);
+            descriptionDiv.append(manifestation.descricao_ouvidoria);
+            itemDescription.append(descriptionDiv);
             
             // adds attachments right below the description
             const attachments = await getManifestationAttachments(manifestation.protocolo_ouvidoria);
