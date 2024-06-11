@@ -51,42 +51,6 @@ if (document.querySelector('#city')) {
     document.getElementsByName('state').forEach(element => 
         element.addEventListener('change', () => {
 
-            document.getElementsByName('city').forEach(selector => selector.innerHTML = `<option selected>Cidade *</option>`);
-
-            var state = $(element).val();
-            
-            
-            // if there was no selected state (the selected state having no numeric value), it disables the city selector and doesn't proceed
-            if (!parseInt(state)) {
-                document.getElementsByName('city').forEach(selector => selector.setAttribute('disabled', true));
-                return;
-            }
-
-            // ... or it enables if any state was selected
-            document.getElementsByName('city').forEach(selector => selector.removeAttribute('disabled'));
-            
-            getCities(state).then(cities => {
-
-                // creates an option in the selector for each state
-                cities.forEach(city => {
-
-                    const option = document.createElement('option');
-                    option.value = city.id_cidade;
-                    option.innerText = city.nome_cidade;
-
-                    document.getElementsByName('city').forEach(selector => selector.append(option));
-                })
-            }
-            )
-
-        })
-    )
-}
-
-if (document.querySelector('#city')) {
-    document.getElementsByName('state').forEach(element => 
-        element.addEventListener('change', () => {
-
             document.getElementsByName('city').forEach(selector => selector.innerHTML = `<option selected>Cidade (selecione)*</option>`);
 
             var state = $(element).val();
