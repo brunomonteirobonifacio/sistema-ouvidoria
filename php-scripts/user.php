@@ -44,18 +44,19 @@ $functions = [
         }
 
         // send Email
-        $mail = require "mailer.php";
-
-        $mail->setFrom('naoresponda.ouvidoriapublica@gmail.com');
-        $mail->setAddress($email);
-        $mail->Subject = 'Ativação de conta';
-        $mail->Body = <<<END
-
-        Clique <a href="localhost/sistema-ouvidoria-web-brain/pages/activate_account.php?token=$activationToken">aqui</a> para ativar sua conta.
-
-        END;
+        require "mailer.php";
 
         try {
+            // $mail->setFrom('naoresponda.ouvidoriapublica@gmail.com', 'naoresponda-ouvidoria');
+            $mail->addAddress($email);
+            $mail->Subject = 'Ativação de conta';
+            $mail->isHTML(true);
+            $mail->Body = <<<END
+
+            Clique <a href="localhost/sistema-ouvidoria-web-brain/pages/activate_account.php?token=$activationToken">aqui</a> para ativar sua conta.
+
+            END;
+
             $mail->send();
         } catch (Exception $e) {
             echo "A mensagem não pôde ser enviada. Erro: {$mail->ErrorInfo}";
