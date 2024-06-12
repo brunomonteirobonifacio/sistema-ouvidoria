@@ -49,9 +49,11 @@ $functions = [
         try {
             // $mail->setFrom('naoresponda.ouvidoriapublica@gmail.com', 'naoresponda-ouvidoria');
             $mail->addAddress($email);
-            $mail->Subject = 'Ativação de conta';
+            $mail->Subject = 'Ativação de conta ouvidoria';
             $mail->isHTML(true);
-            $mail->Body = "Clique <a href='localhost/sistema-ouvidoria-web-brain/pages/activate_account.php?token=$activationToken'>aqui</a> para ativar sua conta.";
+            $mail->Body = "
+            Olá, $username!
+            Clique <a href='localhost/sistema-ouvidoria-web-brain/pages/activate_account.php?token=$activationToken'>aqui</a> para ativar sua conta.";
 
             $mail->send();
         } catch (Exception $e) {
@@ -72,7 +74,8 @@ $functions = [
         // include password peppering
         $pass = $pass . $_ENV['pepper'];
     
-        $query = $connection->prepare("SELECT id_usuario FROM usuario WHERE email_usuario = :email AND senha_usuario = SHA2(:pass, 512)");
+        // selects user with corresponding Email and password and with account activated (no activation hash)
+        $query = $connection->prepare("SELECT id_usuario FROM usuario WHERE email_usuario = :email AND senha_usuario = SHA2(:pass, 512) AND hash_ativacao_usuario IS NULL");
         $query->bindParam('email', $email);
         $query->bindParam('pass', $pass);
         
@@ -80,12 +83,12 @@ $functions = [
             echo '0';   
             exit();
         }
-        
+            
         if (!$query->rowCount()) {
             echo '0';
             exit();
         }
-        
+            
         $userId = $query->fetchAll(PDO::FETCH_ASSOC)[0]['id_usuario'];
         
         session_start();
