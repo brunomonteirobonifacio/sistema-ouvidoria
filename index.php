@@ -86,7 +86,7 @@
 
             <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Criação de ouvidorias</h2>
             <p>
-                Para criar uma nova ouvidoria ou manifestação, clique em "Criar ouvidoria". Caso não encontre, certifique-se que está conectado em sua conta.
+                Para criar uma nova ouvidoria ou manifestação, clique em <a href="pages/create_manifestation.php">"Criar ouvidoria"</a>. Caso não consiga entrar na seção "Criar ouvidoria" certifique-se que está conectado em sua conta.
                 <br>Você deverá fazer uma descrição detalhada sobre o motivo de sua manifestação, escolher o tipo de serviço que será afetado, a natureza da manifestação, e anexar ao menos um arquivo de imagem ou documento
                 <br>OBS: Formatos aceitos são PDF, JPeG, JPG e PNG
             </p>
@@ -106,7 +106,7 @@
 
             <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Minhas ouvidorias</h2>
             <p>
-                Você pode visualizar suas ouvidorias através da página "Minhas ouvidorias". Caso não encontre, certifique-se que está conectado em sua conta.
+                Você pode visualizar suas ouvidorias através da página <a href="pages/view_manifestation.php">"Minhas ouvidorias"</a>. Caso não consiga entrar na seção "Minhas ouvidorias", certifique-se que está conectado em sua conta.
             </p>
             <p>
                 Por meio desta página, você poderá encontrar todas suas ouvidorias e manifestações, contendo o tipo de manifestação e o tipo de serviço afetado, além do número de protocolo.
