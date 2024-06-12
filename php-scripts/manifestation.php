@@ -132,7 +132,7 @@ $functions = [
     'getServiceTypes' => function() {
         include "../db-connection/connection.php";
 
-        $query = $connection->prepare("SELECT id_servico, nome_servico FROM servico_afetado ORDER BY nome_servico");
+        $query = $connection->prepare("SELECT id_servico, nome_servico FROM servico_afetado ORDER BY id_servico");
 
         if (!$query->execute()) {
             echo "Status 500";
