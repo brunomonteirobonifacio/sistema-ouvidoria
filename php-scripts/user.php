@@ -52,8 +52,13 @@ $functions = [
             $mail->Subject = 'Ativação de conta ouvidoria';
             $mail->isHTML(true);
             $mail->Body = "
-            Olá, $username!
-            Clique <a href='localhost/sistema-ouvidoria-web-brain/pages/activate_account.php?token=$activationToken'>aqui</a> para ativar sua conta.";
+            Olá, $username!<br>
+            Clique <a href='localhost/sistema-ouvidoria-web-brain/pages/activate_account.php?token=$activationToken'>aqui</a> para ativar sua conta.
+            ";
+
+            $mail->AltBody = "Olá, $username! Para ativar sua conta, clique no link abaixo
+            localhost/sistema-ouvidoria-web-brain/pages/activate_account.php
+            ";
 
             $mail->send();
         } catch (Exception $e) {
