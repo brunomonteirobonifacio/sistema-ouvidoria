@@ -46,7 +46,7 @@ $query->execute();
 
         <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Não foi possível ativar sua conta</h2>
         <p class="lead fs-5">
-            Isto pode ter ocorrido pois o token de ativação provido não foi encontrado, ou a conta já foi ativada.
+            Isto pode ter ocorrido pois o token de ativação provido não foi encontrado, ou sua conta já foi ativada.
             <br><a href="../">Clique aqui para voltar para a tela inicial</a>
         </p>
 
