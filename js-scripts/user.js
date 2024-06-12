@@ -35,6 +35,8 @@ async function getLoggedUsername() {
     var username;
 
     await $.post(`${getPhpPath()}/user.php`, { function: 'getLoggedUsername' }, (response) => {
+
+        // function will retrive username, or 0 if not logged
         username = response;
     })
 

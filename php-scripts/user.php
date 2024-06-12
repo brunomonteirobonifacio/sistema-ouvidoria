@@ -22,6 +22,7 @@ $functions = [
         $pass = $_POST['password'] . $_ENV['pepper'];
 
         // this will be used to account activation
+        // new accounts come with activation tokens. When the user enters the URL provided on E-mail message, the activation token wil be removed and the account will be accessible 
         $activationToken = bin2hex(random_bytes(16));
         $activationTokenHash = hash("sha256", $activationToken);
 
@@ -38,19 +39,21 @@ $functions = [
         $query->bindParam('pass', $pass);
         $query->bindParam('activationHash', $activationTokenHash);
 
+        // if query could not be executed
         if (!$query->execute()) {
             echo "Status 500";
             exit();
         }
 
-        // send Email
+        // file with E-mail messaging settings
         require "mailer.php";
 
         try {
-            // $mail->setFrom('naoresponda.ouvidoriapublica@gmail.com', 'naoresponda-ouvidoria');
             $mail->addAddress($email);
             $mail->Subject = 'Ativação de conta ouvidoria';
             $mail->isHTML(true);
+
+            // E-mail message containing user activation token
             $mail->Body = "
             Olá, $username!<br>
             Clique <a href='localhost/sistema-ouvidoria-web-brain/pages/activate_account.php?token=$activationToken'>aqui</a> para ativar sua conta.
@@ -80,98 +83,96 @@ $functions = [
         $pass = $pass . $_ENV['pepper'];
     
         // selects user with corresponding Email and password and with account activated (no activation hash)
-        $query = $connection->prepare("SELECT id_usuario FROM usuario WHERE email_usuario = :email AND senha_usuario = SHA2(:pass, 512) AND hash_ativacao_usuario IS NULL");
+        $query = $connection->prepare("SELECT id_usuario, nome_usuario FROM usuario WHERE email_usuario = :email AND senha_usuario = SHA2(:pass, 512) AND hash_ativacao_usuario IS NULL");
         $query->bindParam('email', $email);
         $query->bindParam('pass', $pass);
         
+        // if query could not be executed
         if (!$query->execute()) {
             echo '0';   
             exit();
         }
             
+        // if the user could not be found
         if (!$query->rowCount()) {
             echo '0';
             exit();
         }
-            
-        $userId = $query->fetchAll(PDO::FETCH_ASSOC)[0]['id_usuario'];
+        
+        $user = $query->fetchAll(PDO::FETCH_ASSOC)[0];
         
         session_start();
 
-        $_SESSION['userId'] = $userId;
+        // stores user ID in session
+        $_SESSION['userId'] = $user['id_usuario'];
+        $_SESSION['username'] = $user['nome_usuario'];
 
         echo '1';
         exit();
     },
 
     'logoffUser' => function() {
-        // ends session, where userId was stored
+        // ends session, where user ID was stored
         session_start();
         session_destroy();
 
         exit();
     },
 
+    // returns username of the logged user (whose ID is stored in session)
     'getLoggedUsername' => function() {
+        include "../db-connection/connection.php";
+        
         session_start();
 
-        include "../db-connection/connection.php";
-
-        $query = $connection->prepare("SELECT nome_usuario FROM usuario WHERE id_usuario = :id");
-        $query->bindParam('id', $_SESSION['userId']);
-
-        if (!$query->execute()) {
-            echo '0';
-            exit();
-        }
-
-        if (!$query->rowCount()) {
-            echo '0';
-            exit();
-        }
-
-        $username = $query->fetchAll(PDO::FETCH_ASSOC)[0]['nome_usuario'];
-        echo $username;
+        echo isset($_SESSION['username']) ? $_SESSION['username'] : '0';
 
         exit();
     },
 
+    // checks if CPF is already registered
     'checkCPF' => function() {
         include "../db-connection/connection.php";
+
         $cpf = $_POST['cpf'];
 
         $query = $connection->prepare("SELECT cpf_usuario FROM usuario WHERE cpf_usuario = :cpf");
         $query->bindValue('cpf', $cpf);
 
+        // if query could not be executed
         if (!$query->execute()) {
             echo "Status 500";
             exit();
         }
 
-        // checks if there was any user already registered with given cpf
+        // checks if there was any user already registered with given CPF
         echo $query->rowCount() > 0 ? $query->rowCount() : "0";
         exit();
     },
 
+    // checks if E-mail is already registered
     'checkEmail' => function() {
         include "../db-connection/connection.php";
+
         $email = $_POST['email'];
 
         $query = $connection->prepare("SELECT email_usuario FROM usuario WHERE email_usuario = :email");
         $query->bindValue('email', $email);
 
+        // if query could not be executed
         if (!$query->execute()) {
             echo "Status 500";
             exit();
         }
 
-        // checks if there was any user already registered with given e-mail
+        // checks if there was any user already registered with given E-mail
         echo $query->rowCount() > 0 ? $query->rowCount() : "0";
         exit();
     },
 
     'checkPhone' => function() {
         include "../db-connection/connection.php";
+
         $phone = $_POST['phone'];
 
         $query = $connection->prepare("SELECT telefone_usuario FROM usuario WHERE telefone_usuario = :telefone");
@@ -189,6 +190,7 @@ $functions = [
 
     'checkWhatsapp' => function() {
         include "../db-connection/connection.php";
+
         $whatsapp = $_POST['phone'];
 
         $query = $connection->prepare("SELECT whatsapp_usuario FROM usuario WHERE whatsapp_usuario = :whatsapp");

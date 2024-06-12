@@ -25,6 +25,7 @@ $functions = [
         $query = $connection->prepare("SELECT MAX(protocolo_ouvidoria) AS ultimo_protocolo FROM ouvidoria WHERE protocolo_ouvidoria LIKE :protocol");
         $query->bindValue('protocol', $protocol . '%');
         
+        // if query could not be executed
         if (!$query->execute()) {
             echo "Status 500";
             exit();
@@ -43,6 +44,7 @@ $functions = [
         $query->bindParam('protocol', $protocol);
         $query->bindParam('userId', $userId);
 
+        // if query could not be executed
         if (!$query->execute()) {
             echo "Status 500";
             exit();
