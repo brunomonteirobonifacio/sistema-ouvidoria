@@ -11,7 +11,7 @@
         // checks if the user is already logged in
         session_start();
         if (isset($_SESSION['userId'])) {
-            header('location: ../index.php');
+            header("location: javascript:history.go(-1)");
         }
     ?>
     
