@@ -25,7 +25,7 @@ $('button#login_btn').on('click', async () => {
         
         form.password.classList.add('is-invalid');        
         form.password.classList.remove('is-valid');
-        $('#invalid-password').text('Endereço de E-mail ou senha digitados estão incorretos.');
+        $('#invalid-password').text('Endereço de E-mail ou senha digitados estão incorretos, ou a conta ainda não foi ativada.');
 
         return;
     }
