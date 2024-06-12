@@ -58,7 +58,6 @@
                             Olá, <span class="username"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Alterar dados cadastrais</a></li>
                             <li><a class="dropdown-item" id="logoff" style="cursor: pointer;">Sair</a></li>
                         </ul>
                     </li>
