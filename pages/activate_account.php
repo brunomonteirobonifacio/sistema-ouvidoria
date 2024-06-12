@@ -26,7 +26,7 @@ $query->execute();
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Conta Ativada</title>
+    <title><?php echo $tokenNotFound ? "Erro ao Ativar a Conta" : "Conta Ativada" ?> - Ouvidoria Pública</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
@@ -44,9 +44,9 @@ $query->execute();
             } else {
         ?>
 
-        <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Token não encontrado</h2>
+        <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Não foi possível ativar sua conta</h2>
         <p class="lead fs-5">
-            Não foi possível ativar sua conta, pois o token de ativação provido não foi encontrado.
+            Isto pode ter ocorrido pois o token de ativação provido não foi encontrado, ou a conta já foi ativada.
             <br><a href="../">Clique aqui para voltar para a tela inicial</a>
         </p>
 
