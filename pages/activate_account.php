@@ -16,8 +16,11 @@ if ($user === null) {
     die("token not found");
 }
 
+// removes activation hash
 $query = $connection->prepare("UPDATE usuario SET hash_ativacao_usuario = NULL WHERE id_usuario = :userId");
 $query->bindParam('userId', $user[0]['id_usuario']);
+
+$query->execute();
 
 ?>
 
@@ -26,14 +29,12 @@ $query->bindParam('userId', $user[0]['id_usuario']);
 <head>
     <title>Conta Ativada</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css"
 </head>
 <body>
 
-    <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Conta ativada com sucesso!</h2>
-
     <div class="container">
-
+        <h2 class="my-2 pd-2 display-6 border-dark-subtle border-bottom">Conta ativada com sucesso!</h2>
     </div>
 
 </body>
