@@ -100,6 +100,7 @@ window.addEventListener('load', () => {
     }
 })
 
+// asks for user to confirm logoff
 $('#logoff').on('click', () => {
     $('#logoffModalLabel').text('Sair da conta');
     $('.modal-body').text('Deseja realmente sair de sua conta?');
