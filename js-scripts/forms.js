@@ -83,7 +83,7 @@ if (document.querySelector('#city')) {
 }
 
 // TODO: make this vaildateForm() work and use it instead of Bootstraps
-function checkFormValidity(form) {
+function checkFormValidity(form, colorOnValid = true) {
     const formData = new FormData(form);
     var allValid = true;
 
@@ -91,7 +91,7 @@ function checkFormValidity(form) {
         if (validateField[input[0]]) {
             const formInput = form[input[0]];
             
-            const validField = validateField[input[0]](formInput, form);
+            const validField = validateField[input[0]](formInput, form, colorOnValid);
 
             // the next valid fields won't change the result if there was an invalid field before
             // this won't stop the verification though, as all invalid fields should be warned to the user

@@ -13,6 +13,7 @@ $('#create_manifestation_btn').on('click', async () => {
     trimFields(form);
 
     if (!checkEmptyFields(form)) return;
+    if (!checkFormValidity(form)) return;
     
     const fileInput = form.querySelector('input#attachments');
 
@@ -102,6 +103,8 @@ form.querySelectorAll('input[required], textarea[required]').forEach(field => {
             return;
         }
         
+        
+
         // if its not empty, return to the original no-warning form
         field.classList.remove('is-invalid');
     })
@@ -110,7 +113,7 @@ form.querySelectorAll('input[required], textarea[required]').forEach(field => {
 form.querySelectorAll('select[required]').forEach(field => {
     $(field).on('change', () => {
 
-        if (!$.isNumeric(field.value)) {
+        if (!validateField[field.name](field, form, false)) {
             field.classList.add('is-invalid');
             field.classList.remove('is-valid');
             

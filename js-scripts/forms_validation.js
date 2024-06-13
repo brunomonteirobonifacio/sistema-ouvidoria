@@ -2,7 +2,7 @@
 // this file will contain field validation functions
 // =========================================================================================
 
-function validName(nameInput, form) {
+function validName(nameInput, form, colorOnValid = true) {
     const name = nameInput.value;
 
     // checks if the "full name" is at least 2 words long
@@ -13,13 +13,16 @@ function validName(nameInput, form) {
         return false;
     }
 
-    nameInput.classList.add('is-valid');
+    if (colorOnValid) {
+        nameInput.classList.add('is-valid');
+    }
+
     nameInput.classList.remove('is-invalid');
 
     return true;
 }
 
-function validEmail(emailInput, form) {
+function validEmail(emailInput, form, colorOnValid = true) {
     const email = emailInput.value;
 
     // this pattern would be *word characters, - or .*@*word characters or -*.*2 or 4 letters*
@@ -32,13 +35,16 @@ function validEmail(emailInput, form) {
         return false;
     }
     
+    if (colorOnValid) {
+        emailInput.classList.add('is-valid');
+    }
+
     emailInput.classList.remove('is-invalid');
-    emailInput.classList.add('is-valid');
 
     return true;
 }
 
-function validPhone(phoneInput, form) {
+function validPhone(phoneInput, form, colorOnValid = true) {
     const phone = phoneInput.value;
 
     // this pattern takes possible DDD digits combinations, first number being 9, and all numbers being filled in, into consideration
@@ -51,13 +57,17 @@ function validPhone(phoneInput, form) {
         return false;
     }
     
+    
+    if (colorOnValid) {
+        phoneInput.classList.add('is-valid');
+    }
+
     phoneInput.classList.remove('is-invalid');
-    phoneInput.classList.add('is-valid');
 
     return true;
 }
 
-function validCPF(cpfInput, form) {
+function validCPF(cpfInput, form, colorOnValid = true) {
     const cpf = $(cpfInput).cleanVal();     // getting the value without its mask
 
     var sum = 0, rest;
@@ -104,15 +114,18 @@ function validCPF(cpfInput, form) {
         
         return false
     }
+    
+    if (colorOnValid) {
+        cpfInput.classList.add('is-valid');
+    }
 
-    cpfInput.classList.add('is-valid');
     cpfInput.classList.remove('is-invalid');
     
     return true;
     
 }
 
-function validBirthdate(birthdateInput, form) {
+function validBirthdate(birthdateInput, form, colorOnValid = true) {
     if (!birthdateInput.value) {
         birthdateInput.classList.remove('is-valid');
         birthdateInput.classList.add('is-invalid');
@@ -145,14 +158,17 @@ function validBirthdate(birthdateInput, form) {
     
         return false;
     }
+    
+    if (colorOnValid) {
+        birthdateInput.classList.add('is-valid');
+    }
 
-    birthdateInput.classList.add('is-valid');
     birthdateInput.classList.remove('is-invalid');
 
     return true;
 }
 
-function validState(stateInput, form) {
+function validState(stateInput, form, colorOnValid = true) {
     const state = parseInt(stateInput.value) || 0;
 
     // checks if the state chosen has am invalid ID
@@ -163,13 +179,16 @@ function validState(stateInput, form) {
         return false;
     }
     
-    stateInput.classList.add('is-valid');
+    if (colorOnValid) {
+        stateInput.classList.add('is-valid');
+    }
+
     stateInput.classList.remove('is-invalid');
     
     return true;
 }
 
-function validCity(cityInput, form) {
+function validCity(cityInput, form, colorOnValid = true) {
     const city = parseInt(cityInput.value) || 0;
     
     // checks if the city chosen has am invalid ID
@@ -180,14 +199,17 @@ function validCity(cityInput, form) {
         return false;
     }
 
-    cityInput.classList.add('is-valid');
+    if (colorOnValid) {
+        cityInput.classList.add('is-valid');
+    }
+
     cityInput.classList.remove('is-invalid');
     
     return true;
 }
 
 // passwords must be at laest 8 characters long, contain uppercase and lowercase letters, at least one special character and at least one numnber
-function validPassword(passwordInput, form) {
+function validPassword(passwordInput, form, colorOnValid = true) {
     const password = passwordInput.value.trim();
     const confirmPasswordInput = form.confirm_password;
 
@@ -213,16 +235,17 @@ function validPassword(passwordInput, form) {
         return false;
     }
     
-    
-    document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)';
+    if (colorOnValid) {
+        document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)';
+        passwordInput.classList.add('is-valid');
+    }
 
-    passwordInput.classList.add('is-valid');
     passwordInput.classList.remove('is-invalid');
     
     return true;
 }
 
-function validConfirmPassword(confirmPasswordInput, form) {
+function validConfirmPassword(confirmPasswordInput, form, colorOnValid = true) {
     const confirmPassword = confirmPasswordInput.value.trim();
     const passwordInput = form.password;
     const password = form.password.value.trim();
@@ -245,7 +268,7 @@ function validConfirmPassword(confirmPasswordInput, form) {
         return false;
     }
 
-    if (!validPassword(passwordInput, form)) {
+    if (!validPassword(passwordInput, form, colorOnValid = true)) {
         passwordInput.classList.remove('is-valid');
         passwordInput.classList.add('is-invalid');
 
@@ -254,17 +277,59 @@ function validConfirmPassword(confirmPasswordInput, form) {
 
         document.querySelector('.password_requirements').style.color = 'var(--bs-form-invalid-color)';
         document.getElementById('invalid-password').innerText = 'Digite uma senha válida.';
+        
+        return false;
+    }
+        
+    document.querySelector('.password_requirements').style.color = 'var(--bs-body-color)';
+    
+    if (colorOnValid) {
+        confirmPasswordInput.classList.add('is-valid');
+        passwordInput.classList.add('is-valid');
+        document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)';
+    }
+    
+    passwordInput.classList.remove('is-invalid');
+    confirmPasswordInput.classList.remove('is-invalid');
+
+    return true;
+}
+
+function validServiceType(serviceTypeInput, form, colorOnValid = true) {
+    const serviceType = parseInt(serviceTypeInput.value) || 0;
+
+    if (serviceType < 1 || serviceType > 8) {
+        serviceTypeInput.classList.remove('is-valid');
+        serviceTypeInput.classList.add('is-invalid');
 
         return false;
     }
 
-    document.querySelector('.password_requirements').style.color = 'var(--bs-form-valid-color)';
+    if (colorOnValid) {
+        serviceTypeInput.classList.add('is-valid');
+    }
 
-    passwordInput.classList.add('is-valid');
-    passwordInput.classList.remove('is-invalid');
+    serviceTypeInput.classList.remove('is-invalid');
 
-    confirmPasswordInput.classList.add('is-valid');
-    confirmPasswordInput.classList.remove('is-invalid');
+    return true;
+}
+
+function validManifestationType(manifestationTypeInput, form, colorOnValid = true) {
+    const manifestationType = parseInt(manifestationTypeInput.value) || 0;
+
+
+    if (manifestationType < 1 || manifestationType > 5) {
+        manifestationTypeInput.classList.remove('is-valid');
+        manifestationTypeInput.classList.add('is-invalid');
+        
+        return false;
+    }
+    
+    if (colorOnValid) {
+        manifestationTypeInput.classList.add('is-valid');
+    }
+
+    manifestationTypeInput.classList.remove('is-invalid');
 
     return true;
 }
@@ -340,22 +405,24 @@ async function availableCPF(cpfInput) {
 
 // an object containing every field validator
 var validateField = {
-    name: validName,
-    email: validEmail,    
-    phone: validPhone,
-    whatsapp: validPhone,
-    cpf: validCPF,
-    birthdate: validBirthdate,
-    state: validState,
-    city: validCity,
-    password: validPassword,
-    confirm_password: validConfirmPassword
+    'name': validName,
+    'email': validEmail,    
+    'phone': validPhone,
+    'whatsapp': validPhone,
+    'cpf': validCPF,
+    'birthdate': validBirthdate,
+    'state': validState,
+    'city': validCity,
+    'password': validPassword,
+    'confirm_password': validConfirmPassword,
+    'manifestation-type': validManifestationType,
+    'service-type': validServiceType
 }
 
 // an object containing availability check for every needed field
 var checkAvailable = {
-    email: availableEmail,
-    phone: availablePhone,
-    whatsapp: availablePhone,
-    cpf: availableCPF,
+    'email': availableEmail,
+    'phone': availablePhone,
+    'whatsapp': availablePhone,
+    'cpf': availableCPF
 }
