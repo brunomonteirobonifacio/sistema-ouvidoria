@@ -114,7 +114,7 @@
             <div class="row align-items-start m-2">
                 <div class="col">
                     <select class="form-select"  name="service-type" id="service-type" required>
-                        <option selected>Tipo de serviço afetado *</option>
+                        <option selected>Tipo de serviço afetado (selecione)*</option>
                     </select>
                     <div class="invalid-feedback" style="text-align: start">
                         Este campo é obrigatório.
@@ -122,7 +122,7 @@
                 </div>
                 <div class="col">
                     <select class="form-select" name="manifestation-type" id="manifestation-type" required>
-                        <option selected>Tipo de manifestação *</option>
+                        <option selected>Tipo de manifestação (selecione)*</option>
                     </select>
                     <div class="invalid-feedback" style="text-align: start">
                         Este campo é obrigatório.
@@ -163,5 +163,6 @@
 <script src="../js-scripts/user.js"></script>
 <script src="../js-scripts/manifestation.js"></script>
 <script src="../js-scripts/manifestation_form.js"></script>
+<script src="../js-scripts/forms_validation.js"></script>
 <script src="../js-scripts/forms.js"></script>
 </html>
