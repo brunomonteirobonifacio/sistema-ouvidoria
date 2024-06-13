@@ -85,14 +85,17 @@ function loadManifestationsAccordion(search = '') {
             const protocolText = document.createElement('span');
             protocolText.textContent = manifestation.protocolo_ouvidoria;
             
-            const typesText = document.createElement('span');
-            typesText.textContent = manifestation.tipo_servico_afetado + ', ' + manifestation.tipo_ouvidoria;
+            const serviceTypeText = document.createElement('span');
+            serviceTypeText.textContent = manifestation.tipo_servico_afetado;
+
+            const manifestationTypeText = document.createElement('span');
+            manifestationTypeText.textContent = manifestation.tipo_ouvidoria;
 
             const dateText = document.createElement('span');
             dateText.textContent = 'Data: ' + date
             
             // adds all text spans
-            itemButton.append(protocolText, verticalRule.cloneNode(true), typesText, verticalRule.cloneNode(true), dateText)
+            itemButton.append(protocolText, verticalRule.cloneNode(true), serviceTypeText, verticalRule.cloneNode(true), manifestationTypeText, verticalRule.cloneNode(true), dateText)
             
             const descriptionDiv = document.createElement('div');
             descriptionDiv.classList.add('col');
