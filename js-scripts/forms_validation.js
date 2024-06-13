@@ -22,8 +22,8 @@ function validName(nameInput, form) {
 function validEmail(emailInput, form) {
     const email = emailInput.value;
 
-    // this pattern would be *any characters but space*@*any characters but space*.*2 or 3 letters*
-    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    // this pattern would be *word characters, - or .*@*word characters or -*.*2 or 4 letters*
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailPattern.test(email)) {
         emailInput.classList.remove('is-valid');
