@@ -40,7 +40,7 @@ async function getLoggedUsername() {
         username = response;
     })
 
-    return username
+    return username;
 }
 
 async function getStates() {
