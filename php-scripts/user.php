@@ -26,8 +26,8 @@ $functions = [
         $activationToken = bin2hex(random_bytes(16));
         $activationTokenHash = hash("sha256", $activationToken);
 
-        $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_cidade, senha_usuario, hash_ativacao_usuario) VALUES
-        (:username, :email, :phone, :whatsapp, :cpf, :birthdate, :cityId, SHA2(:pass, 512), :activationHash)");
+        $query = $connection->prepare("INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, whatsapp_usuario, cpf_usuario, data_nasc, cod_cidade, senha_usuario, hash_ativacao_usuario, data_ultimo_acesso) VALUES
+        (:username, :email, :phone, :whatsapp, :cpf, :birthdate, :cityId, SHA2(:pass, 512), :activationHash, CURRENT_TIMESTAMP)");
 
         $query->bindParam('username', $username);
         $query->bindParam('email', $email);
@@ -100,6 +100,14 @@ $functions = [
         }
         
         $user = $query->fetchAll(PDO::FETCH_ASSOC)[0];
+
+        $query = $connection->prepare("UPDATE usuario SET data_ultimo_acesso = CURRENT_TIMESTAMP WHERE id_usuario = :userId");
+        $query->bindParam('userId', $user['id_usuario']);
+
+        if (!$query->execute()) {
+            echo '0';
+            exit();
+        }
         
         session_start();
 

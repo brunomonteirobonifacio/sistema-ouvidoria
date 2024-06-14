@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14/06/2024 às 15:59
+-- Tempo de geração: 14/06/2024 às 21:25
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -5743,6 +5743,7 @@ CREATE TABLE `usuario` (
   `whatsapp_usuario` char(15) DEFAULT NULL,
   `data_nasc` date DEFAULT NULL,
   `cod_cidade` int(11) DEFAULT NULL,
+  `data_ultimo_acesso` datetime DEFAULT NULL,
   `hash_ativacao_usuario` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
