@@ -12,8 +12,7 @@ $('#create_manifestation_btn').on('click', async () => {
 
     trimFields(form);
 
-    if (!checkEmptyFields(form)) return;
-    if (!checkFormValidity(form)) return;
+    if (!checkEmptyFields(form) || !checkFormValidity(form)) return;
     
     const fileInput = form.querySelector('input#attachments');
 
