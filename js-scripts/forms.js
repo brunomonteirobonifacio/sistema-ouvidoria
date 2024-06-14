@@ -82,7 +82,6 @@ if (document.querySelector('#city')) {
     )
 }
 
-// TODO: make this vaildateForm() work and use it instead of Bootstraps
 function checkFormValidity(form, colorOnValid = true) {
     const formData = new FormData(form);
     var allValid = true;
