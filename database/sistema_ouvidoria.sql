@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06/06/2024 às 21:56
+-- Tempo de geração: 14/06/2024 às 15:59
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `anexo` (
   `id_anexo` int(11) NOT NULL,
+  `nome_anexo` varchar(100) DEFAULT NULL,
   `arquivo_anexo` longtext DEFAULT NULL,
   `cod_ouvidoria` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -5694,8 +5695,14 @@ CREATE TABLE `servico_afetado` (
 --
 
 INSERT INTO `servico_afetado` (`id_servico`, `nome_servico`) VALUES
-(1, 'Educação'),
-(2, 'Saúde');
+(1, 'Educação, Ciência e Tecnologia'),
+(2, 'Saúde'),
+(3, 'Procuradoria'),
+(4, 'Fazenda'),
+(5, 'Agricultura'),
+(6, 'Assistência Social, Habitação, Trabalho e Renda'),
+(7, 'Planejamento e Desenvolvimento Urbano'),
+(8, 'Outros');
 
 -- --------------------------------------------------------
 
@@ -5718,7 +5725,7 @@ INSERT INTO `tipo_ouvidoria` (`id_tipo`, `nome_tipo`, `descricao_tipo`) VALUES
 (2, 'Elogio', 'Demonstração ou reconhecimento ou satisfação sobre o serviço oferecido ou atendimento recebido.'),
 (3, 'Solicitação', 'Requerimento de adoção de providência por parte da Administração.'),
 (4, 'Reclamação', 'Demonstração de insatisfação relativa a serviço público.'),
-(5, 'Denúncia', 'Comunicação de prática de ato ilícito cuja solução dependa da atuação de órgão de controle interno ou externo.\r\n\r\nCaso suspeite de alguma atividade ilícita, envie sua denúncia à Ouvidoria. Todo o processo é feito via sistema e a proteção dos seus dados pessoais é garantida.\r\n\r\nVocê deve apresentar os fatos de forma clara e objetiva, contendo elementos mínimos como CPF, CNPJ, nome dos envolvidos ou quaisquer informações que julgue importante para apuração do fato.\r\n\r\nA Ouvidoria tem o dever de proteger a identidade do denunciante. Se ainda se sentir receoso, você poderá fazer um relato anônimo; mas, nesse caso, não receberá número de protocolo para acompanhar a demanda ou receber resposta conc');
+(5, 'Denúncia', 'Comunicação de prática de ato ilícito cuja solução dependa da atuação de órgão de controle interno ou externo. Caso suspeite de alguma atividade ilícita, envie sua denúncia à Ouvidoria. Todo o processo é feito via sistema e a proteção dos seus dados pessoais é garantida.\nVocê deve apresentar os fatos de forma clara e objetiva, contendo elementos mínimos como CPF, CNPJ, nome dos envolvidos ou quaisquer informações que julgue importante para apuração do fato. A Ouvidoria tem o dever de proteger a identidade do denunciante.');
 
 -- --------------------------------------------------------
 
@@ -5731,7 +5738,7 @@ CREATE TABLE `usuario` (
   `nome_usuario` varchar(128) DEFAULT NULL,
   `cpf_usuario` char(14) DEFAULT NULL,
   `email_usuario` varchar(256) DEFAULT NULL,
-  `senha_usuario` varchar(128) DEFAULT NULL,
+  `senha_usuario` varchar(256) DEFAULT NULL,
   `telefone_usuario` char(15) DEFAULT NULL,
   `whatsapp_usuario` char(15) DEFAULT NULL,
   `data_nasc` date DEFAULT NULL,
@@ -5801,7 +5808,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `anexo`
 --
 ALTER TABLE `anexo`
-  MODIFY `id_anexo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_anexo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `cidade`
@@ -5819,13 +5826,13 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT de tabela `ouvidoria`
 --
 ALTER TABLE `ouvidoria`
-  MODIFY `id_ouvidoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_ouvidoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de tabela `servico_afetado`
 --
 ALTER TABLE `servico_afetado`
-  MODIFY `id_servico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_servico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `tipo_ouvidoria`
@@ -5837,7 +5844,7 @@ ALTER TABLE `tipo_ouvidoria`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Restrições para tabelas despejadas
