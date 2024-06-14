@@ -31,6 +31,10 @@ async function loginUser(email, password) {
     return successfulLogin;
 }
 
+async function logoffUser() {
+    await $.post(`${getPhpPath()}/user.php`, { function: 'logoffUser' });
+}
+
 async function getLoggedUsername() {
     var username;
 
@@ -67,10 +71,6 @@ async function getCities(stateId) {
     })
 
     return cities;
-}
-
-async function logoffUser() {
-    await $.post(`${getPhpPath()}/user.php`, { function: 'logoffUser' });
 }
 
 // doesn't rewrite current onload action, instead it just adds to it
